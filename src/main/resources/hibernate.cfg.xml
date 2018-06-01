@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+	    <property name="connection.driver_class">org.postgresql.Driver</property>
+	    <property name="connection.url">jdbc:postgresql://localhost:5432/pocketpos</property>
+	    <property name="connection.username">postgres</property>
+	    <property name="connection.password">dbr1987diogo</property>
+	    <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+	    <property name="current_session_context_class">thread</property>
+	    <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+	    <property name="show_sql">false</property>
+	    <property name="hbm2ddl.auto">validate</property>
+		<property name="c3p0.acquire_increment">5</property> 	    
+	    <property name="c3p0.min_size">5</property>
+	    <property name="c3p0.max_size">50</property>
+	    <property name="c3p0.timeout">1800</property>
+		<property name="c3p0.idle_test_period">900</property>
+	    <property name="c3p0.max_statements">50</property>
+	 	<mapping class="br.com.pocketpos.server.orm.Country"/>
+	 	<mapping class="br.com.pocketpos.server.orm.State"/>
+	 	<mapping class="br.com.pocketpos.server.orm.City"/>
+	 	<mapping class="br.com.pocketpos.server.orm.Address"/>
+	 	<mapping class="br.com.pocketpos.server.orm.Product"/>
+	 	<mapping class="br.com.pocketpos.server.orm.ProductProduct"/>
+	 	<mapping class="br.com.pocketpos.server.orm.Folder"/>
+	 	<mapping class="br.com.pocketpos.server.orm.FolderProduct"/>
+	 	<mapping class="br.com.pocketpos.server.orm.Tariff"/>
+	 	<mapping class="br.com.pocketpos.server.orm.TariffProduct"/>
+	 	<mapping class="br.com.pocketpos.server.orm.Subject"/>
+	 	<mapping class="br.com.pocketpos.server.orm.SubjectSubject"/>
+	 	<mapping class="br.com.pocketpos.server.orm.Individual"/>
+	 	<mapping class="br.com.pocketpos.server.orm.Organization"/>	 	
+	 	<mapping class="br.com.pocketpos.server.orm.Company"/>
+	 	<mapping class="br.com.pocketpos.server.orm.User"/>
+	 	<mapping class="br.com.pocketpos.server.orm.Token"/>
+		<mapping class="br.com.pocketpos.server.orm.Device"/>
+		<mapping class="br.com.pocketpos.server.orm.CompanyDevice"/>
+		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDataset"/>
+		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetIndividual"/>
+		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetOrganization"/>
+ 		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetUser"/>
+ 		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetProduct"/>
+ 		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetProductProduct"/>
+ 		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetFolder"/>
+ 		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetFolderProduct"/>
+ 		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetTariff"/>
+ 		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetTariffProduct"/>
+    </session-factory>
+</hibernate-configuration>
