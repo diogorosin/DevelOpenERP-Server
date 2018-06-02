@@ -19,7 +19,6 @@ import org.hibernate.Session;
 
 import br.com.pocketpos.server.bean.AccountBean001;
 import br.com.pocketpos.server.bean.ExceptionBean001;
-import br.com.pocketpos.server.bean.MessageBean001;
 import br.com.pocketpos.server.orm.Company;
 import br.com.pocketpos.server.orm.CompanyDAO;
 import br.com.pocketpos.server.orm.CompanyDevice;
@@ -276,13 +275,17 @@ public class AccountEndPoint {
 
 			ExceptionBean001 exceptionBean = new ExceptionBean001();
 
-			for (ConstraintViolation<?> constraintViolation : e.getConstraintViolations())
+			int i = 0;
 
-				exceptionBean.getMessages().add(new MessageBean001(
-						constraintViolation.getRootBeanClass().getSimpleName() + "." +
+			for (ConstraintViolation<?> constraintViolation : e.getConstraintViolations()) {
+
+				exceptionBean.getMessages()[i] = constraintViolation.getRootBeanClass().getSimpleName() + "." +
 								constraintViolation.getPropertyPath().toString() + " " +
-								constraintViolation.getMessage().toLowerCase()
-						));
+								constraintViolation.getMessage().toLowerCase();
+
+				i++;
+
+			}
 
 			return Response.status(Response.Status.BAD_REQUEST).
 					entity(exceptionBean).

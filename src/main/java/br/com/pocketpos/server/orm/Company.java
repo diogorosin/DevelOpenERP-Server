@@ -31,7 +31,7 @@ public class Company extends Organization {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final String COUPON_TITLE_DEFAULT = "[ORGANIZATION_FANCYNAME]";
+	public static final String COUPON_TITLE_DEFAULT = "COMPANY_FANCYNAME_PROPERTY";
 
 	public static final String FIND_ALL = "Company.findAll";
 

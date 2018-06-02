@@ -1,37 +1,28 @@
 package br.com.pocketpos.server.bean;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ExceptionBean001 {
 
-	private List<MessageBean001> messages;
+	private String[] messages;
 
-	public ExceptionBean001(){}
+	public ExceptionBean001(){
+		
+		this.messages = new String[]{};
+
+	}
 
 	public ExceptionBean001(String message){
-
-		getMessages().add(new MessageBean001(message));
-
-	}
-
-	public ExceptionBean001(MessageBean001 message){
-
-		getMessages().add(message);
+		
+		this.messages = new String[]{ message };
 
 	}
 
-	public List<MessageBean001> getMessages() {
+	public String[] getMessages() {
 
-		if (messages == null)
-
-			messages = new ArrayList<MessageBean001>();
-
-		return messages;
+		return this.messages;
 
 	}
 
-	public void setMessages(List<MessageBean001> messages) {
+	public void setMessages(String[] messages) {
 
 		this.messages = messages;
 
