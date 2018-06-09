@@ -186,55 +186,51 @@ public class CompanyDeviceDatasetFacade {
 
 			}
 
-			companyDeviceDataset.setFolders(new ArrayList<CompanyDeviceDatasetFolder>());
+			companyDeviceDataset.setTabs(new ArrayList<CompanyDeviceDatasetTab>());
 
-			if (company.getFolders() != null){
+			if (company.getTabs() != null){
 
-				for (Folder folder: company.getFolders()) {
+				for (Tab tab: company.getTabs()) {
 
-					CompanyDeviceDatasetFolderPK companyDeviceDatasetFolderPK = new CompanyDeviceDatasetFolderPK();
+					CompanyDeviceDatasetTabPK companyDeviceDatasetTabPK = new CompanyDeviceDatasetTabPK();
 
-					companyDeviceDatasetFolderPK.setCompanyDeviceDataset(companyDeviceDataset);
+					companyDeviceDatasetTabPK.setCompanyDeviceDataset(companyDeviceDataset);
 
-					companyDeviceDatasetFolderPK.setFolder(folder);				
+					companyDeviceDatasetTabPK.setTab(tab);
 
-					CompanyDeviceDatasetFolder companyDeviceDatasetFolder = new CompanyDeviceDatasetFolder();
+					CompanyDeviceDatasetTab companyDeviceDatasetTab = new CompanyDeviceDatasetTab();
 
-					companyDeviceDatasetFolder.setIdentifier(companyDeviceDatasetFolderPK);
+					companyDeviceDatasetTab.setIdentifier(companyDeviceDatasetTabPK);
 
-					companyDeviceDatasetFolder.setActive(folder.getActive());
+					companyDeviceDatasetTab.setPosition(tab.getPosition());
 
-					companyDeviceDatasetFolder.setPosition(folder.getPosition());
+					companyDeviceDatasetTab.setDenomination(tab.getDenomination());
 
-					companyDeviceDatasetFolder.setDenomination(folder.getDenomination());
+					companyDeviceDatasetTab.setItems(new ArrayList<CompanyDeviceDatasetTabItem>());
 
-					companyDeviceDatasetFolder.setProducts(new ArrayList<CompanyDeviceDatasetFolderProduct>());
+					if (companyDeviceDatasetTabPK.getTab().getItems() != null){
 
-					if (companyDeviceDatasetFolderPK.getFolder().getProducts() != null){
+						for (TabItem tabItem : companyDeviceDatasetTabPK.getTab().getItems()) {
 
-						for (FolderProduct folderProduct : companyDeviceDatasetFolderPK.getFolder().getProducts()) {
+							CompanyDeviceDatasetTabItemPK companyDeviceDatasetTabItemPK = new CompanyDeviceDatasetTabItemPK();
 
-							CompanyDeviceDatasetFolderProductPK companyDeviceDatasetFolderProductPK = new CompanyDeviceDatasetFolderProductPK();
+							companyDeviceDatasetTabItemPK.setCompanyDeviceDatasetTab(companyDeviceDatasetTab);
+							
+							companyDeviceDatasetTabItemPK.setItem(tabItem.getIdentifier().getItem());
 
-							companyDeviceDatasetFolderProductPK.setCompanyDeviceDatasetFolder(companyDeviceDatasetFolder);
+							CompanyDeviceDatasetTabItem companyDeviceDatasetTabItem = new CompanyDeviceDatasetTabItem();
 
-							companyDeviceDatasetFolderProductPK.setProduct(folderProduct.getIdentifier().getProduct());
+							companyDeviceDatasetTabItem.setIdentifier(companyDeviceDatasetTabItemPK);
 
-							CompanyDeviceDatasetFolderProduct companyDeviceDatasetFolderProduct = new CompanyDeviceDatasetFolderProduct();
+							companyDeviceDatasetTabItem.setProduct(tabItem.getProduct());
 
-							companyDeviceDatasetFolderProduct.setIdentifier(companyDeviceDatasetFolderProductPK);
-
-							companyDeviceDatasetFolderProduct.setActive(folderProduct.getActive());
-
-							companyDeviceDatasetFolderProduct.setPosition(folderProduct.getPosition());
-
-							companyDeviceDatasetFolder.getProducts().add(companyDeviceDatasetFolderProduct);
+							companyDeviceDatasetTab.getItems().add(companyDeviceDatasetTabItem);
 
 						}
 
 					}
 
-					companyDeviceDataset.getFolders().add(companyDeviceDatasetFolder);
+					companyDeviceDataset.getTabs().add(companyDeviceDatasetTab);
 
 				}			
 

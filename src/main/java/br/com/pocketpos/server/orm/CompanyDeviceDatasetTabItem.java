@@ -2,66 +2,51 @@ package br.com.pocketpos.server.orm;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name="\"FolderProduct\"")
-public class FolderProduct implements Serializable {
+@Table(name="\"CompanyDeviceDatasetTabItem\"")
+public class CompanyDeviceDatasetTabItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private FolderProductPK identifier;
+	private CompanyDeviceDatasetTabItemPK identifier;
 
-	@NotNull
-	@Column(name="\"active\"", nullable=false)
-	private Boolean active;
-
-	@NotNull
-	@Column(name="\"position\"", nullable=false)
-	private Integer position;
-
-	public FolderProductPK getIdentifier() {
+	@ManyToOne(optional=false)
+	@JoinColumn(name="\"product\"", referencedColumnName="identifier", nullable=false)
+	private Product product;	
+	
+	public CompanyDeviceDatasetTabItemPK getIdentifier() {
 
 		return identifier;
 
 	}
 
-	public void setIdentifier(FolderProductPK identifier) {
+	public void setIdentifier(CompanyDeviceDatasetTabItemPK identifier) {
 
 		this.identifier = identifier;
 
 	}
 
-	public Boolean getActive() {
+	public Product getProduct() {
 
-		return active;
-
-	}
-
-	public void setActive(Boolean active) {
-
-		this.active = active;
+		return product;
 
 	}
 
-	public Integer getPosition() {
+	public void setProduct(Product product) {
 
-		return position;
-
-	}
-
-	public void setPosition(Integer position) {
-
-		this.position = position;
+		this.product = product;
 
 	}
 
+	@Override
 	public int hashCode() {
 
 		final int prime = 31;
@@ -71,6 +56,7 @@ public class FolderProduct implements Serializable {
 
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 
 		if (this == obj)
@@ -79,7 +65,7 @@ public class FolderProduct implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FolderProduct other = (FolderProduct) obj;
+		CompanyDeviceDatasetTabItem other = (CompanyDeviceDatasetTabItem) obj;
 		if (identifier == null) {
 			if (other.identifier != null)
 				return false;

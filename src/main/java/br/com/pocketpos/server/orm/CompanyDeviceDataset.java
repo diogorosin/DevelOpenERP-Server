@@ -96,7 +96,7 @@ public class CompanyDeviceDataset implements Serializable {
 			mappedBy="identifier.companyDeviceDataset", 
 			cascade={CascadeType.ALL}, 
 			orphanRemoval=true)
-	private List<CompanyDeviceDatasetFolder> folders;
+	private List<CompanyDeviceDatasetTab> tabs;
 
 	@OneToMany(
 			fetch=FetchType.LAZY, 
@@ -213,15 +213,15 @@ public class CompanyDeviceDataset implements Serializable {
 
 	}
 
-	public List<CompanyDeviceDatasetFolder> getFolders() {
+	public List<CompanyDeviceDatasetTab> getTabs() {
 
-		return folders;
+		return tabs;
 
 	}
 
-	public void setFolders(List<CompanyDeviceDatasetFolder> folders) {
+	public void setTabs(List<CompanyDeviceDatasetTab> tabs) {
 
-		this.folders = folders;
+		this.tabs = tabs;
 
 	}
 

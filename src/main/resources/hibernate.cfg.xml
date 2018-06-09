@@ -25,8 +25,8 @@
 	 	<mapping class="br.com.pocketpos.server.orm.Address"/>
 	 	<mapping class="br.com.pocketpos.server.orm.Product"/>
 	 	<mapping class="br.com.pocketpos.server.orm.ProductProduct"/>
-	 	<mapping class="br.com.pocketpos.server.orm.Folder"/>
-	 	<mapping class="br.com.pocketpos.server.orm.FolderProduct"/>
+	 	<mapping class="br.com.pocketpos.server.orm.Tab"/>
+	 	<mapping class="br.com.pocketpos.server.orm.TabItem"/>
 	 	<mapping class="br.com.pocketpos.server.orm.Tariff"/>
 	 	<mapping class="br.com.pocketpos.server.orm.TariffProduct"/>
 	 	<mapping class="br.com.pocketpos.server.orm.Subject"/>
@@ -44,8 +44,8 @@
  		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetUser"/>
  		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetProduct"/>
  		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetProductProduct"/>
- 		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetFolder"/>
- 		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetFolderProduct"/>
+ 		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetTab"/>
+ 		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetTabItem"/>
  		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetTariff"/>
  		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetTariffProduct"/>
     </session-factory>

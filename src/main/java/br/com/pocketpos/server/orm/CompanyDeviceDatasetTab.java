@@ -5,13 +5,9 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -19,61 +15,41 @@ import javax.validation.constraints.Size;
 
 
 @Entity
-@Table(name="\"Folder\"")  
-public class Folder implements Serializable {
+@Table(name="\"CompanyDeviceDatasetTab\"")
+public class CompanyDeviceDatasetTab implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)	
-	private Integer identifier;
-
-	@NotNull
-	private Boolean active;
+	@EmbeddedId
+	private CompanyDeviceDatasetTabPK identifier;
 
 	@NotNull
 	@Column(name="\"position\"", nullable=false)
 	private Integer position;
-	
+
 	@NotNull
 	@Size(min=1,max=20)
 	@Column(name="\"denomination\"", nullable=false)
 	private String denomination;
-	
-	@ManyToOne(optional=false)
-	@JoinColumn(name = "organization")
-	private Organization organization;
 
 	@OneToMany(
 			fetch=FetchType.LAZY,
-			mappedBy="identifier.folder",
+			mappedBy="identifier.companyDeviceDatasetTab",
 			cascade={CascadeType.ALL}, 
 			orphanRemoval=true)
-	private List<FolderProduct> products;
+	private List<CompanyDeviceDatasetTabItem> items;
 
-	public Integer getIdentifier() {
+	public CompanyDeviceDatasetTabPK getIdentifier() {
 
 		return identifier;
 
 	}
 
-	public void setIdentifier(Integer identifier) {
+	public void setIdentifier(CompanyDeviceDatasetTabPK identifier) {
 
 		this.identifier = identifier;
 
 	}
-
-	public Boolean getActive() {
-
-		return active;
-
-	}
-
-	public void setActive(Boolean active) {
-
-		this.active = active;
-
-	}	
 
 	public Integer getPosition() {
 
@@ -99,27 +75,15 @@ public class Folder implements Serializable {
 
 	}
 
-	public Organization getOrganization() {
+	public List<CompanyDeviceDatasetTabItem> getItems() {
 
-		return organization;
-
-	}
-
-	public void setOrganization(Organization organization) {
-
-		this.organization = organization;
+		return items;
 
 	}
 
-	public List<FolderProduct> getProducts() {
+	public void setItems(List<CompanyDeviceDatasetTabItem> items) {
 
-		return products;
-
-	}
-
-	public void setProducts(List<FolderProduct> products) {
-
-		this.products = products;
+		this.items = items;
 
 	}
 
@@ -140,7 +104,7 @@ public class Folder implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Folder other = (Folder) obj;
+		CompanyDeviceDatasetTab other = (CompanyDeviceDatasetTab) obj;
 		if (identifier == null) {
 			if (other.identifier != null)
 				return false;

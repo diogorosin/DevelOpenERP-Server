@@ -5,10 +5,10 @@ import java.util.stream.IntStream;
 import br.com.pocketpos.server.bean.CompanyBean001;
 import br.com.pocketpos.server.bean.DatasetBean001;
 import br.com.pocketpos.server.bean.DeviceBean001;
-import br.com.pocketpos.server.bean.DocumentBean001;
+import br.com.pocketpos.server.bean.ItemBean001;
 import br.com.pocketpos.server.bean.DownloadBean;
 import br.com.pocketpos.server.bean.DownloadBean001;
-import br.com.pocketpos.server.bean.FolderBean001;
+import br.com.pocketpos.server.bean.TabBean001;
 import br.com.pocketpos.server.bean.IndividualBean001;
 import br.com.pocketpos.server.bean.OrganizationBean001;
 import br.com.pocketpos.server.bean.PartBean001;
@@ -19,8 +19,8 @@ import br.com.pocketpos.server.bean.UserBean001;
 import br.com.pocketpos.server.orm.Company;
 import br.com.pocketpos.server.orm.CompanyDevice;
 import br.com.pocketpos.server.orm.CompanyDeviceDataset;
-import br.com.pocketpos.server.orm.CompanyDeviceDatasetFolder;
-import br.com.pocketpos.server.orm.CompanyDeviceDatasetFolderProduct;
+import br.com.pocketpos.server.orm.CompanyDeviceDatasetTab;
+import br.com.pocketpos.server.orm.CompanyDeviceDatasetTabItem;
 import br.com.pocketpos.server.orm.CompanyDeviceDatasetIndividual;
 import br.com.pocketpos.server.orm.CompanyDeviceDatasetOrganization;
 import br.com.pocketpos.server.orm.CompanyDeviceDatasetProduct;
@@ -110,15 +110,15 @@ public class DownloadBuilder001 extends DownloadBuilder {
 				}
 
 				if (IntStream.of(options).anyMatch(x -> x == DATASET_FOLDERS)
-						&& companyDeviceDataset.getFolders() != null){					
+						&& companyDeviceDataset.getTabs() != null){					
 
-					for (CompanyDeviceDatasetFolder folder : companyDeviceDataset.getFolders()){
+					for (CompanyDeviceDatasetTab tab : companyDeviceDataset.getTabs()){
 
-						FolderBean001 folderBean = new FolderBean001();
+						TabBean001 tabBean = new TabBean001();
 
-						populateFolder(folderBean, folder);
+						populateTab(tabBean, tab);
 
-						datasetBean.getFolders().add(folderBean);
+						datasetBean.getTabs().add(tabBean);
 
 					}
 
@@ -232,15 +232,15 @@ public class DownloadBuilder001 extends DownloadBuilder {
 			}
 
 			if (IntStream.of(options).anyMatch(x -> x == DATASET_FOLDERS)
-					&& companyDeviceDataset.getFolders() != null){					
+					&& companyDeviceDataset.getTabs() != null){					
 
-				for (CompanyDeviceDatasetFolder folder : companyDeviceDataset.getFolders()){
+				for (CompanyDeviceDatasetTab folder : companyDeviceDataset.getTabs()){
 
-					FolderBean001 folderBean = new FolderBean001();
+					TabBean001 folderBean = new TabBean001();
 
-					populateFolder(folderBean, folder);
+					populateTab(folderBean, folder);
 
-					datasetBean.getFolders().add(folderBean);
+					datasetBean.getTabs().add(folderBean);
 
 				}
 
@@ -356,15 +356,15 @@ public class DownloadBuilder001 extends DownloadBuilder {
 		}
 
 		if (IntStream.of(options).anyMatch(x -> x == DATASET_FOLDERS)
-				&& companyDeviceDataset.getFolders() != null){					
+				&& companyDeviceDataset.getTabs() != null){					
 
-			for (CompanyDeviceDatasetFolder folder : companyDeviceDataset.getFolders()){
+			for (CompanyDeviceDatasetTab folder : companyDeviceDataset.getTabs()){
 
-				FolderBean001 folderBean = new FolderBean001();
+				TabBean001 folderBean = new TabBean001();
 
-				populateFolder(folderBean, folder);
+				populateTab(folderBean, folder);
 
-				datasetBean.getFolders().add(folderBean);
+				datasetBean.getTabs().add(folderBean);
 
 			}
 
@@ -514,30 +514,25 @@ public class DownloadBuilder001 extends DownloadBuilder {
 
 	}
 
-	private void populateFolder(FolderBean001 folderBean, CompanyDeviceDatasetFolder folder){
+	private void populateTab(TabBean001 tabBean, CompanyDeviceDatasetTab tab){
 
-		folderBean.setIdentifier(folder.getIdentifier().getFolder().getIdentifier());
+		tabBean.setIdentifier(tab.getIdentifier().getTab().getIdentifier());
 
-		folderBean.setActive(folder.getActive());
+		tabBean.setPosition(tab.getPosition());
 
-		folderBean.setPosition(folder.getPosition());
+		tabBean.setDenomination(tab.getDenomination());
 
-		folderBean.setDenomination(folder.getDenomination());
+		if (tab.getItems() != null){
 
-		if (folder.getProducts() != null){
+			for (CompanyDeviceDatasetTabItem tabItem : tab.getItems()) {
 
-			for (CompanyDeviceDatasetFolderProduct folderProduct : folder.getProducts()) {
+				ItemBean001 itemBean = new ItemBean001();
 
-				DocumentBean001 documentBean = new DocumentBean001();
+				itemBean.setProduct(tabItem.getProduct().getIdentifier());
 
-				documentBean.setActive(folderProduct.getActive());
-
-				documentBean.setPosition(folderProduct.getPosition());
-
-				folderBean.getDocuments().put(folderProduct.
+				tabBean.getItems().put(tabItem.
 						getIdentifier().
-						getProduct().
-						getIdentifier(), documentBean);
+						getItem(), itemBean);
 
 			}
 

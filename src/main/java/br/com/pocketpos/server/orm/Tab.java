@@ -5,9 +5,13 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -15,16 +19,14 @@ import javax.validation.constraints.Size;
 
 
 @Entity
-@Table(name="\"CompanyDeviceDatasetFolder\"")
-public class CompanyDeviceDatasetFolder implements Serializable {
+@Table(name="\"Tab\"")  
+public class Tab implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private CompanyDeviceDatasetFolderPK identifier;
-	
-	@NotNull
-	private Boolean active;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)	
+	private Integer identifier;
 
 	@NotNull
 	@Column(name="\"position\"", nullable=false)
@@ -34,37 +36,29 @@ public class CompanyDeviceDatasetFolder implements Serializable {
 	@Size(min=1,max=20)
 	@Column(name="\"denomination\"", nullable=false)
 	private String denomination;
+	
+	@ManyToOne(optional=false)
+	@JoinColumn(name = "organization")
+	private Organization organization;
 
 	@OneToMany(
 			fetch=FetchType.LAZY,
-			mappedBy="identifier.companyDeviceDatasetFolder",
+			mappedBy="identifier.tab",
 			cascade={CascadeType.ALL}, 
 			orphanRemoval=true)
-	private List<CompanyDeviceDatasetFolderProduct> products;
+	private List<TabItem> items;
 
-	public CompanyDeviceDatasetFolderPK getIdentifier() {
+	public Integer getIdentifier() {
 
 		return identifier;
 
 	}
 
-	public void setIdentifier(CompanyDeviceDatasetFolderPK identifier) {
+	public void setIdentifier(Integer identifier) {
 
 		this.identifier = identifier;
 
 	}
-
-	public Boolean getActive() {
-
-		return active;
-
-	}
-
-	public void setActive(Boolean active) {
-
-		this.active = active;
-
-	}	
 
 	public Integer getPosition() {
 
@@ -90,15 +84,27 @@ public class CompanyDeviceDatasetFolder implements Serializable {
 
 	}
 
-	public List<CompanyDeviceDatasetFolderProduct> getProducts() {
+	public Organization getOrganization() {
 
-		return products;
+		return organization;
 
 	}
 
-	public void setProducts(List<CompanyDeviceDatasetFolderProduct> products) {
+	public void setOrganization(Organization organization) {
 
-		this.products = products;
+		this.organization = organization;
+
+	}
+
+	public List<TabItem> getItems() {
+
+		return items;
+
+	}
+
+	public void setItems(List<TabItem> items) {
+
+		this.items = items;
 
 	}
 
@@ -119,7 +125,7 @@ public class CompanyDeviceDatasetFolder implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CompanyDeviceDatasetFolder other = (CompanyDeviceDatasetFolder) obj;
+		Tab other = (Tab) obj;
 		if (identifier == null) {
 			if (other.identifier != null)
 				return false;

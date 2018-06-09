@@ -3,17 +3,15 @@ package br.com.pocketpos.server.bean;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FolderBean001 {
+public class TabBean001 {
 
 	private Integer identifier;	
-
-	private Boolean active;
 
 	private Integer position;
 
 	private String denomination;
 
-	private Map<Integer, DocumentBean001> documents;
+	private Map<Integer, ItemBean001> items;
 
 	public Integer getIdentifier() {
 
@@ -24,18 +22,6 @@ public class FolderBean001 {
 	public void setIdentifier(Integer identifier) {
 
 		this.identifier = identifier;
-
-	}
-
-	public Boolean getActive() {
-
-		return active;
-
-	}
-
-	public void setActive(Boolean active) {
-
-		this.active = active;
 
 	}
 
@@ -63,19 +49,19 @@ public class FolderBean001 {
 
 	}
 
-	public Map<Integer, DocumentBean001> getDocuments() {
+	public Map<Integer, ItemBean001> getItems() {
 
-		if (documents==null)
+		if (items==null)
 
-			documents = new HashMap<Integer, DocumentBean001>();
+			items = new HashMap<Integer, ItemBean001>();
 
-		return documents;
+		return items;
 
 	}
 
-	public void setDocuments(Map<Integer, DocumentBean001> documents) {
+	public void setItems(Map<Integer, ItemBean001> items) {
 
-		this.documents = documents;
+		this.items = items;
 
 	}
 

@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 
 
 @Embeddable
-public class CompanyDeviceDatasetFolderPK implements Serializable{
+public class CompanyDeviceDatasetTabPK implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -21,8 +21,8 @@ public class CompanyDeviceDatasetFolderPK implements Serializable{
 	private CompanyDeviceDataset companyDeviceDataset;
 
 	@ManyToOne(optional=false)
-	@JoinColumn(name="folder", nullable=false)
-	private Folder folder;
+	@JoinColumn(name="tab", nullable=false)
+	private Tab tab;
 
 	public CompanyDeviceDataset getCompanyDeviceDataset() {
 
@@ -36,15 +36,15 @@ public class CompanyDeviceDatasetFolderPK implements Serializable{
 
 	}
 
-	public Folder getFolder() {
+	public Tab getTab() {
 
-		return folder;
+		return tab;
 
 	}
 
-	public void setFolder(Folder folder) {
+	public void setTab(Tab tab) {
 
-		this.folder = folder;
+		this.tab = tab;
 
 	}
 
@@ -53,7 +53,7 @@ public class CompanyDeviceDatasetFolderPK implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((companyDeviceDataset == null) ? 0 : companyDeviceDataset.hashCode());
-		result = prime * result + ((folder == null) ? 0 : folder.hashCode());
+		result = prime * result + ((tab == null) ? 0 : tab.hashCode());
 		return result;
 
 	}
@@ -66,16 +66,16 @@ public class CompanyDeviceDatasetFolderPK implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CompanyDeviceDatasetFolderPK other = (CompanyDeviceDatasetFolderPK) obj;
+		CompanyDeviceDatasetTabPK other = (CompanyDeviceDatasetTabPK) obj;
 		if (companyDeviceDataset == null) {
 			if (other.companyDeviceDataset != null)
 				return false;
 		} else if (!companyDeviceDataset.equals(other.companyDeviceDataset))
 			return false;
-		if (folder == null) {
-			if (other.folder != null)
+		if (tab == null) {
+			if (other.tab != null)
 				return false;
-		} else if (!folder.equals(other.folder))
+		} else if (!tab.equals(other.tab))
 			return false;
 		return true;
 

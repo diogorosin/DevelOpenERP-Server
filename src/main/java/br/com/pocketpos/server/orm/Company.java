@@ -58,7 +58,7 @@ public class Company extends Organization {
 			mappedBy="organization", 
 			cascade={CascadeType.ALL}, 
 			orphanRemoval=true)
-	private List<Folder> folders;
+	private List<Tab> tabs;
 
 	public String getCouponTitle() {
 
@@ -96,15 +96,15 @@ public class Company extends Organization {
 
 	}
 
-	public List<Folder> getFolders() {
+	public List<Tab> getTabs() {
 
-		return folders;
+		return tabs;
 
 	}
 
-	public void setFolders(List<Folder> folders) {
+	public void setTabs(List<Tab> tabs) {
 
-		this.folders = folders;
+		this.tabs = tabs;
 
 	}
 

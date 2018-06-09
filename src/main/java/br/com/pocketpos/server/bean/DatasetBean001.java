@@ -18,7 +18,7 @@ public class DatasetBean001 {
 
 	private List<ProductBean001> products;
 
-	private List<FolderBean001> folders;
+	private List<TabBean001> tabs;
 
 	private List<TariffBean001> tariffs;
 
@@ -111,19 +111,19 @@ public class DatasetBean001 {
 
 	}
 
-	public List<FolderBean001> getFolders() {
+	public List<TabBean001> getTabs() {
 
-		if (folders == null)
+		if (tabs == null)
 
-			folders = new ArrayList<FolderBean001>();
+			tabs = new ArrayList<TabBean001>();
 
-		return folders;
+		return tabs;
 
 	}
 
-	public void setFolders(List<FolderBean001> folders) {
+	public void setTabs(List<TabBean001> tabs) {
 
-		this.folders = folders;
+		this.tabs = tabs;
 
 	}
 
