@@ -2,11 +2,13 @@ package br.com.pocketpos.server.orm;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -18,10 +20,18 @@ public class CompanyDeviceDatasetTabItem implements Serializable {
 	@EmbeddedId
 	private CompanyDeviceDatasetTabItemPK identifier;
 
+	@NotNull
+	@Column(name="\"active\"", nullable=false)
+	private Boolean active;
+
+	@NotNull
+	@Column(name="\"position\"", nullable=false)
+	private Integer position;
+
 	@ManyToOne(optional=false)
 	@JoinColumn(name="\"product\"", referencedColumnName="identifier", nullable=false)
 	private Product product;	
-	
+
 	public CompanyDeviceDatasetTabItemPK getIdentifier() {
 
 		return identifier;
@@ -31,6 +41,30 @@ public class CompanyDeviceDatasetTabItem implements Serializable {
 	public void setIdentifier(CompanyDeviceDatasetTabItemPK identifier) {
 
 		this.identifier = identifier;
+
+	}
+
+	public Boolean getActive() {
+
+		return active;
+
+	}
+
+	public void setActive(Boolean active) {
+
+		this.active = active;
+
+	}
+
+	public Integer getPosition() {
+
+		return position;
+
+	}
+
+	public void setPosition(Integer position) {
+
+		this.position = position;
 
 	}
 

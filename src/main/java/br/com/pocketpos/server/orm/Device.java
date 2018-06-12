@@ -60,7 +60,6 @@ public class Device implements Serializable{
 
 	}
 
-
 	public Boolean getActive() {
 
 		return active;

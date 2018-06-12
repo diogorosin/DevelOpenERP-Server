@@ -22,7 +22,7 @@ public class CompanyDeviceDatasetProduct implements Serializable {
 
 	@EmbeddedId
 	private CompanyDeviceDatasetProductPK identifier;
-	
+
 	@NotNull
 	private Boolean active;
 
@@ -30,7 +30,7 @@ public class CompanyDeviceDatasetProduct implements Serializable {
 	@Size(min=1,max=5)
 	@Column(name="\"code\"", nullable=false)
 	private String code;
-	
+
 	@NotNull
 	@Size(min=1,max=100)
 	@Column(name="\"longDenomination\"", nullable=false)

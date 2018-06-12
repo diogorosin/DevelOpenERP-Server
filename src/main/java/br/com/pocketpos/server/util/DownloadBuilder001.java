@@ -518,6 +518,8 @@ public class DownloadBuilder001 extends DownloadBuilder {
 
 		tabBean.setIdentifier(tab.getIdentifier().getTab().getIdentifier());
 
+		tabBean.setActive(tab.getActive());
+
 		tabBean.setPosition(tab.getPosition());
 
 		tabBean.setDenomination(tab.getDenomination());
@@ -527,6 +529,10 @@ public class DownloadBuilder001 extends DownloadBuilder {
 			for (CompanyDeviceDatasetTabItem tabItem : tab.getItems()) {
 
 				ItemBean001 itemBean = new ItemBean001();
+
+				itemBean.setActive(tabItem.getActive());
+
+				itemBean.setPosition(tabItem.getPosition());
 
 				itemBean.setProduct(tabItem.getProduct().getIdentifier());
 

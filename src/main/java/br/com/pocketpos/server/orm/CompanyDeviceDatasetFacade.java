@@ -202,6 +202,8 @@ public class CompanyDeviceDatasetFacade {
 
 					companyDeviceDatasetTab.setIdentifier(companyDeviceDatasetTabPK);
 
+					companyDeviceDatasetTab.setActive(tab.getActive());
+
 					companyDeviceDatasetTab.setPosition(tab.getPosition());
 
 					companyDeviceDatasetTab.setDenomination(tab.getDenomination());
@@ -215,12 +217,16 @@ public class CompanyDeviceDatasetFacade {
 							CompanyDeviceDatasetTabItemPK companyDeviceDatasetTabItemPK = new CompanyDeviceDatasetTabItemPK();
 
 							companyDeviceDatasetTabItemPK.setCompanyDeviceDatasetTab(companyDeviceDatasetTab);
-							
+
 							companyDeviceDatasetTabItemPK.setItem(tabItem.getIdentifier().getItem());
 
 							CompanyDeviceDatasetTabItem companyDeviceDatasetTabItem = new CompanyDeviceDatasetTabItem();
 
 							companyDeviceDatasetTabItem.setIdentifier(companyDeviceDatasetTabItemPK);
+
+							companyDeviceDatasetTabItem.setActive(tabItem.getActive());
+
+							companyDeviceDatasetTabItem.setPosition(tabItem.getPosition());
 
 							companyDeviceDatasetTabItem.setProduct(tabItem.getProduct());
 

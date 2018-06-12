@@ -5,7 +5,9 @@ import java.util.Map;
 
 public class TabBean001 {
 
-	private Integer identifier;	
+	private Integer identifier;
+
+	private Boolean active;	
 
 	private Integer position;
 
@@ -25,6 +27,18 @@ public class TabBean001 {
 
 	}
 
+	public Boolean getActive() {
+
+		return active;
+
+	}
+
+	public void setActive(Boolean active) {
+
+		this.active = active;
+
+	}
+	
 	public Integer getPosition() {
 
 		return position;

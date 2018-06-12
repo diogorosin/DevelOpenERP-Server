@@ -24,6 +24,10 @@ public class CompanyDeviceDatasetTab implements Serializable {
 	private CompanyDeviceDatasetTabPK identifier;
 
 	@NotNull
+	@Column(name="\"active\"", nullable=false)
+	private Boolean active;
+
+	@NotNull
 	@Column(name="\"position\"", nullable=false)
 	private Integer position;
 
@@ -48,6 +52,18 @@ public class CompanyDeviceDatasetTab implements Serializable {
 	public void setIdentifier(CompanyDeviceDatasetTabPK identifier) {
 
 		this.identifier = identifier;
+
+	}
+
+	public Boolean getActive() {
+
+		return active;
+
+	}
+
+	public void setActive(Boolean active) {
+
+		this.active = active;
 
 	}
 

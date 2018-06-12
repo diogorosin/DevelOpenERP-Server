@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
 
 
 @Entity
-@Table(name="\"Tab\"")  
+@Table(name="\"Tab\"")
 public class Tab implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -27,6 +27,10 @@ public class Tab implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)	
 	private Integer identifier;
+
+	@NotNull
+	@Column(name="\"active\"", nullable=false)
+	private Boolean active;
 
 	@NotNull
 	@Column(name="\"position\"", nullable=false)
@@ -57,6 +61,18 @@ public class Tab implements Serializable {
 	public void setIdentifier(Integer identifier) {
 
 		this.identifier = identifier;
+
+	}
+
+	public Boolean getActive() {
+
+		return active;
+
+	}
+
+	public void setActive(Boolean active) {
+
+		this.active = active;
 
 	}
 
