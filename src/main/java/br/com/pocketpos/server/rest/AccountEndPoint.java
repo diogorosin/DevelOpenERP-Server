@@ -30,8 +30,6 @@ import br.com.pocketpos.server.orm.DeviceDAO;
 import br.com.pocketpos.server.orm.Level;
 import br.com.pocketpos.server.orm.SubjectSubject;
 import br.com.pocketpos.server.orm.SubjectSubjectPK;
-import br.com.pocketpos.server.orm.Tariff;
-import br.com.pocketpos.server.orm.TariffDAO;
 import br.com.pocketpos.server.orm.User;
 import br.com.pocketpos.server.orm.UserDAO;
 import br.com.pocketpos.server.util.DownloadBeanFactory;
@@ -83,28 +81,6 @@ public class AccountEndPoint {
 				company.setCouponSubtitle(null);
 
 				companyDAO.create(company);
-
-				//CRIA A TARIFA PADRAO
-				TariffDAO tariffDAO = new TariffDAO(session);
-
-				Tariff tariff = new Tariff();
-
-				tariff.setActive(true);
-
-				tariff.setDenomination("Padrão");
-
-				tariff.setOrganization(company);
-
-				tariffDAO.create(tariff);
-
-				//ATRIBUI A TARIFA A EMPRESA
-				company.setTariffs(new ArrayList<Tariff>());
-
-				company.getTariffs().add(tariff);
-
-				company.setCurrentTariff(tariff);
-
-				companyDAO.update(company);
 
 				isNewCompany = true;
 

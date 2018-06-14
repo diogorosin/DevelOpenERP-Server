@@ -7,6 +7,9 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -40,6 +43,10 @@ public class CompanyDeviceDatasetUser implements Serializable {
 
 	@Enumerated(EnumType.ORDINAL)
 	private Level level;
+	
+	@ManyToOne(optional=true, fetch=FetchType.LAZY)
+	@JoinColumn(name = "\"tariff\"")	
+	private Tariff tariff;	
 
 	public CompanyDeviceDatasetUserPK getIdentifier() {
 
@@ -110,6 +117,18 @@ public class CompanyDeviceDatasetUser implements Serializable {
 	public void setLevel(Level level) {
 
 		this.level = level;
+
+	}
+
+	public Tariff getTariff() {
+
+		return tariff;
+
+	}
+
+	public void setTariff(Tariff tariff) {
+
+		this.tariff = tariff;
 
 	}
 

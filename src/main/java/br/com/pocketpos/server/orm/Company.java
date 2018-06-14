@@ -6,6 +6,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -37,6 +39,10 @@ public class Company extends Organization {
 
 	public static final String ROW_COUNT = "Company.rowCount";	
 
+	@ManyToOne(optional=true, fetch=FetchType.LAZY)
+	@JoinColumn(name = "\"tariff\"")	
+	private Tariff tariff;
+
 	@NotNull
 	@Size(min=1, max=32)
 	@Column(name="\"couponTitle\"")
@@ -55,10 +61,36 @@ public class Company extends Organization {
 
 	@OneToMany(
 			fetch=FetchType.LAZY,
-			mappedBy="organization", 
+			mappedBy="company",
+			cascade={CascadeType.ALL},
+			orphanRemoval=true)
+	private List<Product> products;
+
+	@OneToMany(
+			fetch=FetchType.LAZY,
+			mappedBy="company", 
 			cascade={CascadeType.ALL}, 
 			orphanRemoval=true)
 	private List<Tab> tabs;
+
+	@OneToMany(
+			fetch=FetchType.LAZY,
+			mappedBy="company",
+			cascade={CascadeType.ALL}, 
+			orphanRemoval=true)
+	private List<Tariff> tariffs;
+
+	public Tariff getTariff() {
+
+		return tariff;
+
+	}
+
+	public void setTariff(Tariff tariff) {
+		
+		this.tariff = tariff;
+		
+	}
 
 	public String getCouponTitle() {
 
@@ -94,6 +126,18 @@ public class Company extends Organization {
 
 		this.devices = devices;
 
+	}	
+
+	public List<Product> getProducts() {
+
+		return products;
+
+	}
+
+	public void setProducts(List<Product> products) {
+
+		this.products = products;
+
 	}
 
 	public List<Tab> getTabs() {
@@ -105,6 +149,18 @@ public class Company extends Organization {
 	public void setTabs(List<Tab> tabs) {
 
 		this.tabs = tabs;
+
+	}
+
+	public List<Tariff> getTariffs() {
+
+		return tariffs;
+
+	}
+
+	public void setTariffs(List<Tariff> tariffs) {
+
+		this.tariffs = tariffs;
 
 	}
 

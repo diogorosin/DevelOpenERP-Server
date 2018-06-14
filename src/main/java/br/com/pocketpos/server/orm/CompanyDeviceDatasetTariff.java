@@ -1,14 +1,11 @@
 package br.com.pocketpos.server.orm;
 
 import java.io.Serializable;
-import java.util.List;
+import java.math.BigDecimal;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -30,13 +27,10 @@ public class CompanyDeviceDatasetTariff implements Serializable {
 	@Size(min=1,max=20)
 	@Column(name="\"denomination\"", nullable=false)
 	private String denomination;
-	
-	@OneToMany(
-			fetch=FetchType.LAZY,
-			mappedBy="identifier.companyDeviceDatasetTariff",
-			cascade={CascadeType.ALL}, 
-			orphanRemoval=true)
-	private List<CompanyDeviceDatasetTariffProduct> products;
+
+	@NotNull	
+	@Column(name="\"factor\"", nullable=false)
+	private BigDecimal factor;
 
 	public CompanyDeviceDatasetTariffPK getIdentifier() {
 
@@ -73,16 +67,16 @@ public class CompanyDeviceDatasetTariff implements Serializable {
 
 	}
 
-	public List<CompanyDeviceDatasetTariffProduct> getProducts() {
-
-		return products;
-
+	public BigDecimal getFactor() {
+		
+		return factor;
+		
 	}
 
-	public void setProducts(List<CompanyDeviceDatasetTariffProduct> products) {
-
-		this.products = products;
-
+	public void setFactor(BigDecimal factor) {
+		
+		this.factor = factor;
+		
 	}
 
 	public int hashCode() {

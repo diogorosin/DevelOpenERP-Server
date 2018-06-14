@@ -1,18 +1,15 @@
 package br.com.pocketpos.server.orm;
 
 import java.io.Serializable;
-import java.util.List;
+import java.math.BigDecimal;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -36,16 +33,13 @@ public class Tariff implements Serializable {
 	@Column(name="\"denomination\"", nullable=false)
 	private String denomination;
 
-	@ManyToOne(optional=false)
-	@JoinColumn(name = "organization")
-	private Organization organization;
+	@NotNull	
+	@Column(name="\"factor\"", nullable=false)
+	private BigDecimal factor;
 
-	@OneToMany(
-			fetch=FetchType.LAZY,
-			mappedBy="identifier.tariff",
-			cascade={CascadeType.ALL}, 
-			orphanRemoval=true)
-	private List<TariffProduct> products;
+	@ManyToOne(optional=false)
+	@JoinColumn(name = "\"company\"")
+	private Company company;
 
 	public Integer getIdentifier() {
 
@@ -82,27 +76,27 @@ public class Tariff implements Serializable {
 
 	}
 
-	public Organization getOrganization() {
+	public BigDecimal getFactor() {
 
-		return organization;
-
-	}
-
-	public void setOrganization(Organization organization) {
-
-		this.organization = organization;
+		return factor;
 
 	}
 
-	public List<TariffProduct> getProducts() {
+	public void setFactor(BigDecimal factor) {
 
-		return products;
+		this.factor = factor;
 
 	}
 
-	public void setProducts(List<TariffProduct> products) {
+	public Company getCompany() {
 
-		this.products = products;
+		return company;
+
+	}
+
+	public void setCompany(Company company) {
+
+		this.company = company;
 
 	}
 

@@ -40,6 +40,10 @@ public class CompanyDeviceDatasetFacade {
 
 			companyDeviceDataset.setUsers(new ArrayList<CompanyDeviceDatasetUser>());
 
+			companyDeviceDataset.setOrganizations(new ArrayList<CompanyDeviceDatasetOrganization>());
+
+			companyDeviceDataset.setIndividuals(new ArrayList<CompanyDeviceDatasetIndividual>());
+
 			if (company.getChilds() != null){
 
 				for (SubjectSubject subjectSubject: company.getChilds()) {
@@ -67,6 +71,8 @@ public class CompanyDeviceDatasetFacade {
 						companyDeviceDatasetSubject.setPassword(user.getPassword());
 
 						companyDeviceDatasetSubject.setLevel(subjectSubject.getLevel());
+						
+						companyDeviceDatasetSubject.setTariff(subjectSubject.getTariff());
 
 						companyDeviceDataset.getUsers().add(companyDeviceDatasetSubject);
 
@@ -91,6 +97,8 @@ public class CompanyDeviceDatasetFacade {
 							companyDeviceDatasetIndividual.setName(individual.getName());
 
 							companyDeviceDatasetIndividual.setLevel(subjectSubject.getLevel());
+							
+							companyDeviceDatasetIndividual.setTariff(subjectSubject.getTariff());							
 
 							companyDeviceDataset.getIndividuals().add(companyDeviceDatasetIndividual);
 
@@ -117,6 +125,8 @@ public class CompanyDeviceDatasetFacade {
 								companyDeviceDatasetOrganization.setFancyName(organization.getFancyName());
 
 								companyDeviceDatasetOrganization.setLevel(subjectSubject.getLevel());
+
+								companyDeviceDatasetOrganization.setTariff(subjectSubject.getTariff());								
 
 								companyDeviceDataset.getOrganizations().add(companyDeviceDatasetOrganization);
 
@@ -153,6 +163,10 @@ public class CompanyDeviceDatasetFacade {
 					companyDeviceDatasetProduct.setLongDenomination(product.getLongDenomination());
 
 					companyDeviceDatasetProduct.setShortDenomination(product.getShortDenomination());
+
+					companyDeviceDatasetProduct.setPrice(product.getPrice());
+
+					companyDeviceDatasetProduct.setTariff(product.getTariff());					
 
 					companyDeviceDatasetProduct.setParts(new ArrayList<CompanyDeviceDatasetProductProduct>());
 
@@ -262,31 +276,7 @@ public class CompanyDeviceDatasetFacade {
 
 					companyDeviceDatasetTariff.setDenomination(tariff.getDenomination());
 
-					companyDeviceDatasetTariff.setProducts(new ArrayList<CompanyDeviceDatasetTariffProduct>());
-
-					if (companyDeviceDatasetTariffPK.getTariff().getProducts() != null){
-
-						for (TariffProduct tariffProduct : companyDeviceDatasetTariffPK.getTariff().getProducts()) {
-
-							CompanyDeviceDatasetTariffProductPK companyDeviceDatasetTariffProductPK = new CompanyDeviceDatasetTariffProductPK();
-
-							companyDeviceDatasetTariffProductPK.setCompanyDeviceDatasetTariff(companyDeviceDatasetTariff);
-
-							companyDeviceDatasetTariffProductPK.setProduct(tariffProduct.getIdentifier().getProduct());
-
-							CompanyDeviceDatasetTariffProduct companyDeviceDatasetTariffProduct = new CompanyDeviceDatasetTariffProduct();
-
-							companyDeviceDatasetTariffProduct.setIdentifier(companyDeviceDatasetTariffProductPK);
-
-							companyDeviceDatasetTariffProduct.setActive(tariffProduct.getActive());
-
-							companyDeviceDatasetTariffProduct.setPrice(tariffProduct.getPrice());
-
-							companyDeviceDatasetTariff.getProducts().add(companyDeviceDatasetTariffProduct);
-
-						}
-
-					}
+					companyDeviceDatasetTariff.setFactor(tariff.getFactor());
 
 					companyDeviceDataset.getTariffs().add(companyDeviceDatasetTariff);
 

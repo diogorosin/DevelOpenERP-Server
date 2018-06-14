@@ -7,6 +7,9 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -31,6 +34,10 @@ public class CompanyDeviceDatasetIndividual implements Serializable {
 
 	@Enumerated(EnumType.ORDINAL)
 	private Level level;
+	
+	@ManyToOne(optional=true, fetch=FetchType.LAZY)
+	@JoinColumn(name = "\"tariff\"")	
+	private Tariff tariff;
 
 	public CompanyDeviceDatasetIndividualPK getIdentifier() {
 
@@ -80,6 +87,18 @@ public class CompanyDeviceDatasetIndividual implements Serializable {
 
 	}
 
+	public Tariff getTariff() {
+		
+		return tariff;
+
+	}
+
+	public void setTariff(Tariff tariff) {
+		
+		this.tariff = tariff;
+		
+	}
+	
 	public int hashCode() {
 
 		final int prime = 31;

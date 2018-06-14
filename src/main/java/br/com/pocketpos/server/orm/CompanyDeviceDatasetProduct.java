@@ -1,6 +1,7 @@
 package br.com.pocketpos.server.orm;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -8,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -40,6 +43,14 @@ public class CompanyDeviceDatasetProduct implements Serializable {
 	@Size(min=1,max=20)
 	@Column(name="\"shortDenomination\"", nullable=false)
 	private String shortDenomination;
+
+	@NotNull
+	@Column(name="\"price\"", nullable=false)
+	private BigDecimal price;
+
+	@ManyToOne(optional=true, fetch=FetchType.LAZY)
+	@JoinColumn(name = "\"tariff\"")	
+	private Tariff tariff;
 
 	@OneToMany(
 			fetch=FetchType.LAZY,
@@ -106,6 +117,30 @@ public class CompanyDeviceDatasetProduct implements Serializable {
 
 		this.shortDenomination = shortDenomination;
 
+	}
+
+	public BigDecimal getPrice() {
+		
+		return price;
+		
+	}
+
+	public void setPrice(BigDecimal price) {
+		
+		this.price = price;
+		
+	}
+	
+	public Tariff getTariff() {
+		
+		return tariff;
+		
+	}
+
+	public void setTariff(Tariff tariff) {
+		
+		this.tariff = tariff;
+		
 	}
 
 	public List<CompanyDeviceDatasetProductProduct> getParts() {

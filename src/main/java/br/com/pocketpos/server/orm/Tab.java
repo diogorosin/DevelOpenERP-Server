@@ -42,8 +42,8 @@ public class Tab implements Serializable {
 	private String denomination;
 	
 	@ManyToOne(optional=false)
-	@JoinColumn(name = "organization")
-	private Organization organization;
+	@JoinColumn(name = "company")
+	private Company company;
 
 	@OneToMany(
 			fetch=FetchType.LAZY,
@@ -100,15 +100,15 @@ public class Tab implements Serializable {
 
 	}
 
-	public Organization getOrganization() {
+	public Company getCompany() {
 
-		return organization;
+		return company;
 
 	}
 
-	public void setOrganization(Organization organization) {
+	public void setCompany(Company company) {
 
-		this.organization = organization;
+		this.company = company;
 
 	}
 

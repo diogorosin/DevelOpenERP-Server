@@ -1,6 +1,7 @@
 package br.com.pocketpos.server.orm;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -35,7 +36,7 @@ public class Product implements Serializable {
 	@Size(min=1,max=5)
 	@Column(name="\"code\"", nullable=false)
 	private String code;
-	
+
 	@NotNull
 	@Size(min=1,max=100)
 	@Column(name="\"longDenomination\"", nullable=false)
@@ -45,10 +46,18 @@ public class Product implements Serializable {
 	@Size(min=1,max=20)
 	@Column(name="\"shortDenomination\"", nullable=false)
 	private String shortDenomination;
-	
+
+	@NotNull
+	@Column(name="\"price\"", nullable=false)
+	private BigDecimal price;
+
+	@ManyToOne(optional=true, fetch=FetchType.LAZY)
+	@JoinColumn(name = "\"tariff\"")	
+	private Tariff tariff;
+
 	@ManyToOne(optional=false)
-	@JoinColumn(name = "organization")
-	private Organization organization;
+	@JoinColumn(name = "company")
+	private Company company;
 
 	@OneToMany(
 			fetch=FetchType.LAZY,
@@ -117,15 +126,39 @@ public class Product implements Serializable {
 
 	}
 
-	public Organization getOrganization() {
+	public BigDecimal getPrice() {
+		
+		return price;
+		
+	}
 
-		return organization;
+	public void setPrice(BigDecimal price) {
+		
+		this.price = price;
+		
+	}
+	
+	public Tariff getTariff() {
+		
+		return tariff;
+		
+	}
+
+	public void setTariff(Tariff tariff) {
+		
+		this.tariff = tariff;
+		
+	}
+
+	public Company getCompany() {
+
+		return company;
 
 	}
 
-	public void setOrganization(Organization organization) {
+	public void setCompany(Company company) {
 
-		this.organization = organization;
+		this.company = company;
 
 	}
 

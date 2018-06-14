@@ -7,30 +7,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class CompanyBean001 extends OrganizationBean001{
 
-
 	@JsonIgnore
 	private Integer level;
 
-	private Integer currentTariff;
-	
 	private String couponTitle;
 	
 	private String couponSubtitle;
 
 	private List<DeviceBean001> devices;
-
-
-	public Integer getCurrentTariff() {
-
-		return currentTariff;
-
-	}
-
-	public void setCurrentTariff(Integer currentTariff) {
-
-		this.currentTariff = currentTariff;
-
-	}
 
 	public String getCouponTitle() {
 

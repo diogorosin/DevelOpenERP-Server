@@ -171,7 +171,7 @@ public class CompanyDeviceDataset implements Serializable {
 
 	}
 
-	public void setIndividual(List<CompanyDeviceDatasetIndividual> individuals) {
+	public void setIndividuals(List<CompanyDeviceDatasetIndividual> individuals) {
 
 		this.individuals = individuals;
 

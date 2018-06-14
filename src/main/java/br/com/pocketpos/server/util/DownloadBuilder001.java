@@ -5,28 +5,26 @@ import java.util.stream.IntStream;
 import br.com.pocketpos.server.bean.CompanyBean001;
 import br.com.pocketpos.server.bean.DatasetBean001;
 import br.com.pocketpos.server.bean.DeviceBean001;
-import br.com.pocketpos.server.bean.ItemBean001;
 import br.com.pocketpos.server.bean.DownloadBean;
 import br.com.pocketpos.server.bean.DownloadBean001;
-import br.com.pocketpos.server.bean.TabBean001;
 import br.com.pocketpos.server.bean.IndividualBean001;
+import br.com.pocketpos.server.bean.ItemBean001;
 import br.com.pocketpos.server.bean.OrganizationBean001;
 import br.com.pocketpos.server.bean.PartBean001;
-import br.com.pocketpos.server.bean.PriceBean001;
 import br.com.pocketpos.server.bean.ProductBean001;
+import br.com.pocketpos.server.bean.TabBean001;
 import br.com.pocketpos.server.bean.TariffBean001;
 import br.com.pocketpos.server.bean.UserBean001;
 import br.com.pocketpos.server.orm.Company;
 import br.com.pocketpos.server.orm.CompanyDevice;
 import br.com.pocketpos.server.orm.CompanyDeviceDataset;
-import br.com.pocketpos.server.orm.CompanyDeviceDatasetTab;
-import br.com.pocketpos.server.orm.CompanyDeviceDatasetTabItem;
 import br.com.pocketpos.server.orm.CompanyDeviceDatasetIndividual;
 import br.com.pocketpos.server.orm.CompanyDeviceDatasetOrganization;
 import br.com.pocketpos.server.orm.CompanyDeviceDatasetProduct;
 import br.com.pocketpos.server.orm.CompanyDeviceDatasetProductProduct;
+import br.com.pocketpos.server.orm.CompanyDeviceDatasetTab;
+import br.com.pocketpos.server.orm.CompanyDeviceDatasetTabItem;
 import br.com.pocketpos.server.orm.CompanyDeviceDatasetTariff;
-import br.com.pocketpos.server.orm.CompanyDeviceDatasetTariffProduct;
 import br.com.pocketpos.server.orm.CompanyDeviceDatasetUser;
 
 public class DownloadBuilder001 extends DownloadBuilder {
@@ -407,8 +405,8 @@ public class DownloadBuilder001 extends DownloadBuilder {
 
 		companyBean.setFancyName(company.getFancyName());
 
-		companyBean.setCurrentTariff(company.getCurrentTariff().getIdentifier());
-		
+		companyBean.setTariff(company.getTariff() != null ? company.getTariff().getIdentifier() : null);
+
 		companyBean.setCouponTitle(company.getCouponTitle());
 
 		companyBean.setCouponSubtitle(company.getCouponSubtitle());
@@ -447,7 +445,9 @@ public class DownloadBuilder001 extends DownloadBuilder {
 
 		individualBean.setLevel(individual.getLevel().ordinal());
 
-		individualBean.setName(individual.getName());		
+		individualBean.setName(individual.getName());
+		
+		individualBean.setTariff(individual.getTariff() != null ? individual.getTariff().getIdentifier() : null);		
 
 	}
 
@@ -462,6 +462,8 @@ public class DownloadBuilder001 extends DownloadBuilder {
 		organizationBean.setDenomination(organization.getDenomination());
 
 		organizationBean.setFancyName(organization.getFancyName());
+		
+		organizationBean.setTariff(organization.getTariff() != null ? organization.getTariff().getIdentifier() : null);
 
 	}
 
@@ -478,6 +480,8 @@ public class DownloadBuilder001 extends DownloadBuilder {
 		userBean.setLogin(user.getLogin());
 
 		userBean.setPassword(user.getPassword());
+		
+		userBean.setTariff(user.getTariff() != null ? user.getTariff().getIdentifier() : null);		
 
 	}
 
@@ -492,6 +496,10 @@ public class DownloadBuilder001 extends DownloadBuilder {
 		productBean.setLongDenomination(product.getLongDenomination());
 
 		productBean.setShortDenomination(product.getShortDenomination());
+		
+		productBean.setPrice(product.getPrice());
+
+		productBean.setTariff(product.getTariff() != null ? product.getTariff().getIdentifier() : null);
 
 		if (product.getParts() != null){
 
@@ -554,24 +562,7 @@ public class DownloadBuilder001 extends DownloadBuilder {
 
 		tariffBean.setDenomination(tariff.getDenomination());
 
-		if (tariff.getProducts() != null){
-
-			for (CompanyDeviceDatasetTariffProduct tariffProduct : tariff.getProducts()) {
-
-				PriceBean001 priceBean = new PriceBean001();
-
-				priceBean.setActive(tariffProduct.getActive());
-
-				priceBean.setPrice(tariffProduct.getPrice());
-
-				tariffBean.getPrices().put(tariffProduct.
-						getIdentifier().
-						getProduct().
-						getIdentifier(), priceBean);
-
-			}
-
-		}
+		tariffBean.setFactor(tariff.getFactor());
 
 	}
 

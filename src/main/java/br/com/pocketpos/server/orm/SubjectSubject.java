@@ -28,6 +28,10 @@ public class SubjectSubject implements Serializable {
 	@Enumerated(EnumType.ORDINAL)
 	private Level level;
 
+	@ManyToOne(optional=true, fetch=FetchType.LAZY)
+	@JoinColumn(name = "\"tariff\"")	
+	private Tariff tariff;		
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="address")
 	private Address address;
@@ -65,6 +69,18 @@ public class SubjectSubject implements Serializable {
 	public void setLevel(Level level) {
 
 		this.level = level;
+
+	}
+
+	public Tariff getTariff() {
+
+		return tariff;
+
+	}
+
+	public void setTariff(Tariff tariff) {
+
+		this.tariff = tariff;
 
 	}
 
