@@ -11,76 +11,60 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name="\"CompanyDeviceDatasetProductProduct\"")
-public class CompanyDeviceDatasetProductProduct implements Serializable {
+@Table(name="\"MeasureUnitMeasureUnit\"")
+public class MeasureUnitMeasureUnit implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private CompanyDeviceDatasetProductProductPK identifier;
-	
-	@NotNull
-	@Column(name="\"active\"", nullable=false)
-	private Boolean active;
+	private MeasureUnitMeasureUnitPK identifier;
 
 	@NotNull
-	@Column(name="\"quantity\"", nullable=false)
-	private BigDecimal quantity;
+	@Column(name="\"factor\"", nullable=false)
+	private BigDecimal factor;
 
-	public CompanyDeviceDatasetProductProductPK getIdentifier() {
-
+	public MeasureUnitMeasureUnitPK getIdentifier() {
+		
 		return identifier;
-
+		
 	}
 
-	public void setIdentifier(CompanyDeviceDatasetProductProductPK identifier) {
-
+	public void setIdentifier(MeasureUnitMeasureUnitPK identifier) {
+		
 		this.identifier = identifier;
-
+		
 	}
 
-	public Boolean getActive() {
-
-		return active;
-
+	public BigDecimal getFactor() {
+		
+		return factor;
+		
 	}
 
-	public void setActive(Boolean active) {
-
-		this.active = active;
-
-	}
-
-	public BigDecimal getQuantity() {
-
-		return quantity;
-
-	}
-
-	public void setQuantity(BigDecimal quantity) {
-
-		this.quantity = quantity;
-
+	public void setFactor(BigDecimal factor) {
+		
+		this.factor = factor;
+		
 	}
 
 	public int hashCode() {
-
+		
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((identifier == null) ? 0 : identifier.hashCode());
 		return result;
-
+		
 	}
 
 	public boolean equals(Object obj) {
-
+		
 		if (this == obj)
 			return true;
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CompanyDeviceDatasetProductProduct other = (CompanyDeviceDatasetProductProduct) obj;
+		MeasureUnitMeasureUnit other = (MeasureUnitMeasureUnit) obj;
 		if (identifier == null) {
 			if (other.identifier != null)
 				return false;

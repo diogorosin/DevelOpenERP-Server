@@ -75,6 +75,10 @@ public class CompanyEndPoint {
 
 				companyBean.setActive(company.getActive());
 
+				companyBean.setCouponTitle(company.getCouponTitle());				
+
+				companyBean.setCouponSubtitle(company.getCouponSubtitle());
+
 				companyBeans.add(companyBean);
 
 
@@ -100,7 +104,11 @@ public class CompanyEndPoint {
 
 					companyBean.setDenomination(company.getDenomination());
 
-					companyBean.setFancyName(company.getFancyName());					
+					companyBean.setFancyName(company.getFancyName());
+					
+					companyBean.setCouponTitle(company.getCouponTitle());				
+
+					companyBean.setCouponSubtitle(company.getCouponSubtitle());
 
 					companyBeans.add(companyBean);
 
