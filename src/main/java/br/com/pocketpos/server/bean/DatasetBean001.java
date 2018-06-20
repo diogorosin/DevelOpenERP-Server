@@ -3,12 +3,11 @@ package br.com.pocketpos.server.bean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatasetBean001 {
+public class DatasetBean001 implements DatasetBean {
 
+	private CompanyBean001 company;
 
-	private Integer identifier;
-
-	private String denomination;
+	private List<DeviceBean001> devices;
 
 	private List<OrganizationBean001> organizations;
 
@@ -16,37 +15,44 @@ public class DatasetBean001 {
 
 	private List<UserBean001> users;
 
+	private List<MeasureUnitBean001> measureUnits;	
+
 	private List<ProductBean001> products;
 
-	private List<TabBean001> tabs;
+	private List<CatalogBean001> catalogs;
 
-	private List<TariffBean001> tariffs;
+	public CompanyBean001 getCompany() {
 
+		if (company == null)
 
-	public Integer getIdentifier() {
+			company = new CompanyBean001();
 
-		return identifier;
-
-	}
-
-	public void setIdentifier(Integer identifier) {
-
-		this.identifier = identifier;
+		return company;
 
 	}
 
-	public String getDenomination() {
+	public void setCompany(CompanyBean001 company) {
 
-		return denomination;
-
-	}
-
-	public void setDenomination(String denomination) {
-
-		this.denomination = denomination;
+		this.company = company;
 
 	}
 
+	public List<DeviceBean001> getDevices() {
+
+		if (devices==null)
+
+			devices = new ArrayList<DeviceBean001>();
+
+		return devices;
+
+	}
+
+	public void setDevices(List<DeviceBean001> devices) {
+
+		this.devices = devices;
+
+	}
+	
 	public List<UserBean001> getUsers() {
 
 		if (users == null)
@@ -95,6 +101,22 @@ public class DatasetBean001 {
 
 	}
 
+	public List<MeasureUnitBean001> getMeasureUnits() {
+
+		if (this.measureUnits == null)
+
+			measureUnits = new ArrayList<MeasureUnitBean001>();
+
+		return measureUnits;
+
+	}
+
+	public void setMeasureUnits(List<MeasureUnitBean001> measureUnits) {
+
+		this.measureUnits = measureUnits;
+
+	}
+
 	public List<ProductBean001> getProducts() {
 
 		if (products == null)
@@ -111,35 +133,19 @@ public class DatasetBean001 {
 
 	}
 
-	public List<TabBean001> getTabs() {
+	public List<CatalogBean001> getCatalogs() {
 
-		if (tabs == null)
+		if (catalogs == null)
 
-			tabs = new ArrayList<TabBean001>();
+			catalogs = new ArrayList<CatalogBean001>();
 
-		return tabs;
-
-	}
-
-	public void setTabs(List<TabBean001> tabs) {
-
-		this.tabs = tabs;
+		return catalogs;
 
 	}
 
-	public List<TariffBean001> getTariffs() {
+	public void setCatalogs(List<CatalogBean001> catalogs) {
 
-		if (tariffs == null)
-
-			tariffs = new ArrayList<TariffBean001>();
-
-		return tariffs;
-
-	}
-
-	public void setTariffs(List<TariffBean001> tariffs) {
-
-		this.tariffs = tariffs;
+		this.catalogs = catalogs;
 
 	}
 

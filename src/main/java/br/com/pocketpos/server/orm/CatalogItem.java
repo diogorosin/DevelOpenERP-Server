@@ -1,6 +1,7 @@
 package br.com.pocketpos.server.orm;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -12,47 +13,39 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name="\"TabItem\"")
-public class TabItem implements Serializable {
+@Table(name="\"CatalogItem\"")
+public class CatalogItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private TabItemPK identifier;
-
-	@NotNull
-	@Column(name="\"active\"", nullable=false)
-	private Boolean active;
+	private CatalogItemPK identifier;
 
 	@NotNull
 	@Column(name="\"position\"", nullable=false)
 	private Integer position;
 
+	@NotNull
+	@Column(name="\"code\"", nullable=false)
+	private Integer code;
+
 	@ManyToOne(optional=false)
 	@JoinColumn(name="\"product\"", referencedColumnName="identifier", nullable=false)
 	private Product product;
 
-	public TabItemPK getIdentifier() {
+	@NotNull
+	@Column(name="\"price\"", nullable=false)
+	private BigDecimal price;
+
+	public CatalogItemPK getIdentifier() {
 
 		return identifier;
 
 	}
 
-	public void setIdentifier(TabItemPK identifier) {
+	public void setIdentifier(CatalogItemPK identifier) {
 
 		this.identifier = identifier;
-
-	}
-
-	public Boolean getActive() {
-
-		return active;
-
-	}
-
-	public void setActive(Boolean active) {
-
-		this.active = active;
 
 	}
 
@@ -68,6 +61,18 @@ public class TabItem implements Serializable {
 
 	}
 
+	public Integer getCode() {
+
+		return code;
+
+	}
+
+	public void setCode(Integer code) {
+
+		this.code = code;
+
+	}
+
 	public Product getProduct() {
 
 		return product;
@@ -77,6 +82,18 @@ public class TabItem implements Serializable {
 	public void setProduct(Product product) {
 
 		this.product = product;
+
+	}
+
+	public BigDecimal getPrice() {
+
+		return price;
+
+	}
+
+	public void setPrice(BigDecimal price) {
+
+		this.price = price;
 
 	}
 
@@ -97,7 +114,7 @@ public class TabItem implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TabItem other = (TabItem) obj;
+		CatalogItem other = (CatalogItem) obj;
 		if (identifier == null) {
 			if (other.identifier != null)
 				return false;

@@ -1,7 +1,6 @@
 package br.com.pocketpos.server.orm;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -33,27 +32,18 @@ public class Product implements Serializable {
 	private Boolean active;
 
 	@NotNull
-	@Size(min=1,max=5)
-	@Column(name="\"code\"", nullable=false)
-	private String code;
-
-	@NotNull
-	@Size(min=1,max=100)
+	@Size(min=1, max=100)
 	@Column(name="\"longDenomination\"", nullable=false)
 	private String longDenomination;
 
 	@NotNull
-	@Size(min=1,max=20)
+	@Size(min=1, max=20)
 	@Column(name="\"shortDenomination\"", nullable=false)
 	private String shortDenomination;
 
-	@NotNull
-	@Column(name="\"price\"", nullable=false)
-	private BigDecimal price;
-
-	@ManyToOne(optional=true, fetch=FetchType.LAZY)
-	@JoinColumn(name = "\"tariff\"")	
-	private Tariff tariff;
+	@ManyToOne(optional=false)
+	@JoinColumn(name="\"measureUnit\"")
+	private MeasureUnit measureUnit;
 
 	@ManyToOne(optional=false)
 	@JoinColumn(name = "company")
@@ -90,18 +80,6 @@ public class Product implements Serializable {
 
 	}	
 
-	public String getCode() {
-
-		return code;
-
-	}
-
-	public void setCode(String code) {
-
-		this.code = code;
-
-	}
-
 	public String getLongDenomination() {
 
 		return longDenomination;
@@ -126,28 +104,16 @@ public class Product implements Serializable {
 
 	}
 
-	public BigDecimal getPrice() {
-		
-		return price;
-		
+	public MeasureUnit getMeasureUnit() {
+
+		return measureUnit;
+
 	}
 
-	public void setPrice(BigDecimal price) {
-		
-		this.price = price;
-		
-	}
-	
-	public Tariff getTariff() {
-		
-		return tariff;
-		
-	}
+	public void setMeasureUnit(MeasureUnit measureUnit) {
 
-	public void setTariff(Tariff tariff) {
-		
-		this.tariff = tariff;
-		
+		this.measureUnit = measureUnit;
+
 	}
 
 	public Company getCompany() {

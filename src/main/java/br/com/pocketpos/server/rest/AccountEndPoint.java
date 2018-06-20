@@ -22,17 +22,16 @@ import br.com.pocketpos.server.bean.ExceptionBean001;
 import br.com.pocketpos.server.orm.Company;
 import br.com.pocketpos.server.orm.CompanyDAO;
 import br.com.pocketpos.server.orm.CompanyDevice;
-import br.com.pocketpos.server.orm.CompanyDeviceDatasetDAO;
-import br.com.pocketpos.server.orm.CompanyDeviceDatasetFacade;
 import br.com.pocketpos.server.orm.CompanyDevicePK;
 import br.com.pocketpos.server.orm.Device;
 import br.com.pocketpos.server.orm.DeviceDAO;
 import br.com.pocketpos.server.orm.Level;
+import br.com.pocketpos.server.orm.MeasureUnitDAO;
 import br.com.pocketpos.server.orm.SubjectSubject;
 import br.com.pocketpos.server.orm.SubjectSubjectPK;
 import br.com.pocketpos.server.orm.User;
 import br.com.pocketpos.server.orm.UserDAO;
-import br.com.pocketpos.server.util.DownloadBeanFactory;
+import br.com.pocketpos.server.util.DatasetBuilder001;
 import br.com.pocketpos.server.util.HibernateUtil;
 import br.com.pocketpos.server.util.I18N;
 
@@ -175,7 +174,7 @@ public class AccountEndPoint {
 
 				companyDevice.setAlias(device.getManufacturer() + "/" + device.getModel());
 
-				companyDevice.setActive(isNewCompany);
+				companyDevice.setAllow(isNewCompany);
 
 				company.getDevices().add(companyDevice);
 
@@ -200,9 +199,7 @@ public class AccountEndPoint {
 
 			if (!company.getChilds().contains(subjectSubject)){
 
-				subjectSubject.setLevel(isNewCompany ? Level.OWNER_PARTNER : Level.CUSTOMER_SUPPLIER);
-
-				subjectSubject.setAllow(isNewCompany);
+				subjectSubject.setLevel(isNewCompany ? Level.OWNER_PARTNER : Level.UNDEFINED);
 
 				company.getChilds().add(subjectSubject);
 
@@ -210,19 +207,9 @@ public class AccountEndPoint {
 
 			}
 
-			//DATASET
-			//ATUALIZA SE HOUVE INCLUSAO DO DISPOSITIVO OU DO USUARIO
-			//SE O DISPOSITIVO OU USUARIO ACABARAM DE SEREM VINCULADOS A EMPRESA
-			//ENTAO CRIA-SE NOVOS DATASETS PARA SEREM ENVIADOS AOS DISPOSITIVOS.			
-			if (isNewCompanyDevice || isNewSubjectSubject){
+			if (isNewCompanyDevice || isNewSubjectSubject)
 
 				companyDAO.update(company);
-
-				new CompanyDeviceDatasetFacade(
-						new CompanyDeviceDatasetDAO(session)).
-				buildDatasetsForAllCompanyDevices(company);
-
-			}
 
 			session.getTransaction().commit();
 
@@ -231,16 +218,18 @@ public class AccountEndPoint {
 					user.toString() +
 					" vinculado à " + (isNewCompany?"Nova ":"") + "Empresa: " +
 					company.toString() +
-					" através do "+(isNewDevice?"Novo ":"")+"Dispositivo: " + 
+					" através do " + (isNewDevice?"Novo ":"") + "Dispositivo: " + 
 					device.toString());
 
 			return Response.status(Response.Status.OK).
-					entity(
-							DownloadBeanFactory.
-							buildDownloadBean(
-									new CompanyDeviceDatasetDAO(session).
-									retrieveMostRecentDatasetByCompanyDevice(companyDevice),
-									DownloadBeanFactory.VERSION_001)). 
+					entity(new DatasetBuilder001().
+							withCompany(company).
+							withDevices(company.getDevices()).
+							withSubjects(company.getChilds()).
+							withMeasureUnits(new MeasureUnitDAO(session).list()).
+							withProducts(company.getProducts()).
+							withCatalogs(company.getCatalogs()).							
+							build()). 
 					build();
 
 		} catch (ConstraintViolationException e) {
@@ -256,8 +245,8 @@ public class AccountEndPoint {
 			for (ConstraintViolation<?> constraintViolation : e.getConstraintViolations()) {
 
 				exceptionBean.getMessages()[i] = constraintViolation.getRootBeanClass().getSimpleName() + "." +
-								constraintViolation.getPropertyPath().toString() + " " +
-								constraintViolation.getMessage().toLowerCase();
+						constraintViolation.getPropertyPath().toString() + " " +
+						constraintViolation.getMessage().toLowerCase();
 
 				i++;
 

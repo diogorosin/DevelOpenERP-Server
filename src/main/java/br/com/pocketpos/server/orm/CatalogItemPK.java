@@ -9,26 +9,26 @@ import javax.persistence.ManyToOne;
 
 
 @Embeddable
-public class TabItemPK implements Serializable{
+public class CatalogItemPK implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne(optional=false)
-	@JoinColumn(name="\"tab\"", referencedColumnName="identifier", nullable=false)
-	private Tab tab;
+	@JoinColumn(name="\"catalog\"", referencedColumnName="identifier", nullable=false)
+	private Catalog catalog;
 
 	@Column(name="\"item\"", nullable=false)
 	private Integer item;
 
-	public Tab getTab() {
+	public Catalog getCatalog() {
 
-		return tab;
+		return catalog;
 
 	}
 
-	public void setTab(Tab tab) {
+	public void setCatalog(Catalog catalog) {
 
-		this.tab = tab;
+		this.catalog = catalog;
 
 	}
 
@@ -49,7 +49,7 @@ public class TabItemPK implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((item == null) ? 0 : item.hashCode());
-		result = prime * result + ((tab == null) ? 0 : tab.hashCode());
+		result = prime * result + ((catalog == null) ? 0 : catalog.hashCode());
 		return result;
 
 	}
@@ -62,16 +62,16 @@ public class TabItemPK implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TabItemPK other = (TabItemPK) obj;
+		CatalogItemPK other = (CatalogItemPK) obj;
 		if (item == null) {
 			if (other.item != null)
 				return false;
 		} else if (!item.equals(other.item))
 			return false;
-		if (tab == null) {
-			if (other.tab != null)
+		if (catalog == null) {
+			if (other.catalog != null)
 				return false;
-		} else if (!tab.equals(other.tab))
+		} else if (!catalog.equals(other.catalog))
 			return false;
 		return true;
 

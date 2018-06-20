@@ -22,6 +22,7 @@ import br.com.pocketpos.server.orm.SubjectSubjectDAO;
 import br.com.pocketpos.server.orm.SubjectSubjectPK;
 import br.com.pocketpos.server.orm.Company;
 import br.com.pocketpos.server.orm.CompanyDAO;
+import br.com.pocketpos.server.orm.Level;
 import br.com.pocketpos.server.orm.User;
 import br.com.pocketpos.server.orm.UserDAO;
 import br.com.pocketpos.server.orm.Token;
@@ -104,7 +105,7 @@ public class AuthenticationFactory {
 
 			throw new UserNotLinkedToTheCompanyException();
 
-		if (!subjectSubject.getActive())
+		if (subjectSubject.getLevel().equals(Level.UNDEFINED))
 
 			throw new UserNotAllowedException();
 

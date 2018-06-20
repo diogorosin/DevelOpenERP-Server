@@ -1,8 +1,5 @@
 package br.com.pocketpos.server.bean;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class CompanyBean001 extends OrganizationBean001{
@@ -11,10 +8,8 @@ public class CompanyBean001 extends OrganizationBean001{
 	private Integer level;
 
 	private String couponTitle;
-	
-	private String couponSubtitle;
 
-	private List<DeviceBean001> devices;
+	private String couponSubtitle;
 
 	public String getCouponTitle() {
 
@@ -39,22 +34,5 @@ public class CompanyBean001 extends OrganizationBean001{
 		this.couponSubtitle = couponSubtitle;
 
 	}
-
-	public List<DeviceBean001> getDevices() {
-
-		if (devices == null)
-
-			devices = new ArrayList<DeviceBean001>();
-
-		return devices;
-
-	}
-
-	public void setDevices(List<DeviceBean001> devices){
-
-		this.devices = devices;
-
-	}
-
 
 }

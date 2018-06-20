@@ -28,6 +28,7 @@ import br.com.pocketpos.server.exception.CompanyNotActiveException;
 import br.com.pocketpos.server.exception.UnauthorizedException;
 import br.com.pocketpos.server.exception.UserNotActiveException;
 import br.com.pocketpos.server.exception.UserNotAllowedException;
+import br.com.pocketpos.server.orm.Level;
 import br.com.pocketpos.server.orm.Token;
 import br.com.pocketpos.server.orm.TokenDAO;
 import br.com.pocketpos.server.util.HibernateUtil;
@@ -106,28 +107,32 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 				throw new UserNotActiveException();
 
 			//VERIFICA SE O USUARIO ESTA ATIVO PARA A EMPRESA
-			if (!token.
-					getSubjectSubject().
-					getActive())
+			if (token.getSubjectSubject().
+					getLevel().
+					equals(Level.UNDEFINED)) {
 
 				throw new UserNotAllowedException();
 
-			//VERIFICA O NIVEL DE ACESSO
-			Method method = resourceInfo.getResourceMethod();
+			} else {
 
-			if (method.isAnnotationPresent(Authentication.class)){
+				//VERIFICA O NIVEL DE ACESSO
+				Method method = resourceInfo.getResourceMethod();
 
-				Authentication secured = method.getAnnotation(Authentication.class);
+				if (method.isAnnotationPresent(Authentication.class)){
 
-				if (secured.level().ordinal() > token.
-						getSubjectSubject().
-						getLevel().
-						ordinal()){
+					Authentication secured = method.getAnnotation(Authentication.class);
 
-					throw new WebApplicationException(Response.status(Status.FORBIDDEN).
-							entity(new ExceptionBean001(I18N.get(I18N.RESOURCE_NOT_ALLOWED))).
-							type(MediaType.APPLICATION_JSON).
-							build());
+					if (secured.level().ordinal() > token.
+							getSubjectSubject().
+							getLevel().
+							ordinal()){
+
+						throw new WebApplicationException(Response.status(Status.FORBIDDEN).
+								entity(new ExceptionBean001(I18N.get(I18N.RESOURCE_NOT_ALLOWED))).
+								type(MediaType.APPLICATION_JSON).
+								build());
+
+					}
 
 				}
 

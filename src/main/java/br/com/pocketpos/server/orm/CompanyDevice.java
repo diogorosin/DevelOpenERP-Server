@@ -1,15 +1,11 @@
 package br.com.pocketpos.server.orm;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -38,18 +34,11 @@ public class CompanyDevice implements Serializable {
 	@EmbeddedId
 	private CompanyDevicePK identifier;
 
-	@NotNull
-	private Boolean active;
-
 	@Size(min=0, max=20)
 	private String alias;
 
-	@OneToMany(
-			fetch=FetchType.LAZY,
-			mappedBy="identifier.companyDevice", 
-			cascade={CascadeType.ALL}, 
-			orphanRemoval=true)
-	private List<CompanyDeviceDataset> datasets;
+	@NotNull
+	private Boolean allow;
 
 	public CompanyDevicePK getIdentifier() {
 
@@ -63,15 +52,15 @@ public class CompanyDevice implements Serializable {
 
 	}
 
-	public Boolean getActive() {
+	public Boolean getAllow() {
 
-		return active;
+		return allow;
 
 	}
 
-	public void setActive(Boolean active) {
+	public void setAllow(Boolean allow) {
 
-		this.active = active;
+		this.allow = allow;
 
 	}
 
@@ -84,18 +73,6 @@ public class CompanyDevice implements Serializable {
 	public void setAlias(String alias) {
 
 		this.alias = alias;
-
-	}
-
-	public List<CompanyDeviceDataset> getDatasets() {
-
-		return datasets;
-
-	}
-
-	public void setDatasets(List<CompanyDeviceDataset> datasets) {
-
-		this.datasets = datasets;
 
 	}
 

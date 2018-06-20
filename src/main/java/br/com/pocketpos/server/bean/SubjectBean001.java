@@ -3,13 +3,11 @@ package br.com.pocketpos.server.bean;
 
 public class SubjectBean001 {
 
-	private Integer identifier;	
+	private Integer identifier;
 
 	private Boolean active;
 
 	private Integer level;
-	
-	private Integer tariff;	
 
 	public Integer getIdentifier() {
 
@@ -45,19 +43,6 @@ public class SubjectBean001 {
 
 		this.level = level;
 
-	}
-
-
-	public Integer getTariff() {
-		
-		return tariff;
-		
-	}
-
-	public void setTariff(Integer tariff) {
-		
-		this.tariff = tariff;
-		
 	}
 
 }

@@ -1,6 +1,5 @@
 package br.com.pocketpos.server.bean;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,15 +9,11 @@ public class ProductBean001 {
 
 	private Boolean active;
 
-	private String code;
-
 	private String longDenomination;
 
 	private String shortDenomination;
 
-	private BigDecimal price;
-	
-	private Integer tariff;
+	private Integer measureUnit;
 
 	private Map<Integer, PartBean001> parts;
 
@@ -46,18 +41,6 @@ public class ProductBean001 {
 
 	}
 
-	public String getCode() {
-
-		return code;
-
-	}
-
-	public void setCode(String code) {
-
-		this.code = code;
-
-	}
-
 	public String getLongDenomination() {
 
 		return longDenomination;
@@ -82,28 +65,16 @@ public class ProductBean001 {
 
 	}
 
-	public BigDecimal getPrice() {
-		
-		return price;
+	public Integer getMeasureUnit() {
+
+		return measureUnit;
 
 	}
 
-	public void setPrice(BigDecimal price) {
-		
-		this.price = price;
-		
-	}
+	public void setMeasureUnit(Integer measureUnit) {
 
-	public Integer getTariff() {
-		
-		return tariff;
-		
-	}
+		this.measureUnit = measureUnit;
 
-	public void setTariff(Integer tariff) {
-		
-		this.tariff = tariff;
-		
 	}
 
 	public Map<Integer, PartBean001> getParts() {

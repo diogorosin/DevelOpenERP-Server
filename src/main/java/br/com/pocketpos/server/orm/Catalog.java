@@ -19,18 +19,14 @@ import javax.validation.constraints.Size;
 
 
 @Entity
-@Table(name="\"Tab\"")
-public class Tab implements Serializable {
+@Table(name="\"Catalog\"")
+public class Catalog implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)	
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer identifier;
-
-	@NotNull
-	@Column(name="\"active\"", nullable=false)
-	private Boolean active;
 
 	@NotNull
 	@Column(name="\"position\"", nullable=false)
@@ -40,17 +36,16 @@ public class Tab implements Serializable {
 	@Size(min=1,max=20)
 	@Column(name="\"denomination\"", nullable=false)
 	private String denomination;
-	
+
 	@ManyToOne(optional=false)
 	@JoinColumn(name = "company")
 	private Company company;
 
-	@OneToMany(
-			fetch=FetchType.LAZY,
-			mappedBy="identifier.tab",
-			cascade={CascadeType.ALL}, 
+	@OneToMany(fetch=FetchType.LAZY,
+			mappedBy="identifier.catalog",
+			cascade={CascadeType.ALL},
 			orphanRemoval=true)
-	private List<TabItem> items;
+	private List<CatalogItem> items;
 
 	public Integer getIdentifier() {
 
@@ -61,18 +56,6 @@ public class Tab implements Serializable {
 	public void setIdentifier(Integer identifier) {
 
 		this.identifier = identifier;
-
-	}
-
-	public Boolean getActive() {
-
-		return active;
-
-	}
-
-	public void setActive(Boolean active) {
-
-		this.active = active;
 
 	}
 
@@ -112,13 +95,13 @@ public class Tab implements Serializable {
 
 	}
 
-	public List<TabItem> getItems() {
+	public List<CatalogItem> getItems() {
 
 		return items;
 
 	}
 
-	public void setItems(List<TabItem> items) {
+	public void setItems(List<CatalogItem> items) {
 
 		this.items = items;
 
@@ -141,7 +124,7 @@ public class Tab implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Tab other = (Tab) obj;
+		Catalog other = (Catalog) obj;
 		if (identifier == null) {
 			if (other.identifier != null)
 				return false;

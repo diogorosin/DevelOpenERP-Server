@@ -10,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -22,15 +21,8 @@ public class SubjectSubject implements Serializable {
 	@EmbeddedId
 	private SubjectSubjectPK identifier;
 
-	@NotNull
-	private Boolean active;
-
 	@Enumerated(EnumType.ORDINAL)
 	private Level level;
-
-	@ManyToOne(optional=true, fetch=FetchType.LAZY)
-	@JoinColumn(name = "\"tariff\"")	
-	private Tariff tariff;		
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="address")
@@ -48,18 +40,6 @@ public class SubjectSubject implements Serializable {
 
 	}
 
-	public Boolean getActive() {
-
-		return active;
-
-	}
-
-	public void setAllow(Boolean active) {
-
-		this.active = active;
-
-	}
-
 	public Level getLevel() {
 
 		return level;
@@ -69,18 +49,6 @@ public class SubjectSubject implements Serializable {
 	public void setLevel(Level level) {
 
 		this.level = level;
-
-	}
-
-	public Tariff getTariff() {
-
-		return tariff;
-
-	}
-
-	public void setTariff(Tariff tariff) {
-
-		this.tariff = tariff;
 
 	}
 

@@ -23,11 +23,12 @@
 	 	<mapping class="br.com.pocketpos.server.orm.State"/>
 	 	<mapping class="br.com.pocketpos.server.orm.City"/>
 	 	<mapping class="br.com.pocketpos.server.orm.Address"/>
+		<mapping class="br.com.pocketpos.server.orm.MeasureUnit"/>
+		<mapping class="br.com.pocketpos.server.orm.MeasureUnitMeasureUnit"/>
 	 	<mapping class="br.com.pocketpos.server.orm.Product"/>
 	 	<mapping class="br.com.pocketpos.server.orm.ProductProduct"/>
-	 	<mapping class="br.com.pocketpos.server.orm.Tab"/>
-	 	<mapping class="br.com.pocketpos.server.orm.TabItem"/>
-	 	<mapping class="br.com.pocketpos.server.orm.Tariff"/>
+	 	<mapping class="br.com.pocketpos.server.orm.Catalog"/>
+	 	<mapping class="br.com.pocketpos.server.orm.CatalogItem"/>
 	 	<mapping class="br.com.pocketpos.server.orm.Subject"/>
 	 	<mapping class="br.com.pocketpos.server.orm.SubjectSubject"/>
 	 	<mapping class="br.com.pocketpos.server.orm.Individual"/>
@@ -37,14 +38,5 @@
 	 	<mapping class="br.com.pocketpos.server.orm.Token"/>
 		<mapping class="br.com.pocketpos.server.orm.Device"/>
 		<mapping class="br.com.pocketpos.server.orm.CompanyDevice"/>
-		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDataset"/>
-		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetIndividual"/>
-		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetOrganization"/>
- 		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetUser"/>
- 		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetProduct"/>
- 		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetProductProduct"/>
- 		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetTab"/>
- 		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetTabItem"/>
- 		<mapping class="br.com.pocketpos.server.orm.CompanyDeviceDatasetTariff"/>
     </session-factory>
 </hibernate-configuration>

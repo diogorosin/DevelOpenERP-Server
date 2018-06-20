@@ -9,16 +9,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.URL;
 
 
 @Entity
 @Table(name="\"Address\"")
-@NamedQuery(name="Address.findAll", query="FROM Address A")
 public class Address implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -27,34 +26,45 @@ public class Address implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer identifier;
 
+	@Size(min=1, max=100)
+	@Column(name="\"denomination\"", nullable=true)
+	private String denomination;
+
+	@Size(min=1, max=5)	
+	@Column(name="\"number\"", nullable=true)	
+	private String number;	
+
+	@Size(min=1, max=10)	
+	@Column(name="\"complement\"", nullable=true)	
 	private String complement;
 
+	@Size(min=1, max=100)	
+	@Column(name="\"district\"", nullable=true)	
 	private String district;
 
-	@Email
-	private String email;
-
-	private String number;
-
-	private Long phone;
-
-	@Column(name="\"playArea\"")
-	private String playArea;
-	
-	@Column(name="\"postalCode\"")
+	@Column(name="\"postalCode\"", nullable=true)
 	private Integer postalCode;
 
-	@URL
-	@Column(name="\"webSite\"")
-	private String webSite;
-
 	@ManyToOne
-	@JoinColumn(name="city")
+	@JoinColumn(name="city", nullable=true)
 	private City city;
+
+	@Column(name="\"phone\"", nullable=true)	
+	private Long phone;
+
+	@Email
+	@Size(min=1, max=254)
+	@Column(name="\"email\"", nullable=true)	
+	private String email;
+
+	@URL
+	@Size(min=1, max=254)
+	@Column(name="\"webSite\"", nullable=true)
+	private String webSite;
 
 	public Integer getIdentifier() {
 
-		return this.identifier;
+		return identifier;
 
 	}
 
@@ -64,9 +74,33 @@ public class Address implements Serializable{
 
 	}
 
+	public String getDenomination() {
+
+		return denomination;
+
+	}
+
+	public void setDenomination(String denomination) {
+
+		this.denomination = denomination;
+
+	}
+
+	public String getNumber() {
+
+		return number;
+
+	}
+
+	public void setNumber(String number) {
+
+		this.number = number;
+
+	}
+
 	public String getComplement() {
 
-		return this.complement;
+		return complement;
 
 	}
 
@@ -78,7 +112,7 @@ public class Address implements Serializable{
 
 	public String getDistrict() {
 
-		return this.district;
+		return district;
 
 	}
 
@@ -88,57 +122,9 @@ public class Address implements Serializable{
 
 	}
 
-	public String getEmail() {
-
-		return this.email;
-
-	}
-
-	public void setEmail(String email) {
-
-		this.email = email;
-
-	}
-
-	public String getNumber() {
-
-		return this.number;
-
-	}
-
-	public void setNumber(String number) {
-
-		this.number = number;
-
-	}
-
-	public Long getPhone() {
-
-		return this.phone;
-
-	}
-
-	public void setPhone(Long phone) {
-
-		this.phone = phone;
-
-	}
-
-	public String getPlayArea() {
-
-		return this.playArea;
-
-	}
-
-	public void setPlayArea(String playArea) {
-
-		this.playArea = playArea;
-
-	}
-
 	public Integer getPostalCode() {
 
-		return this.postalCode;
+		return postalCode;
 
 	}
 
@@ -148,21 +134,9 @@ public class Address implements Serializable{
 
 	}
 
-	public String getWebSite() {
-
-		return this.webSite;
-
-	}
-
-	public void setWebSite(String webSite) {
-
-		this.webSite = webSite;
-
-	}
-
 	public City getCity() {
 
-		return this.city;
+		return city;
 
 	}
 
@@ -172,19 +146,53 @@ public class Address implements Serializable{
 
 	}
 
-	@Override
-	public int hashCode() {
+	public Long getPhone() {
 
+		return phone;
+
+	}
+
+	public void setPhone(Long phone) {
+
+		this.phone = phone;
+
+	}
+
+	public String getEmail() {
+
+		return email;
+
+	}
+
+	public void setEmail(String email) {
+
+		this.email = email;
+
+	}
+
+	public String getWebSite() {
+
+		return webSite;
+
+	}
+
+	public void setWebSite(String webSite) {
+
+		this.webSite = webSite;
+
+	}
+
+	public int hashCode() {
+		
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((identifier == null) ? 0 : identifier.hashCode());
 		return result;
-
+		
 	}
 
-	@Override
 	public boolean equals(Object obj) {
-
+		
 		if (this == obj)
 			return true;
 		if (obj == null)

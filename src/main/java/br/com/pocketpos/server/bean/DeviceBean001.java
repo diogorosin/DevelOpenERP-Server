@@ -1,8 +1,5 @@
 package br.com.pocketpos.server.bean;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class DeviceBean001 {
 
 	private Integer identifier;	
@@ -16,8 +13,6 @@ public class DeviceBean001 {
 	private String model;
 
 	private String alias;
-
-	private List<DatasetBean001> datasets;
 
 	public Integer getIdentifier() {
 
@@ -88,22 +83,6 @@ public class DeviceBean001 {
 	public void setAlias(String alias) {
 
 		this.alias = alias;
-
-	}
-
-	public List<DatasetBean001> getDatasets() {
-
-		if (datasets==null)
-
-			datasets = new ArrayList<DatasetBean001>();
-
-		return datasets;
-
-	}
-
-	public void setDatasets(List<DatasetBean001> datasets) {
-
-		this.datasets = datasets;
 
 	}
 

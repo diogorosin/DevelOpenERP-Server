@@ -2,19 +2,20 @@ package br.com.pocketpos.server.orm;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 @Entity
 @Table(name="\"City\"")
-@NamedQuery(name="City.findAll", query="FROM City C")
 public class City implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -23,8 +24,12 @@ public class City implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer identifier;
 
+	@NotNull
+	@Size(min=1, max=40)
+	@Column(name="\"denomination\"")	
 	private String denomination;
 
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name="state")
 	private State state;

@@ -10,6 +10,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -29,10 +30,12 @@ public class User extends Individual implements Principal{
 
 	@Email
 	@NotNull
+	@Size(min=1, max=254)
 	@Column(unique=true)
 	private String login;
 
 	@NotNull
+	@Size(min=64, max=64)
 	private String password;
 
 	public String getLogin() {

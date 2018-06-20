@@ -3,17 +3,15 @@ package br.com.pocketpos.server.bean;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TabBean001 {
+public class CatalogBean001 {
 
 	private Integer identifier;
-
-	private Boolean active;	
 
 	private Integer position;
 
 	private String denomination;
 
-	private Map<Integer, ItemBean001> items;
+	private Map<Integer, CatalogItemBean001> items;
 
 	public Integer getIdentifier() {
 
@@ -27,18 +25,6 @@ public class TabBean001 {
 
 	}
 
-	public Boolean getActive() {
-
-		return active;
-
-	}
-
-	public void setActive(Boolean active) {
-
-		this.active = active;
-
-	}
-	
 	public Integer getPosition() {
 
 		return position;
@@ -63,17 +49,17 @@ public class TabBean001 {
 
 	}
 
-	public Map<Integer, ItemBean001> getItems() {
+	public Map<Integer, CatalogItemBean001> getItems() {
 
 		if (items==null)
 
-			items = new HashMap<Integer, ItemBean001>();
+			items = new HashMap<Integer, CatalogItemBean001>();
 
 		return items;
 
 	}
 
-	public void setItems(Map<Integer, ItemBean001> items) {
+	public void setItems(Map<Integer, CatalogItemBean001> items) {
 
 		this.items = items;
 
