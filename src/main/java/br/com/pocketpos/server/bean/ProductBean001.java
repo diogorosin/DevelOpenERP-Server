@@ -1,80 +1,189 @@
 package br.com.pocketpos.server.bean;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProductBean001 {
+public class ProductBean001 extends ProgenyBean001{
 
-	private Integer identifier;
+	//DIMENSOES	
+	private Integer widthUnit;
 
-	private Boolean active;
+	private BigDecimal widthValue;
 
-	private String longDenomination;
+	private Integer heightUnit;
 
-	private String shortDenomination;
+	private BigDecimal heightValue;
 
-	private Integer measureUnit;
+	private Integer lengthUnit;
 
+	private BigDecimal lengthValue;
+
+	//VOLUME
+	private Integer contentUnit;	
+
+	private BigDecimal contentValue;
+
+	//PESO
+	private Integer grossWeightUnit;
+
+	private BigDecimal grossWeightValue;
+
+	private Integer netWeightUnit;
+
+	private BigDecimal netWeightValue;
+
+	//PARTES
 	private Map<Integer, PartBean001> parts;
 
-	public Integer getIdentifier() {
-
-		return identifier;
-
+	public Integer getWidthUnit() {
+		
+		return widthUnit;
+		
 	}
 
-	public void setIdentifier(Integer identifier) {
-
-		this.identifier = identifier;
-
+	public void setWidthUnit(Integer widthUnit) {
+		
+		this.widthUnit = widthUnit;
+		
 	}
 
-	public Boolean getActive() {
-
-		return active;
-
+	public BigDecimal getWidthValue() {
+		
+		return widthValue;
+		
 	}
 
-	public void setActive(Boolean active) {
-
-		this.active = active;
-
+	public void setWidthValue(BigDecimal widthValue) {
+		
+		this.widthValue = widthValue;
+		
 	}
 
-	public String getLongDenomination() {
-
-		return longDenomination;
-
+	public Integer getHeightUnit() {
+		
+		return heightUnit;
+		
 	}
 
-	public void setLongDenomination(String longDenomination) {
-
-		this.longDenomination = longDenomination;
-
+	public void setHeightUnit(Integer heightUnit) {
+		
+		this.heightUnit = heightUnit;
+		
 	}
 
-	public String getShortDenomination() {
-
-		return shortDenomination;
-
+	public BigDecimal getHeightValue() {
+		
+		return heightValue;
+		
 	}
 
-	public void setShortDenomination(String shortDenomination) {
-
-		this.shortDenomination = shortDenomination;
-
+	public void setHeightValue(BigDecimal heightValue) {
+		
+		this.heightValue = heightValue;
+		
 	}
 
-	public Integer getMeasureUnit() {
-
-		return measureUnit;
-
+	public Integer getLengthUnit() {
+		
+		return lengthUnit;
+		
 	}
 
-	public void setMeasureUnit(Integer measureUnit) {
+	public void setLengthUnit(Integer lengthUnit) {
+		
+		this.lengthUnit = lengthUnit;
+		
+	}
 
-		this.measureUnit = measureUnit;
+	public BigDecimal getLengthValue() {
+		
+		return lengthValue;
+		
+	}
 
+	public void setLengthValue(BigDecimal lengthValue) {
+		
+		this.lengthValue = lengthValue;
+		
+	}
+
+	public Integer getContentUnit() {
+		
+		return contentUnit;
+		
+	}
+
+	public void setContentUnit(Integer contentUnit) {
+		
+		this.contentUnit = contentUnit;
+		
+	}
+
+	public BigDecimal getContentValue() {
+		
+		return contentValue;
+		
+	}
+
+	public void setContentValue(BigDecimal contentValue) {
+		
+		this.contentValue = contentValue;
+		
+	}
+
+	public Integer getGrossWeightUnit() {
+		
+		return grossWeightUnit;
+		
+	}
+
+	public void setGrossWeightUnit(Integer grossWeightUnit) {
+		
+		this.grossWeightUnit = grossWeightUnit;
+		
+	}
+
+	public BigDecimal getGrossWeightValue() {
+		
+		return grossWeightValue;
+		
+	}
+
+	public void setGrossWeightValue(BigDecimal grossWeightValue) {
+		
+		this.grossWeightValue = grossWeightValue;
+		
+	}
+
+	public Integer getNetWeightUnit() {
+		
+		return netWeightUnit;
+		
+	}
+
+	public void setNetWeightUnit(Integer netWeightUnit) {
+		
+		this.netWeightUnit = netWeightUnit;
+		
+	}
+
+	public BigDecimal getNetWeightValue() {
+		
+		return netWeightValue;
+		
+	}
+
+	public void setNetWeightValue(BigDecimal netWeightValue) {
+		
+		this.netWeightValue = netWeightValue;
+		
+	}
+
+	public void setParts(Map<Integer, PartBean001> parts) {
+		
+		this.parts = parts;
+		
 	}
 
 	public Map<Integer, PartBean001> getParts() {

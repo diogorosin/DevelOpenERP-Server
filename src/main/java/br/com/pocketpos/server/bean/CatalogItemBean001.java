@@ -3,13 +3,17 @@ package br.com.pocketpos.server.bean;
 import java.math.BigDecimal;
 
 public class CatalogItemBean001 {
-	
+
 	private Integer position;
-	
+
 	private Integer code;
-	
+
+	private String denomination;
+
 	private Integer product;
-	
+
+	private Integer measureUnit;
+
 	private BigDecimal price;
 
 	public Integer getPosition() {
@@ -36,6 +40,18 @@ public class CatalogItemBean001 {
 
 	}
 
+	public String getDenomination() {
+
+		return denomination;
+
+	}
+
+	public void setDenomination(String denomination) {
+
+		this.denomination = denomination;
+
+	}
+
 	public Integer getProduct() {
 
 		return product;
@@ -45,6 +61,18 @@ public class CatalogItemBean001 {
 	public void setProduct(Integer product) {
 
 		this.product = product;
+
+	}
+
+	public Integer getMeasureUnit() {
+
+		return measureUnit;
+
+	}
+
+	public void setMeasureUnit(Integer measureUnit) {
+
+		this.measureUnit = measureUnit;
 
 	}
 

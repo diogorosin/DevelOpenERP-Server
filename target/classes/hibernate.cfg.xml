@@ -25,6 +25,7 @@
 	 	<mapping class="br.com.pocketpos.server.orm.Address"/>
 		<mapping class="br.com.pocketpos.server.orm.MeasureUnit"/>
 		<mapping class="br.com.pocketpos.server.orm.MeasureUnitMeasureUnit"/>
+		<mapping class="br.com.pocketpos.server.orm.Progeny"/>
 	 	<mapping class="br.com.pocketpos.server.orm.Product"/>
 	 	<mapping class="br.com.pocketpos.server.orm.ProductProduct"/>
 	 	<mapping class="br.com.pocketpos.server.orm.Catalog"/>

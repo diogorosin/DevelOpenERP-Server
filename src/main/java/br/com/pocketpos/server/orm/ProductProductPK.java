@@ -13,11 +13,11 @@ public class ProductProductPK implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne(optional=false)
-	@JoinColumn(name="\"product\"", referencedColumnName="identifier", nullable=false)
+	@JoinColumn(name="\"product\"", referencedColumnName="progeny", nullable=false)
 	private Product product;
 
 	@ManyToOne(optional=false)
-	@JoinColumn(name="\"part\"", referencedColumnName="identifier", nullable=false)
+	@JoinColumn(name="\"part\"", referencedColumnName="progeny", nullable=false)
 	private Product part;
 
 	public Product getProduct() {

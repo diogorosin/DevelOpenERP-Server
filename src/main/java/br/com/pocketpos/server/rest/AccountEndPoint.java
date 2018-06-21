@@ -227,7 +227,7 @@ public class AccountEndPoint {
 							withDevices(company.getDevices()).
 							withSubjects(company.getChilds()).
 							withMeasureUnits(new MeasureUnitDAO(session).list()).
-							withProducts(company.getProducts()).
+							withProgenies(company.getProgenies()).
 							withCatalogs(company.getCatalogs()).							
 							build()). 
 					build();

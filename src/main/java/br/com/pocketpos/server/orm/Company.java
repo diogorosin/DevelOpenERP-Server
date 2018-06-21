@@ -58,7 +58,7 @@ public class Company extends Organization {
 			mappedBy="company",
 			cascade={CascadeType.ALL},
 			orphanRemoval=true)
-	private List<Product> products;
+	private List<Progeny> progenies;
 
 	@OneToMany(
 			fetch=FetchType.LAZY,
@@ -103,15 +103,15 @@ public class Company extends Organization {
 
 	}	
 
-	public List<Product> getProducts() {
+	public List<Progeny> getProgenies() {
 
-		return products;
+		return progenies;
 
 	}
 
-	public void setProducts(List<Product> products) {
+	public void setProgenies(List<Progeny> progenies) {
 
-		this.products = products;
+		this.progenies = progenies;
 
 	}
 

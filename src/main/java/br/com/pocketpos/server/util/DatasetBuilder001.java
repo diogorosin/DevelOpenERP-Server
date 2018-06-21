@@ -24,6 +24,7 @@ import br.com.pocketpos.server.orm.MeasureUnitMeasureUnit;
 import br.com.pocketpos.server.orm.Organization;
 import br.com.pocketpos.server.orm.Product;
 import br.com.pocketpos.server.orm.ProductProduct;
+import br.com.pocketpos.server.orm.Progeny;
 import br.com.pocketpos.server.orm.SubjectSubject;
 import br.com.pocketpos.server.orm.User;
 
@@ -135,17 +136,21 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 	}
 
-	public DatasetBuilder withProducts(List<Product> products) {
-		
-		products.clear();
+	public DatasetBuilder withProgenies(List<Progeny> progenies) {
 
-		for (Product product : products) {
+		getDatasetBean().getProducts().clear();
 
-			ProductBean001 productBean = new ProductBean001();
+		for (Progeny progeny: progenies) {
 
-			populateProduct(productBean, product);
+			if (progeny instanceof Product){
 
-			getDatasetBean().getProducts().add(productBean);
+				ProductBean001 productBean = new ProductBean001();
+
+				populateProduct(productBean, (Product) progeny);
+
+				getDatasetBean().getProducts().add(productBean);
+
+			}
 
 		}
 
@@ -154,6 +159,8 @@ public class DatasetBuilder001 implements DatasetBuilder {
 	}
 
 	public DatasetBuilder withCatalogs(List<Catalog> catalogs) {
+
+		getDatasetBean().getCatalogs().clear();
 
 		for (Catalog catalog : catalogs) {
 
@@ -277,11 +284,31 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 		productBean.setActive(product.getActive());
 
-		productBean.setLongDenomination(product.getLongDenomination());
+		productBean.setDenomination(product.getDenomination());
 
-		productBean.setShortDenomination(product.getShortDenomination());
+		productBean.setWidthValue(product.getWidthValue());
 
-		productBean.setMeasureUnit(product.getMeasureUnit().getIdentifier());
+		productBean.setWidthUnit(product.getWidthUnit() != null ? product.getWidthUnit().getIdentifier() : null);
+
+		productBean.setHeightValue(product.getHeightValue());
+
+		productBean.setHeightUnit(product.getHeightUnit() != null ? product.getHeightUnit().getIdentifier() : null);
+
+		productBean.setLengthValue(product.getLengthValue());
+
+		productBean.setLengthUnit(product.getLengthUnit() != null ? product.getLengthUnit().getIdentifier() : null);
+
+		productBean.setContentValue(product.getContentValue());
+
+		productBean.setContentUnit(product.getContentUnit() != null ? product.getContentUnit().getIdentifier() : null);
+
+		productBean.setGrossWeightValue(product.getGrossWeightValue());
+
+		productBean.setGrossWeightUnit(product.getGrossWeightUnit() != null ? product.getGrossWeightUnit().getIdentifier() : null);
+
+		productBean.setNetWeightValue(product.getNetWeightValue());
+
+		productBean.setNetWeightUnit(product.getNetWeightUnit() != null ? product.getNetWeightUnit().getIdentifier() : null);
 
 		if (product.getParts() != null){
 
@@ -323,7 +350,11 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 				catalogItemBean.setCode(catalogItem.getCode());
 
-				catalogItemBean.setProduct(catalogItem.getProduct().getIdentifier());
+				catalogItemBean.setDenomination(catalogItem.getDenomination());
+
+				catalogItemBean.setProduct(catalogItem.getProgeny().getIdentifier());
+
+				catalogItemBean.setMeasureUnit(catalogItem.getMeasureUnit().getIdentifier());
 
 				catalogItemBean.setPrice(catalogItem.getPrice());
 

@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -29,9 +30,18 @@ public class CatalogItem implements Serializable {
 	@Column(name="\"code\"", nullable=false)
 	private Integer code;
 
+	@NotNull
+	@Size(min=1, max=32)
+	@Column(name="\"denomination\"", nullable=false)
+	private String denomination;
+
 	@ManyToOne(optional=false)
-	@JoinColumn(name="\"product\"", referencedColumnName="identifier", nullable=false)
-	private Product product;
+	@JoinColumn(name="\"progeny\"", referencedColumnName="identifier", nullable=false)
+	private Progeny progeny;
+
+	@ManyToOne(optional=false)
+	@JoinColumn(name="\"measureUnit\"")
+	private MeasureUnit measureUnit;
 
 	@NotNull
 	@Column(name="\"price\"", nullable=false)
@@ -73,16 +83,40 @@ public class CatalogItem implements Serializable {
 
 	}
 
-	public Product getProduct() {
+	public String getDenomination() {
 
-		return product;
+		return denomination;
 
 	}
 
-	public void setProduct(Product product) {
+	public void setDenomination(String denomination) {
 
-		this.product = product;
+		this.denomination = denomination;
 
+	}
+
+	public Progeny getProgeny() {
+
+		return progeny;
+
+	}
+
+	public void setProgeny(Progeny progeny) {
+
+		this.progeny = progeny;
+
+	}
+
+	public MeasureUnit getMeasureUnit() {
+		
+		return measureUnit;
+
+	}
+
+	public void setMeasureUnit(MeasureUnit measureUnit) {
+		
+		this.measureUnit = measureUnit;
+		
 	}
 
 	public BigDecimal getPrice() {

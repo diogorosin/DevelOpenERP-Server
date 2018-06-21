@@ -1,53 +1,70 @@
 package br.com.pocketpos.server.orm;
 
-import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 
 @Entity
 @Table(name="\"Product\"")  
-public class Product implements Serializable {
+@PrimaryKeyJoinColumn(name="progeny")
+public class Product extends Progeny {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)	
-	private Integer identifier;
+	//DIMENSOES	
+	@ManyToOne(optional=true)
+	@JoinColumn(name="\"widthUnit\"")
+	private MeasureUnit widthUnit;
 
-	@NotNull
-	private Boolean active;
+	@Column(name="\"widthValue\"", nullable=true)
+	private BigDecimal widthValue;
 
-	@NotNull
-	@Size(min=1, max=100)
-	@Column(name="\"longDenomination\"", nullable=false)
-	private String longDenomination;
+	@ManyToOne(optional=true)
+	@JoinColumn(name="\"heightUnit\"")
+	private MeasureUnit heightUnit;
 
-	@NotNull
-	@Size(min=1, max=20)
-	@Column(name="\"shortDenomination\"", nullable=false)
-	private String shortDenomination;
+	@Column(name="\"heightValue\"", nullable=true)
+	private BigDecimal heightValue;
 
-	@ManyToOne(optional=false)
-	@JoinColumn(name="\"measureUnit\"")
-	private MeasureUnit measureUnit;
+	@ManyToOne(optional=true)
+	@JoinColumn(name="\"lengthUnit\"")
+	private MeasureUnit lengthUnit;
 
-	@ManyToOne(optional=false)
-	@JoinColumn(name = "company")
-	private Company company;
+	@Column(name="\"lengthValue\"", nullable=true)
+	private BigDecimal lengthValue;
+
+	//VOLUME
+	@ManyToOne(optional=true)
+	@JoinColumn(name="\"contentUnit\"")
+	private MeasureUnit contentUnit;	
+
+	@Column(name="\"contentValue\"", nullable=true)
+	private BigDecimal contentValue;
+
+	//PESO
+	@ManyToOne(optional=true)
+	@JoinColumn(name="\"grossWeightUnit\"")
+	private MeasureUnit grossWeightUnit;
+
+	@Column(name="\"grossWeightValue\"", nullable=true)
+	private BigDecimal grossWeightValue;
+
+	@ManyToOne(optional=true)
+	@JoinColumn(name="\"netWeightUnit\"")
+	private MeasureUnit netWeightUnit;
+
+	@Column(name="\"netWeightValue\"", nullable=true)
+	private BigDecimal netWeightValue;
 
 	@OneToMany(
 			fetch=FetchType.LAZY,
@@ -56,76 +73,148 @@ public class Product implements Serializable {
 			orphanRemoval=true)
 	private List<ProductProduct> parts;
 
-	public Integer getIdentifier() {
-
-		return identifier;
-
+	public MeasureUnit getWidthUnit() {
+		
+		return widthUnit;
+		
 	}
 
-	public void setIdentifier(Integer identifier) {
-
-		this.identifier = identifier;
-
+	public void setWidthUnit(MeasureUnit widthUnit) {
+		
+		this.widthUnit = widthUnit;
+		
 	}
 
-	public Boolean getActive() {
-
-		return active;
-
+	public BigDecimal getWidthValue() {
+		
+		return widthValue;
+		
 	}
 
-	public void setActive(Boolean active) {
-
-		this.active = active;
-
-	}	
-
-	public String getLongDenomination() {
-
-		return longDenomination;
-
+	public void setWidthValue(BigDecimal widthValue) {
+		
+		this.widthValue = widthValue;
+		
 	}
 
-	public void setLongDenomination(String longDenomination) {
-
-		this.longDenomination = longDenomination;
-
+	public MeasureUnit getHeightUnit() {
+		
+		return heightUnit;
+		
 	}
 
-	public String getShortDenomination() {
-
-		return shortDenomination;
-
+	public void setHeightUnit(MeasureUnit heightUnit) {
+		
+		this.heightUnit = heightUnit;
+		
 	}
 
-	public void setShortDenomination(String shortDenomination) {
-
-		this.shortDenomination = shortDenomination;
-
+	public BigDecimal getHeightValue() {
+		
+		return heightValue;
+		
 	}
 
-	public MeasureUnit getMeasureUnit() {
-
-		return measureUnit;
-
+	public void setHeightValue(BigDecimal heightValue) {
+		
+		this.heightValue = heightValue;
+		
 	}
 
-	public void setMeasureUnit(MeasureUnit measureUnit) {
-
-		this.measureUnit = measureUnit;
-
+	public MeasureUnit getLengthUnit() {
+		
+		return lengthUnit;
+		
 	}
 
-	public Company getCompany() {
-
-		return company;
-
+	public void setLengthUnit(MeasureUnit lengthUnit) {
+		
+		this.lengthUnit = lengthUnit;
+		
 	}
 
-	public void setCompany(Company company) {
+	public BigDecimal getLengthValue() {
+		
+		return lengthValue;
+		
+	}
 
-		this.company = company;
+	public void setLengthValue(BigDecimal lengthValue) {
+		
+		this.lengthValue = lengthValue;
+		
+	}
 
+	public MeasureUnit getContentUnit() {
+		
+		return contentUnit;
+		
+	}
+
+	public void setContentUnit(MeasureUnit contentUnit) {
+		
+		this.contentUnit = contentUnit;
+		
+	}
+
+	public BigDecimal getContentValue() {
+		
+		return contentValue;
+		
+	}
+
+	public void setContentValue(BigDecimal contentValue) {
+		
+		this.contentValue = contentValue;
+		
+	}
+
+	public MeasureUnit getGrossWeightUnit() {
+		
+		return grossWeightUnit;
+		
+	}
+
+	public void setGrossWeightUnit(MeasureUnit grossWeightUnit) {
+		
+		this.grossWeightUnit = grossWeightUnit;
+		
+	}
+
+	public BigDecimal getGrossWeightValue() {
+		
+		return grossWeightValue;
+		
+	}
+
+	public void setGrossWeightValue(BigDecimal grossWeightValue) {
+		
+		this.grossWeightValue = grossWeightValue;
+		
+	}
+
+	public MeasureUnit getNetWeightUnit() {
+		
+		return netWeightUnit;
+		
+	}
+
+	public void setNetWeightUnit(MeasureUnit netWeightUnit) {
+		
+		this.netWeightUnit = netWeightUnit;
+		
+	}
+
+	public BigDecimal getNetWeightValue() {
+		
+		return netWeightValue;
+		
+	}
+
+	public void setNetWeightValue(BigDecimal netWeightValue) {
+		
+		this.netWeightValue = netWeightValue;
+		
 	}
 
 	public List<ProductProduct> getParts() {
@@ -137,33 +226,6 @@ public class Product implements Serializable {
 	public void setParts(List<ProductProduct> parts) {
 
 		this.parts = parts;
-
-	}
-
-	public int hashCode() {
-
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((getIdentifier() == null) ? 0 : getIdentifier().hashCode());
-		return result;
-
-	}
-
-	public boolean equals(Object obj) {
-
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Product other = (Product) obj;
-		if (getIdentifier() == null) {
-			if (other.getIdentifier() != null)
-				return false;
-		} else if (!getIdentifier().equals(other.getIdentifier()))
-			return false;
-		return true;
 
 	}
 
