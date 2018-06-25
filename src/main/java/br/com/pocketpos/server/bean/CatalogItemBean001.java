@@ -6,11 +6,11 @@ public class CatalogItemBean001 {
 
 	private Integer position;
 
+	private Integer product;
+
 	private Integer code;
 
 	private String denomination;
-
-	private Integer product;
 
 	private Integer measureUnit;
 
@@ -25,6 +25,18 @@ public class CatalogItemBean001 {
 	public void setPosition(Integer position) {
 
 		this.position = position;
+
+	}
+
+	public Integer getProduct() {
+
+		return product;
+
+	}
+
+	public void setProduct(Integer product) {
+
+		this.product = product;
 
 	}
 
@@ -49,18 +61,6 @@ public class CatalogItemBean001 {
 	public void setDenomination(String denomination) {
 
 		this.denomination = denomination;
-
-	}
-
-	public Integer getProduct() {
-
-		return product;
-
-	}
-
-	public void setProduct(Integer product) {
-
-		this.product = product;
 
 	}
 

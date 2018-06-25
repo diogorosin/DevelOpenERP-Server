@@ -258,6 +258,8 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 		measureUnitBean.setAcronym(measureUnit.getAcronym());
 
+		measureUnitBean.setGroup(measureUnit.getGroup().ordinal());
+
 		if (measureUnit.getConversions() != null){
 
 			for (MeasureUnitMeasureUnit measureUnitMeasureUnit : measureUnit.getConversions()) {
@@ -352,7 +354,7 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 				catalogItemBean.setDenomination(catalogItem.getDenomination());
 
-				catalogItemBean.setProduct(catalogItem.getProgeny().getIdentifier());
+				catalogItemBean.setProduct(catalogItem.getProduct().getIdentifier());
 
 				catalogItemBean.setMeasureUnit(catalogItem.getMeasureUnit().getIdentifier());
 

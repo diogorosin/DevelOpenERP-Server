@@ -10,6 +10,8 @@ public class MeasureUnitBean001 {
 	private String denomination;
 
 	private String acronym;
+	
+	private Integer group;
 
 	private Map<Integer, ConversionBean001> conversions;
 
@@ -47,6 +49,18 @@ public class MeasureUnitBean001 {
 
 		this.acronym = acronym;
 
+	}
+
+	public Integer getGroup() {
+
+		return group;
+
+	}
+
+	public void setGroup(Integer group) {
+		
+		this.group = group;
+		
 	}
 
 	public Map<Integer, ConversionBean001> getConversions() {

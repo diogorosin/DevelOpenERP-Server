@@ -26,6 +26,10 @@ public class CatalogItem implements Serializable {
 	@Column(name="\"position\"", nullable=false)
 	private Integer position;
 
+	@ManyToOne(optional=false)
+	@JoinColumn(name="\"product\"", referencedColumnName="progeny", nullable=false)
+	private Product product;
+
 	@NotNull
 	@Column(name="\"code\"", nullable=false)
 	private Integer code;
@@ -34,10 +38,6 @@ public class CatalogItem implements Serializable {
 	@Size(min=1, max=32)
 	@Column(name="\"denomination\"", nullable=false)
 	private String denomination;
-
-	@ManyToOne(optional=false)
-	@JoinColumn(name="\"progeny\"", referencedColumnName="identifier", nullable=false)
-	private Progeny progeny;
 
 	@ManyToOne(optional=false)
 	@JoinColumn(name="\"measureUnit\"")
@@ -71,6 +71,18 @@ public class CatalogItem implements Serializable {
 
 	}
 
+	public Product getProduct() {
+
+		return product;
+
+	}
+
+	public void setProduct(Product product) {
+
+		this.product = product;
+
+	}
+
 	public Integer getCode() {
 
 		return code;
@@ -92,18 +104,6 @@ public class CatalogItem implements Serializable {
 	public void setDenomination(String denomination) {
 
 		this.denomination = denomination;
-
-	}
-
-	public Progeny getProgeny() {
-
-		return progeny;
-
-	}
-
-	public void setProgeny(Progeny progeny) {
-
-		this.progeny = progeny;
 
 	}
 
