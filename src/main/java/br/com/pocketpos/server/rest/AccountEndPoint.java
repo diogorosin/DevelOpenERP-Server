@@ -228,8 +228,9 @@ public class AccountEndPoint {
 							withSubjects(company.getChilds()).
 							withMeasureUnits(new MeasureUnitDAO(session).list()).
 							withProgenies(company.getProgenies()).
-							withCatalogs(company.getCatalogs()).							
-							build()). 
+							withCatalogs(company.getCatalogs()).
+							withPayments(company.getPayments()).
+							build()).
 					build();
 
 		} catch (ConstraintViolationException e) {

@@ -12,12 +12,14 @@ import br.com.pocketpos.server.bean.IndividualBean001;
 import br.com.pocketpos.server.bean.MeasureUnitBean001;
 import br.com.pocketpos.server.bean.OrganizationBean001;
 import br.com.pocketpos.server.bean.PartBean001;
+import br.com.pocketpos.server.bean.PaymentBean001;
 import br.com.pocketpos.server.bean.ProductBean001;
 import br.com.pocketpos.server.bean.UserBean001;
 import br.com.pocketpos.server.orm.Catalog;
 import br.com.pocketpos.server.orm.CatalogItem;
 import br.com.pocketpos.server.orm.Company;
 import br.com.pocketpos.server.orm.CompanyDevice;
+import br.com.pocketpos.server.orm.CompanyPayment;
 import br.com.pocketpos.server.orm.Individual;
 import br.com.pocketpos.server.orm.MeasureUnit;
 import br.com.pocketpos.server.orm.MeasureUnitMeasureUnit;
@@ -169,6 +171,24 @@ public class DatasetBuilder001 implements DatasetBuilder {
 			populateCatalog(catalogBean, catalog);
 
 			getDatasetBean().getCatalogs().add(catalogBean);
+
+		}
+		
+		return this;
+
+	}
+
+	public DatasetBuilder withPayments(List<CompanyPayment> payments) {
+
+		getDatasetBean().getCatalogs().clear();
+
+		for (CompanyPayment payment : payments) {
+
+			PaymentBean001 paymentBean = new PaymentBean001();
+
+			populatePayment(paymentBean, payment);
+
+			getDatasetBean().getPayments().add(paymentBean);
 
 		}
 		
@@ -370,6 +390,14 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 	}
 
+	private void populatePayment(PaymentBean001 paymentBean, CompanyPayment payment){
+
+		paymentBean.setIdentifier(payment.getIdentifier().getPayment().getIdentifier());
+
+		paymentBean.setDenomination(payment.getIdentifier().getPayment().getDenomination());
+
+	}
+	
 	public DatasetBean001 build() {
 
 		return getDatasetBean();
