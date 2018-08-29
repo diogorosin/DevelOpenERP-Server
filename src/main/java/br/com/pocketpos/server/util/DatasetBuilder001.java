@@ -180,7 +180,7 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 	public DatasetBuilder withPayments(List<CompanyPayment> payments) {
 
-		getDatasetBean().getCatalogs().clear();
+		getDatasetBean().getPayments().clear();
 
 		for (CompanyPayment payment : payments) {
 
@@ -395,6 +395,7 @@ public class DatasetBuilder001 implements DatasetBuilder {
 		paymentBean.setIdentifier(payment.getIdentifier().getPayment().getIdentifier());
 
 		paymentBean.setDenomination(payment.getIdentifier().getPayment().getDenomination());
+		
 
 	}
 	
