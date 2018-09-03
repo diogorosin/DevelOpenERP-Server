@@ -46,7 +46,9 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 	public DatasetBuilder withCompany(Company company) {
 
-		populateCompany(getDatasetBean().getCompany(), company);
+		if (company != null)
+
+			populateCompany(getDatasetBean().getCompany(), company);
 
 		return this;
 
@@ -56,13 +58,17 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 		getDatasetBean().getDevices().clear();
 
-		for (CompanyDevice companyDevice : devices) {
+		if (devices != null) {
 
-			DeviceBean001 deviceBean = new DeviceBean001();
+			for (CompanyDevice companyDevice : devices) {
 
-			populateDevice(deviceBean, companyDevice);
+				DeviceBean001 deviceBean = new DeviceBean001();
 
-			getDatasetBean().getDevices().add(deviceBean);
+				populateDevice(deviceBean, companyDevice);
+
+				getDatasetBean().getDevices().add(deviceBean);
+
+			}
 
 		}
 
@@ -78,39 +84,43 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 		getDatasetBean().getOrganizations().clear();
 
-		for (SubjectSubject subjectSubject: subjects) {
+		if (subjects != null){
 
-			if (subjectSubject.getIdentifier().getChild() instanceof User){
+			for (SubjectSubject subjectSubject: subjects) {
 
-				UserBean001 userBean = new UserBean001();
+				if (subjectSubject.getIdentifier().getChild() instanceof User){
 
-				populateUser(userBean, subjectSubject);
+					UserBean001 userBean = new UserBean001();
 
-				getDatasetBean().getUsers().add(userBean);
+					populateUser(userBean, subjectSubject);
 
-			} else {
-
-				if (subjectSubject.getIdentifier().getChild() instanceof Organization){
-
-					OrganizationBean001 organizationBean = new OrganizationBean001();
-
-					populateOrganization(organizationBean, subjectSubject);
-
-					getDatasetBean().getOrganizations().add(organizationBean);
+					getDatasetBean().getUsers().add(userBean);
 
 				} else {
 
 					if (subjectSubject.getIdentifier().getChild() instanceof Organization){
 
-						IndividualBean001 individualBean = new IndividualBean001();
+						OrganizationBean001 organizationBean = new OrganizationBean001();
 
-						populateIndividual(individualBean, subjectSubject);
+						populateOrganization(organizationBean, subjectSubject);
 
-						getDatasetBean().getIndividuals().add(individualBean);
+						getDatasetBean().getOrganizations().add(organizationBean);
+
+					} else {
+
+						if (subjectSubject.getIdentifier().getChild() instanceof Organization){
+
+							IndividualBean001 individualBean = new IndividualBean001();
+
+							populateIndividual(individualBean, subjectSubject);
+
+							getDatasetBean().getIndividuals().add(individualBean);
+
+						}					
 
 					}					
 
-				}					
+				}
 
 			}
 
@@ -124,13 +134,17 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 		getDatasetBean().getMeasureUnits().clear();
 
-		for (MeasureUnit measureUnit : measureUnits) {
+		if (measureUnits != null) {
 
-			MeasureUnitBean001 measureUnitBean = new MeasureUnitBean001();
+			for (MeasureUnit measureUnit : measureUnits) {
 
-			populateMeasureUnit(measureUnitBean, measureUnit);
+				MeasureUnitBean001 measureUnitBean = new MeasureUnitBean001();
 
-			getDatasetBean().getMeasureUnits().add(measureUnitBean);
+				populateMeasureUnit(measureUnitBean, measureUnit);
+
+				getDatasetBean().getMeasureUnits().add(measureUnitBean);
+
+			}
 
 		}
 
@@ -142,19 +156,23 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 		getDatasetBean().getProducts().clear();
 
-		for (Progeny progeny: progenies) {
+		if (progenies != null) {
 
-			if (progeny instanceof Product){
+			for (Progeny progeny: progenies) {
 
-				ProductBean001 productBean = new ProductBean001();
+				if (progeny instanceof Product){
 
-				populateProduct(productBean, (Product) progeny);
+					ProductBean001 productBean = new ProductBean001();
 
-				getDatasetBean().getProducts().add(productBean);
+					populateProduct(productBean, (Product) progeny);
+
+					getDatasetBean().getProducts().add(productBean);
+
+				}
 
 			}
 
-		}
+		} 
 
 		return this;
 
@@ -164,16 +182,20 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 		getDatasetBean().getCatalogs().clear();
 
-		for (Catalog catalog : catalogs) {
+		if (catalogs != null) {
 
-			CatalogBean001 catalogBean = new CatalogBean001();
+			for (Catalog catalog : catalogs) {
 
-			populateCatalog(catalogBean, catalog);
+				CatalogBean001 catalogBean = new CatalogBean001();
 
-			getDatasetBean().getCatalogs().add(catalogBean);
+				populateCatalog(catalogBean, catalog);
+
+				getDatasetBean().getCatalogs().add(catalogBean);
+
+			}
 
 		}
-		
+
 		return this;
 
 	}
@@ -182,16 +204,20 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 		getDatasetBean().getPayments().clear();
 
-		for (CompanyPayment payment : payments) {
+		if (payments != null) {
 
-			PaymentBean001 paymentBean = new PaymentBean001();
+			for (CompanyPayment payment : payments) {
 
-			populatePayment(paymentBean, payment);
+				PaymentBean001 paymentBean = new PaymentBean001();
 
-			getDatasetBean().getPayments().add(paymentBean);
+				populatePayment(paymentBean, payment);
+
+				getDatasetBean().getPayments().add(paymentBean);
+
+			}
 
 		}
-		
+
 		return this;
 
 	}
@@ -395,10 +421,10 @@ public class DatasetBuilder001 implements DatasetBuilder {
 		paymentBean.setIdentifier(payment.getIdentifier().getPayment().getIdentifier());
 
 		paymentBean.setDenomination(payment.getIdentifier().getPayment().getDenomination());
-		
+
 
 	}
-	
+
 	public DatasetBean001 build() {
 
 		return getDatasetBean();
