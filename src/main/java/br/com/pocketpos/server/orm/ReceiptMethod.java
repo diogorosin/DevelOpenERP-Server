@@ -11,8 +11,8 @@ import javax.validation.constraints.Size;
 
 
 @Entity
-@Table(name="\"Payment\"")
-public class Payment implements Serializable {
+@Table(name="\"ReceiptMethod\"")
+public class ReceiptMethod implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -65,7 +65,7 @@ public class Payment implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Payment other = (Payment) obj;
+		ReceiptMethod other = (ReceiptMethod) obj;
 		if (identifier == null) {
 			if (other.identifier != null)
 				return false;

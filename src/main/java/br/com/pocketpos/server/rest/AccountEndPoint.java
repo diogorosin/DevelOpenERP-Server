@@ -23,10 +23,13 @@ import br.com.pocketpos.server.orm.Company;
 import br.com.pocketpos.server.orm.CompanyDAO;
 import br.com.pocketpos.server.orm.CompanyDevice;
 import br.com.pocketpos.server.orm.CompanyDevicePK;
+import br.com.pocketpos.server.orm.CompanyReceiptMethod;
+import br.com.pocketpos.server.orm.CompanyReceiptMethodPK;
 import br.com.pocketpos.server.orm.Device;
 import br.com.pocketpos.server.orm.DeviceDAO;
 import br.com.pocketpos.server.orm.Level;
 import br.com.pocketpos.server.orm.MeasureUnitDAO;
+import br.com.pocketpos.server.orm.ReceiptMethodDAO;
 import br.com.pocketpos.server.orm.SubjectSubject;
 import br.com.pocketpos.server.orm.SubjectSubjectPK;
 import br.com.pocketpos.server.orm.User;
@@ -78,6 +81,20 @@ public class AccountEndPoint {
 				company.setCouponTitle(Company.COUPON_TITLE_DEFAULT);
 
 				company.setCouponSubtitle(null);
+				
+				company.setReceiptMethods(new ArrayList<CompanyReceiptMethod>());
+
+				CompanyReceiptMethodPK companyReceiptMethodPK = new CompanyReceiptMethodPK();
+
+				companyReceiptMethodPK.setCompany(company);
+
+				companyReceiptMethodPK.setReceiptMethod(new ReceiptMethodDAO(session).retrieve("DIN"));
+ 
+				CompanyReceiptMethod companyReceiptMethod = new CompanyReceiptMethod();
+
+				companyReceiptMethod.setIdentifier(companyReceiptMethodPK);
+
+				company.getReceiptMethods().add(companyReceiptMethod);
 
 				companyDAO.create(company);
 
@@ -229,7 +246,7 @@ public class AccountEndPoint {
 							withMeasureUnits(new MeasureUnitDAO(session).list()).
 							withProgenies(company.getProgenies()).
 							withCatalogs(company.getCatalogs()).
-							withPayments(company.getPayments()).
+							withReceiptMethods(company.getReceiptMethods()).
 							build()).
 					build();
 

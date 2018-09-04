@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 
 
 @Embeddable
-public class CompanyPaymentPK implements Serializable{
+public class CompanyReceiptMethodPK implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -18,8 +18,8 @@ public class CompanyPaymentPK implements Serializable{
 	private Company company;
 
 	@ManyToOne(cascade=CascadeType.ALL, optional=false)
-	@JoinColumn(name="\"payment\"", nullable=false)
-	private Payment payment;
+	@JoinColumn(name="\"receiptMethod\"", nullable=false)
+	private ReceiptMethod receiptMethod;
 
 	public Company getCompany() {
 
@@ -33,15 +33,15 @@ public class CompanyPaymentPK implements Serializable{
 
 	}
 
-	public Payment getPayment() {
+	public ReceiptMethod getReceiptMethod() {
 
-		return payment;
+		return receiptMethod;
 
 	}
 
-	public void setPayment(Payment payment) {
+	public void setReceiptMethod(ReceiptMethod receiptMethod) {
 
-		this.payment = payment;
+		this.receiptMethod = receiptMethod;
 
 	}
 
@@ -50,7 +50,7 @@ public class CompanyPaymentPK implements Serializable{
 
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((payment == null) ? 0 : payment.hashCode());
+		result = prime * result + ((receiptMethod == null) ? 0 : receiptMethod.hashCode());
 		result = prime * result + ((company == null) ? 0 : company.hashCode());
 		return result;
 
@@ -65,11 +65,11 @@ public class CompanyPaymentPK implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CompanyPaymentPK other = (CompanyPaymentPK) obj;
-		if (payment == null) {
-			if (other.payment != null)
+		CompanyReceiptMethodPK other = (CompanyReceiptMethodPK) obj;
+		if (receiptMethod == null) {
+			if (other.receiptMethod != null)
 				return false;
-		} else if (!payment.equals(other.payment))
+		} else if (!receiptMethod.equals(other.receiptMethod))
 			return false;
 		if (company == null) {
 			if (other.company != null)

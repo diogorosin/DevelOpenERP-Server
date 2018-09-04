@@ -21,7 +21,7 @@ public class DatasetBean001 implements DatasetBean {
 
 	private List<CatalogBean001> catalogs;
 
-	private List<PaymentBean001> payments;
+	private List<ReceiptMethodBean001> receiptMethods;
 
 	public CompanyBean001 getCompany() {
 
@@ -151,19 +151,19 @@ public class DatasetBean001 implements DatasetBean {
 
 	}
 
-	public List<PaymentBean001> getPayments() {
+	public List<ReceiptMethodBean001> getReceiptMethods() {
 
-		if (payments == null)
+		if (receiptMethods == null)
 
-			payments = new ArrayList<PaymentBean001>();
+			receiptMethods = new ArrayList<ReceiptMethodBean001>();
 
-		return payments;
+		return receiptMethods;
 
 	}
 
-	public void setPayments(List<PaymentBean001> payments) {
+	public void setReceiptMethods(List<ReceiptMethodBean001> receiptMethods) {
 
-		this.payments = payments;
+		this.receiptMethods = receiptMethods;
 
 	}
 	

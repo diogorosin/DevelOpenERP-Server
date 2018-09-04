@@ -72,7 +72,7 @@ public class Company extends Organization {
 			mappedBy="identifier.company",
 			cascade={CascadeType.ALL}, 
 			orphanRemoval=true)
-	private List<CompanyPayment> payments;
+	private List<CompanyReceiptMethod> receiptMethods;
 	
 	public String getCouponTitle() {
 
@@ -134,15 +134,15 @@ public class Company extends Organization {
 
 	}
 
-	public List<CompanyPayment> getPayments() {
+	public List<CompanyReceiptMethod> getReceiptMethods() {
 
-		return payments;
+		return receiptMethods;
 
 	}
 
-	public void setPayments(List<CompanyPayment> payments) {
+	public void setReceiptMethods(List<CompanyReceiptMethod> receiptMethods) {
 
-		this.payments = payments;
+		this.receiptMethods = receiptMethods;
 
 	}
 

@@ -12,14 +12,14 @@ import br.com.pocketpos.server.bean.IndividualBean001;
 import br.com.pocketpos.server.bean.MeasureUnitBean001;
 import br.com.pocketpos.server.bean.OrganizationBean001;
 import br.com.pocketpos.server.bean.PartBean001;
-import br.com.pocketpos.server.bean.PaymentBean001;
+import br.com.pocketpos.server.bean.ReceiptMethodBean001;
 import br.com.pocketpos.server.bean.ProductBean001;
 import br.com.pocketpos.server.bean.UserBean001;
 import br.com.pocketpos.server.orm.Catalog;
 import br.com.pocketpos.server.orm.CatalogItem;
 import br.com.pocketpos.server.orm.Company;
 import br.com.pocketpos.server.orm.CompanyDevice;
-import br.com.pocketpos.server.orm.CompanyPayment;
+import br.com.pocketpos.server.orm.CompanyReceiptMethod;
 import br.com.pocketpos.server.orm.Individual;
 import br.com.pocketpos.server.orm.MeasureUnit;
 import br.com.pocketpos.server.orm.MeasureUnitMeasureUnit;
@@ -200,19 +200,19 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 	}
 
-	public DatasetBuilder withPayments(List<CompanyPayment> payments) {
+	public DatasetBuilder withReceiptMethods(List<CompanyReceiptMethod> receiptMethods) {
 
-		getDatasetBean().getPayments().clear();
+		getDatasetBean().getReceiptMethods().clear();
 
-		if (payments != null) {
+		if (receiptMethods != null) {
 
-			for (CompanyPayment payment : payments) {
+			for (CompanyReceiptMethod payment : receiptMethods) {
 
-				PaymentBean001 paymentBean = new PaymentBean001();
+				ReceiptMethodBean001 paymentBean = new ReceiptMethodBean001();
 
 				populatePayment(paymentBean, payment);
 
-				getDatasetBean().getPayments().add(paymentBean);
+				getDatasetBean().getReceiptMethods().add(paymentBean);
 
 			}
 
@@ -416,11 +416,11 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 	}
 
-	private void populatePayment(PaymentBean001 paymentBean, CompanyPayment payment){
+	private void populatePayment(ReceiptMethodBean001 paymentBean, CompanyReceiptMethod payment){
 
-		paymentBean.setIdentifier(payment.getIdentifier().getPayment().getIdentifier());
+		paymentBean.setIdentifier(payment.getIdentifier().getReceiptMethod().getIdentifier());
 
-		paymentBean.setDenomination(payment.getIdentifier().getPayment().getDenomination());
+		paymentBean.setDenomination(payment.getIdentifier().getReceiptMethod().getDenomination());
 
 
 	}

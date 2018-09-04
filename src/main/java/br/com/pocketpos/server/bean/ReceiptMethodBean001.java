@@ -1,6 +1,6 @@
 package br.com.pocketpos.server.bean;
 
-public class PaymentBean001 {
+public class ReceiptMethodBean001 {
 
 	private String identifier;
 

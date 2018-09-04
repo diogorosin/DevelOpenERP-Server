@@ -10,29 +10,29 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="\"CompanyPayment\"")
+@Table(name="\"CompanyReceiptMethod\"")
 @NamedQueries({
 	@NamedQuery(
-			name = CompanyPayment.FIND_BY_COMPANY,
-			query = "FROM CompanyPayment CP WHERE CP.identifier.company = :company"
+			name = CompanyReceiptMethod.FIND_BY_COMPANY,
+			query = "FROM CompanyReceiptMethod CRM WHERE CRM.identifier.company = :company"
 	)
 })
-public class CompanyPayment implements Serializable {
+public class CompanyReceiptMethod implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final String FIND_BY_COMPANY = "CompanyPayment.findByCompany";
+	public static final String FIND_BY_COMPANY = "CompanyReceiptMethod.findByCompany";
 
 	@EmbeddedId
-	private CompanyPaymentPK identifier;
+	private CompanyReceiptMethodPK identifier;
 
-	public CompanyPaymentPK getIdentifier() {
+	public CompanyReceiptMethodPK getIdentifier() {
 
 		return this.identifier;
 
 	}
 
-	public void setIdentifier(CompanyPaymentPK identifier) {
+	public void setIdentifier(CompanyReceiptMethodPK identifier) {
 
 		this.identifier = identifier;
 
@@ -57,7 +57,7 @@ public class CompanyPayment implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CompanyPayment other = (CompanyPayment) obj;
+		CompanyReceiptMethod other = (CompanyReceiptMethod) obj;
 		if (identifier == null) {
 			if (other.identifier != null)
 				return false;
