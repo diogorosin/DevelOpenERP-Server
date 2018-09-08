@@ -73,7 +73,14 @@ public class Company extends Organization {
 			cascade={CascadeType.ALL}, 
 			orphanRemoval=true)
 	private List<CompanyReceiptMethod> receiptMethods;
-	
+
+	@OneToMany(
+			fetch=FetchType.LAZY,
+			mappedBy="identifier.company",
+			cascade={CascadeType.ALL}, 
+			orphanRemoval=true)
+	private List<CompanyPaymentMethod> paymentMethods;
+
 	public String getCouponTitle() {
 
 		return couponTitle;
@@ -143,6 +150,18 @@ public class Company extends Organization {
 	public void setReceiptMethods(List<CompanyReceiptMethod> receiptMethods) {
 
 		this.receiptMethods = receiptMethods;
+
+	}
+
+	public List<CompanyPaymentMethod> getPaymentMethods() {
+
+		return paymentMethods;
+
+	}
+
+	public void setPaymentMethods(List<CompanyPaymentMethod> paymentMethods) {
+
+		this.paymentMethods = paymentMethods;
 
 	}
 

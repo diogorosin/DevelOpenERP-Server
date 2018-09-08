@@ -23,12 +23,15 @@ import br.com.pocketpos.server.orm.Company;
 import br.com.pocketpos.server.orm.CompanyDAO;
 import br.com.pocketpos.server.orm.CompanyDevice;
 import br.com.pocketpos.server.orm.CompanyDevicePK;
+import br.com.pocketpos.server.orm.CompanyPaymentMethod;
+import br.com.pocketpos.server.orm.CompanyPaymentMethodPK;
 import br.com.pocketpos.server.orm.CompanyReceiptMethod;
 import br.com.pocketpos.server.orm.CompanyReceiptMethodPK;
 import br.com.pocketpos.server.orm.Device;
 import br.com.pocketpos.server.orm.DeviceDAO;
 import br.com.pocketpos.server.orm.Level;
 import br.com.pocketpos.server.orm.MeasureUnitDAO;
+import br.com.pocketpos.server.orm.PaymentMethodDAO;
 import br.com.pocketpos.server.orm.ReceiptMethodDAO;
 import br.com.pocketpos.server.orm.SubjectSubject;
 import br.com.pocketpos.server.orm.SubjectSubjectPK;
@@ -81,9 +84,12 @@ public class AccountEndPoint {
 				company.setCouponTitle(Company.COUPON_TITLE_DEFAULT);
 
 				company.setCouponSubtitle(null);
-				
+
 				company.setReceiptMethods(new ArrayList<CompanyReceiptMethod>());
 
+				company.setPaymentMethods(new ArrayList<CompanyPaymentMethod>());
+
+				//INCLUI AS FORMAS DE RECEBIMENTO
 				CompanyReceiptMethodPK companyReceiptMethodPK = new CompanyReceiptMethodPK();
 
 				companyReceiptMethodPK.setCompany(company);
@@ -95,6 +101,20 @@ public class AccountEndPoint {
 				companyReceiptMethod.setIdentifier(companyReceiptMethodPK);
 
 				company.getReceiptMethods().add(companyReceiptMethod);
+
+				//INCLUI AS FORMAS DE PAGAMENTOS				
+				CompanyPaymentMethodPK companyPaymentMethodPK = new CompanyPaymentMethodPK();
+
+				companyPaymentMethodPK.setCompany(company);
+
+				companyPaymentMethodPK.setPaymentMethod(new PaymentMethodDAO(session).retrieve("DIN"));
+ 
+				CompanyPaymentMethod companyPaymentMethod = new CompanyPaymentMethod();
+
+				companyPaymentMethod.setIdentifier(companyPaymentMethodPK);
+
+				company.getPaymentMethods().add(companyPaymentMethod);
+
 
 				companyDAO.create(company);
 
@@ -247,6 +267,7 @@ public class AccountEndPoint {
 							withProgenies(company.getProgenies()).
 							withCatalogs(company.getCatalogs()).
 							withReceiptMethods(company.getReceiptMethods()).
+							withPaymentMethods(company.getPaymentMethods()).
 							build()).
 					build();
 

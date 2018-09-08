@@ -6,6 +6,7 @@ import br.com.pocketpos.server.bean.DatasetBean;
 import br.com.pocketpos.server.orm.Catalog;
 import br.com.pocketpos.server.orm.Company;
 import br.com.pocketpos.server.orm.CompanyDevice;
+import br.com.pocketpos.server.orm.CompanyPaymentMethod;
 import br.com.pocketpos.server.orm.CompanyReceiptMethod;
 import br.com.pocketpos.server.orm.MeasureUnit;
 import br.com.pocketpos.server.orm.Progeny;
@@ -27,6 +28,8 @@ public abstract interface DatasetBuilder {
 	public abstract DatasetBuilder withCatalogs(List<Catalog> catalogs);
 	
 	public abstract DatasetBuilder withReceiptMethods(List<CompanyReceiptMethod> receiptMethods);
+
+	public abstract DatasetBuilder withPaymentMethods(List<CompanyPaymentMethod> paymentMethods);
 	
 	public abstract DatasetBean build();
 

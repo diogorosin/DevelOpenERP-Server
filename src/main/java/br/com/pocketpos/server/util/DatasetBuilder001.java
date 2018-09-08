@@ -12,6 +12,7 @@ import br.com.pocketpos.server.bean.IndividualBean001;
 import br.com.pocketpos.server.bean.MeasureUnitBean001;
 import br.com.pocketpos.server.bean.OrganizationBean001;
 import br.com.pocketpos.server.bean.PartBean001;
+import br.com.pocketpos.server.bean.PaymentMethodBean001;
 import br.com.pocketpos.server.bean.ReceiptMethodBean001;
 import br.com.pocketpos.server.bean.ProductBean001;
 import br.com.pocketpos.server.bean.UserBean001;
@@ -19,6 +20,7 @@ import br.com.pocketpos.server.orm.Catalog;
 import br.com.pocketpos.server.orm.CatalogItem;
 import br.com.pocketpos.server.orm.Company;
 import br.com.pocketpos.server.orm.CompanyDevice;
+import br.com.pocketpos.server.orm.CompanyPaymentMethod;
 import br.com.pocketpos.server.orm.CompanyReceiptMethod;
 import br.com.pocketpos.server.orm.Individual;
 import br.com.pocketpos.server.orm.MeasureUnit;
@@ -206,13 +208,13 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 		if (receiptMethods != null) {
 
-			for (CompanyReceiptMethod payment : receiptMethods) {
+			for (CompanyReceiptMethod receiptMethod : receiptMethods) {
 
-				ReceiptMethodBean001 paymentBean = new ReceiptMethodBean001();
+				ReceiptMethodBean001 receiptMethodBean = new ReceiptMethodBean001();
 
-				populatePayment(paymentBean, payment);
+				populateReceiptMethod(receiptMethodBean, receiptMethod);
 
-				getDatasetBean().getReceiptMethods().add(paymentBean);
+				getDatasetBean().getReceiptMethods().add(receiptMethodBean);
 
 			}
 
@@ -222,6 +224,28 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 	}
 
+	public DatasetBuilder withPaymentMethods(List<CompanyPaymentMethod> paymentMethods) {
+
+		getDatasetBean().getPaymentMethods().clear();
+
+		if (paymentMethods != null) {
+
+			for (CompanyPaymentMethod paymentMethod : paymentMethods) {
+
+				PaymentMethodBean001 paymentMethodBean = new PaymentMethodBean001();
+
+				populatePaymentMethod(paymentMethodBean, paymentMethod);
+
+				getDatasetBean().getPaymentMethods().add(paymentMethodBean);
+
+			}
+
+		}
+
+		return this;
+
+	}
+	
 	private void populateCompany(CompanyBean001 companyBean, Company company){
 
 		companyBean.setIdentifier(company.getIdentifier());
@@ -416,11 +440,20 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 	}
 
-	private void populatePayment(ReceiptMethodBean001 paymentBean, CompanyReceiptMethod payment){
+	private void populateReceiptMethod(ReceiptMethodBean001 receiptMethodBean, CompanyReceiptMethod receiptMethod){
 
-		paymentBean.setIdentifier(payment.getIdentifier().getReceiptMethod().getIdentifier());
+		receiptMethodBean.setIdentifier(receiptMethod.getIdentifier().getReceiptMethod().getIdentifier());
 
-		paymentBean.setDenomination(payment.getIdentifier().getReceiptMethod().getDenomination());
+		receiptMethodBean.setDenomination(receiptMethod.getIdentifier().getReceiptMethod().getDenomination());
+
+
+	}
+
+	private void populatePaymentMethod(PaymentMethodBean001 paymentMethodBean, CompanyPaymentMethod paymentMethod){
+
+		paymentMethodBean.setIdentifier(paymentMethod.getIdentifier().getPaymentMethod().getIdentifier());
+
+		paymentMethodBean.setDenomination(paymentMethod.getIdentifier().getPaymentMethod().getDenomination());
 
 
 	}

@@ -23,6 +23,8 @@ public class DatasetBean001 implements DatasetBean {
 
 	private List<ReceiptMethodBean001> receiptMethods;
 
+	private List<PaymentMethodBean001> paymentMethods;
+
 	public CompanyBean001 getCompany() {
 
 		if (company == null)
@@ -167,4 +169,20 @@ public class DatasetBean001 implements DatasetBean {
 
 	}
 	
+	public List<PaymentMethodBean001> getPaymentMethods() {
+
+		if (paymentMethods == null)
+
+			paymentMethods = new ArrayList<PaymentMethodBean001>();
+
+		return paymentMethods;
+
+	}
+
+	public void setPaymentMethods(List<PaymentMethodBean001> paymentMethods) {
+
+		this.paymentMethods = paymentMethods;
+
+	}
+
 }

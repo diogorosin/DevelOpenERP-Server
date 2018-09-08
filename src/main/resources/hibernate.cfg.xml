@@ -40,6 +40,8 @@
 		<mapping class="br.com.pocketpos.server.orm.Device"/>
 		<mapping class="br.com.pocketpos.server.orm.CompanyDevice"/>
 		<mapping class="br.com.pocketpos.server.orm.ReceiptMethod"/>
+		<mapping class="br.com.pocketpos.server.orm.PaymentMethod"/>
 		<mapping class="br.com.pocketpos.server.orm.CompanyReceiptMethod"/>
+		<mapping class="br.com.pocketpos.server.orm.CompanyPaymentMethod"/>
     </session-factory>
 </hibernate-configuration>
