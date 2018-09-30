@@ -3,21 +3,22 @@ package br.com.pocketpos.server.util;
 import java.util.List;
 
 import br.com.pocketpos.server.bean.CatalogBean001;
-import br.com.pocketpos.server.bean.CatalogItemBean001;
 import br.com.pocketpos.server.bean.CompanyBean001;
 import br.com.pocketpos.server.bean.ConversionBean001;
 import br.com.pocketpos.server.bean.DatasetBean001;
 import br.com.pocketpos.server.bean.DeviceBean001;
 import br.com.pocketpos.server.bean.IndividualBean001;
 import br.com.pocketpos.server.bean.MeasureUnitBean001;
+import br.com.pocketpos.server.bean.MerchandiseBean001;
 import br.com.pocketpos.server.bean.OrganizationBean001;
 import br.com.pocketpos.server.bean.PartBean001;
 import br.com.pocketpos.server.bean.PaymentMethodBean001;
-import br.com.pocketpos.server.bean.ReceiptMethodBean001;
 import br.com.pocketpos.server.bean.ProductBean001;
+import br.com.pocketpos.server.bean.ProgenyBean001;
+import br.com.pocketpos.server.bean.ReceiptMethodBean001;
+import br.com.pocketpos.server.bean.ServiceBean001;
 import br.com.pocketpos.server.bean.UserBean001;
 import br.com.pocketpos.server.orm.Catalog;
-import br.com.pocketpos.server.orm.CatalogItem;
 import br.com.pocketpos.server.orm.Company;
 import br.com.pocketpos.server.orm.CompanyDevice;
 import br.com.pocketpos.server.orm.CompanyPaymentMethod;
@@ -25,10 +26,12 @@ import br.com.pocketpos.server.orm.CompanyReceiptMethod;
 import br.com.pocketpos.server.orm.Individual;
 import br.com.pocketpos.server.orm.MeasureUnit;
 import br.com.pocketpos.server.orm.MeasureUnitMeasureUnit;
+import br.com.pocketpos.server.orm.Merchandise;
 import br.com.pocketpos.server.orm.Organization;
 import br.com.pocketpos.server.orm.Product;
 import br.com.pocketpos.server.orm.ProductProduct;
 import br.com.pocketpos.server.orm.Progeny;
+import br.com.pocketpos.server.orm.Service;
 import br.com.pocketpos.server.orm.SubjectSubject;
 import br.com.pocketpos.server.orm.User;
 
@@ -156,19 +159,47 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 	public DatasetBuilder withProgenies(List<Progeny> progenies) {
 
+		getDatasetBean().getServices().clear();
+
 		getDatasetBean().getProducts().clear();
+
+		getDatasetBean().getMerchandises().clear();
 
 		if (progenies != null) {
 
 			for (Progeny progeny: progenies) {
 
-				if (progeny instanceof Product){
+				if (progeny instanceof Merchandise) {
 
-					ProductBean001 productBean = new ProductBean001();
+					MerchandiseBean001 merchandiseBean = new MerchandiseBean001();
 
-					populateProduct(productBean, (Product) progeny);
+					populateMerchandise(merchandiseBean, (Merchandise) progeny);
 
-					getDatasetBean().getProducts().add(productBean);
+					getDatasetBean().getMerchandises().add(merchandiseBean);
+
+				} else {
+
+					if (progeny instanceof Product) {
+
+						ProductBean001 productBean = new ProductBean001();
+
+						populateProduct(productBean, (Product) progeny);
+
+						getDatasetBean().getProducts().add(productBean);
+
+					} else {
+
+						if (progeny instanceof Service) {
+
+							ServiceBean001 serviceBean = new ServiceBean001();
+
+							populateService(serviceBean, (Service) progeny);
+
+							getDatasetBean().getServices().add(serviceBean);
+
+						}
+
+					}
 
 				}
 
@@ -350,13 +381,40 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 	}
 
+
+	private void populateProgeny(ProgenyBean001 progenyBean, Progeny progeny){
+
+		progenyBean.setIdentifier(progeny.getIdentifier());
+
+		progenyBean.setActive(progeny.getActive());
+
+		progenyBean.setDenomination(progeny.getDenomination());
+
+	}
+	
+	
+	private void populateService(ServiceBean001 serviceBean, Service service){
+
+		populateProgeny(serviceBean, service);
+
+		serviceBean.setCatalog(service.getCatalog().getIdentifier());
+
+		serviceBean.setPosition(service.getPosition());
+
+		serviceBean.setReference(service.getReference());
+
+		serviceBean.setLabel(service.getLabel());
+
+		serviceBean.setMeasureUnit(service.getMeasureUnit().getIdentifier());
+
+		serviceBean.setPrice(service.getPrice());
+
+	}
+	
+	
 	private void populateProduct(ProductBean001 productBean, Product product){
 
-		productBean.setIdentifier(product.getIdentifier());
-
-		productBean.setActive(product.getActive());
-
-		productBean.setDenomination(product.getDenomination());
+		populateProgeny(productBean, product);
 
 		productBean.setWidthValue(product.getWidthValue());
 
@@ -395,7 +453,7 @@ public class DatasetBuilder001 implements DatasetBuilder {
 				productBean.getParts().put(
 						productProduct.
 						getIdentifier().
-						getPart().
+						getChild().
 						getIdentifier(), partBean);
 
 			}
@@ -403,6 +461,26 @@ public class DatasetBuilder001 implements DatasetBuilder {
 		}
 
 	}
+
+
+	private void populateMerchandise(MerchandiseBean001 merchandiseBean, Merchandise merchandise){
+
+		populateProduct(merchandiseBean, merchandise);
+
+		merchandiseBean.setCatalog(merchandise.getCatalog().getIdentifier());
+		
+		merchandiseBean.setPosition(merchandise.getPosition());
+		
+		merchandiseBean.setReference(merchandise.getReference());
+		
+		merchandiseBean.setLabel(merchandise.getLabel());
+		
+		merchandiseBean.setMeasureUnit(merchandise.getMeasureUnit().getIdentifier());
+
+		merchandiseBean.setPrice(merchandise.getPrice());
+
+	}
+	
 
 	private void populateCatalog(CatalogBean001 catalogBean, Catalog catalog){
 
@@ -412,7 +490,7 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 		catalogBean.setDenomination(catalog.getDenomination());
 
-		if (catalog.getItems() != null){
+/*		if (catalog.getItems() != null){
 
 			for (CatalogItem catalogItem : catalog.getItems()) {
 
@@ -424,7 +502,7 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 				catalogItemBean.setDenomination(catalogItem.getDenomination());
 
-				catalogItemBean.setProduct(catalogItem.getProduct().getIdentifier());
+				catalogItemBean.setProgeny(catalogItem.getProgeny().getIdentifier());
 
 				catalogItemBean.setMeasureUnit(catalogItem.getMeasureUnit().getIdentifier());
 
@@ -436,7 +514,7 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 			}
 
-		}
+		} */
 
 	}
 

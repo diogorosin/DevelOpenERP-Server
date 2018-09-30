@@ -1,8 +1,5 @@
 package br.com.pocketpos.server.bean;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class CatalogBean001 {
 
 	private Integer identifier;
@@ -10,8 +7,6 @@ public class CatalogBean001 {
 	private Integer position;
 
 	private String denomination;
-
-	private Map<Integer, CatalogItemBean001> items;
 
 	public Integer getIdentifier() {
 
@@ -46,22 +41,6 @@ public class CatalogBean001 {
 	public void setDenomination(String denomination) {
 
 		this.denomination = denomination;
-
-	}
-
-	public Map<Integer, CatalogItemBean001> getItems() {
-
-		if (items==null)
-
-			items = new HashMap<Integer, CatalogItemBean001>();
-
-		return items;
-
-	}
-
-	public void setItems(Map<Integer, CatalogItemBean001> items) {
-
-		this.items = items;
 
 	}
 

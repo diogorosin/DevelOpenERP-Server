@@ -209,7 +209,7 @@ public class AccountEndPoint {
 
 			if (!company.getDevices().contains(companyDevice)){
 
-				companyDevice.setAlias(device.getManufacturer() + "/" + device.getModel());
+				companyDevice.setAlias((device.getManufacturer() + "/" + device.getModel()).substring(0,11));
 
 				companyDevice.setAllow(isNewCompany);
 

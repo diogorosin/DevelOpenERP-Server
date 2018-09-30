@@ -68,7 +68,7 @@ public class Product extends Progeny {
 
 	@OneToMany(
 			fetch=FetchType.LAZY,
-			mappedBy="identifier.product",
+			mappedBy="identifier.parent",
 			cascade={CascadeType.ALL}, 
 			orphanRemoval=true)
 	private List<ProductProduct> parts;

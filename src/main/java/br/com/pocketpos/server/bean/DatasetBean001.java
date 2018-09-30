@@ -19,6 +19,10 @@ public class DatasetBean001 implements DatasetBean {
 
 	private List<ProductBean001> products;
 
+	private List<ServiceBean001> services;	
+	
+	private List<MerchandiseBean001> merchandises;
+
 	private List<CatalogBean001> catalogs;
 
 	private List<ReceiptMethodBean001> receiptMethods;
@@ -137,6 +141,38 @@ public class DatasetBean001 implements DatasetBean {
 
 	}
 
+	public List<ServiceBean001> getServices() {
+
+		if (services == null)
+
+			services = new ArrayList<ServiceBean001>();
+
+		return services;
+
+	}
+
+	public void setServices(List<ServiceBean001> services) {
+		
+		this.services = services;
+		
+	}
+
+	public List<MerchandiseBean001> getMerchandises() {
+
+		if (merchandises == null)
+
+			merchandises = new ArrayList<MerchandiseBean001>();
+		
+		return merchandises;
+		
+	}
+
+	public void setMerchandises(List<MerchandiseBean001> merchandises) {
+
+		this.merchandises = merchandises;
+
+	}
+	
 	public List<CatalogBean001> getCatalogs() {
 
 		if (catalogs == null)

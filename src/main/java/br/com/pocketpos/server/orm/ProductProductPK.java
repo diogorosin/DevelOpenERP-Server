@@ -13,34 +13,34 @@ public class ProductProductPK implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne(optional=false)
-	@JoinColumn(name="\"product\"", referencedColumnName="progeny", nullable=false)
-	private Product product;
+	@JoinColumn(name="\"parent\"", referencedColumnName="progeny", nullable=false)
+	private Product parent;
 
 	@ManyToOne(optional=false)
-	@JoinColumn(name="\"part\"", referencedColumnName="progeny", nullable=false)
-	private Product part;
+	@JoinColumn(name="\"child\"", referencedColumnName="progeny", nullable=false)
+	private Product child;
 
-	public Product getProduct() {
+	public Product getParent() {
 
-		return product;
-
-	}
-
-	public void setProduct(Product product) {
-
-		this.product = product;
+		return parent;
 
 	}
 
-	public Product getPart() {
+	public void setParent(Product parent) {
 
-		return part;
+		this.parent = parent;
 
 	}
 
-	public void setPart(Product part) {
+	public Product getChild() {
 
-		this.part = part;
+		return child;
+
+	}
+
+	public void setChild(Product child) {
+
+		this.child = child;
 
 	}
 
@@ -49,8 +49,8 @@ public class ProductProductPK implements Serializable{
 
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((part == null) ? 0 : part.hashCode());
-		result = prime * result + ((product == null) ? 0 : product.hashCode());
+		result = prime * result + ((child == null) ? 0 : child.hashCode());
+		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
 		return result;
 
 	}
@@ -65,15 +65,15 @@ public class ProductProductPK implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		ProductProductPK other = (ProductProductPK) obj;
-		if (part == null) {
-			if (other.part != null)
+		if (child == null) {
+			if (other.child != null)
 				return false;
-		} else if (!part.equals(other.part))
+		} else if (!child.equals(other.child))
 			return false;
-		if (product == null) {
-			if (other.product != null)
+		if (parent == null) {
+			if (other.parent != null)
 				return false;
-		} else if (!product.equals(other.product))
+		} else if (!parent.equals(other.parent))
 			return false;
 		return true;
 

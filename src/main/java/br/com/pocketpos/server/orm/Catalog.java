@@ -1,18 +1,14 @@
 package br.com.pocketpos.server.orm;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -40,12 +36,6 @@ public class Catalog implements Serializable {
 	@ManyToOne(optional=false)
 	@JoinColumn(name = "company")
 	private Company company;
-
-	@OneToMany(fetch=FetchType.LAZY,
-			mappedBy="identifier.catalog",
-			cascade={CascadeType.ALL},
-			orphanRemoval=true)
-	private List<CatalogItem> items;
 
 	public Integer getIdentifier() {
 
@@ -92,18 +82,6 @@ public class Catalog implements Serializable {
 	public void setCompany(Company company) {
 
 		this.company = company;
-
-	}
-
-	public List<CatalogItem> getItems() {
-
-		return items;
-
-	}
-
-	public void setItems(List<CatalogItem> items) {
-
-		this.items = items;
 
 	}
 

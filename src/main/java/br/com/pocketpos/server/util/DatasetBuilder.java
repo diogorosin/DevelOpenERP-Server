@@ -26,7 +26,7 @@ public abstract interface DatasetBuilder {
 	public abstract DatasetBuilder withProgenies(List<Progeny> progeny);	
 
 	public abstract DatasetBuilder withCatalogs(List<Catalog> catalogs);
-	
+
 	public abstract DatasetBuilder withReceiptMethods(List<CompanyReceiptMethod> receiptMethods);
 
 	public abstract DatasetBuilder withPaymentMethods(List<CompanyPaymentMethod> paymentMethods);
