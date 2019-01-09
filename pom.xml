@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>developen-erp-server</groupId>
-  <artifactId>developen-erp-server</artifactId>
+  <artifactId>developen-erp-servers</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>DevelOpenERP Server</name>
@@ -107,7 +107,7 @@
     </dependency>
   </dependencies>
   <build>
-    <finalName>developen-erp-server</finalName>
+    <finalName>DevelOpenERP-Server</finalName>
     <plugins>
 	  <plugin>
           <groupId>org.apache.maven.plugins</groupId>
