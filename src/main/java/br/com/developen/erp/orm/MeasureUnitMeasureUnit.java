@@ -6,15 +6,25 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 
 @Entity
 @Table(name="\"MeasureUnitMeasureUnit\"")
+@NamedQueries({
+	@NamedQuery(
+			name = MeasureUnitMeasureUnit.FIND_ALL,
+			query = "FROM MeasureUnitMeasureUnit"
+	)
+})
 public class MeasureUnitMeasureUnit implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	public static final String FIND_ALL = "MeasureUnitMeasureUnit.findAll";
 
 	@EmbeddedId
 	private MeasureUnitMeasureUnitPK identifier;

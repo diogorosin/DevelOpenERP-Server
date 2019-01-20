@@ -23,7 +23,7 @@ public abstract interface DatasetBuilder {
 
 	public abstract DatasetBuilder withMeasureUnits(List<MeasureUnit> measureUnits);
 
-	public abstract DatasetBuilder withProgenies(List<Progeny> progeny);	
+	public abstract DatasetBuilder withProgenies(List<Progeny> progenies);
 
 	public abstract DatasetBuilder withCatalogs(List<Catalog> catalogs);
 

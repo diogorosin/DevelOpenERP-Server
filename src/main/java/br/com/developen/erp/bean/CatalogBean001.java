@@ -4,6 +4,8 @@ public class CatalogBean001 {
 
 	private Integer identifier;
 
+	private Boolean active;
+	
 	private Integer position;
 
 	private String denomination;
@@ -17,6 +19,18 @@ public class CatalogBean001 {
 	public void setIdentifier(Integer identifier) {
 
 		this.identifier = identifier;
+
+	}
+
+	public Boolean getActive() {
+
+		return active;
+
+	}
+
+	public void setActive(Boolean active) {
+
+		this.active = active;
 
 	}
 

@@ -25,6 +25,10 @@ public class Catalog implements Serializable {
 	private Integer identifier;
 
 	@NotNull
+	@Column(name="\"active\"", nullable=false)
+	private Boolean active;
+	
+	@NotNull
 	@Column(name="\"position\"", nullable=false)
 	private Integer position;
 
@@ -47,6 +51,18 @@ public class Catalog implements Serializable {
 
 		this.identifier = identifier;
 
+	}
+
+	public Boolean getActive() {
+		
+		return active;
+		
+	}
+
+	public void setActive(Boolean active) {
+		
+		this.active = active;
+		
 	}
 
 	public Integer getPosition() {

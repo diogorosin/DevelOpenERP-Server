@@ -1,8 +1,6 @@
 package br.com.developen.erp.bean;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ProductBean001 extends ProgenyBean001{
 
@@ -32,9 +30,6 @@ public class ProductBean001 extends ProgenyBean001{
 	private Integer netWeightUnit;
 
 	private BigDecimal netWeightValue;
-
-	//PARTES
-	private Map<Integer, PartBean001> parts;
 
 	public Integer getWidthUnit() {
 		
@@ -178,28 +173,6 @@ public class ProductBean001 extends ProgenyBean001{
 		
 		this.netWeightValue = netWeightValue;
 		
-	}
-
-	public void setParts(Map<Integer, PartBean001> parts) {
-		
-		this.parts = parts;
-		
-	}
-
-	public Map<Integer, PartBean001> getParts() {
-
-		if (parts == null)
-
-			parts = new HashMap<Integer, PartBean001>();
-
-		return parts;
-
-	}
-
-	public void setPart(Map<Integer, PartBean001> parts) {
-
-		this.parts = parts;
-
 	}
 
 }

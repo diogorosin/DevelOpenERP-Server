@@ -15,9 +15,13 @@ public class DatasetBean001 implements DatasetBean {
 
 	private List<UserBean001> users;
 
-	private List<MeasureUnitBean001> measureUnits;	
+	private List<MeasureUnitBean001> measureUnits;
+	
+	private List<MeasureUnitMeasureUnitBean001> measureUnitMeasureUnits;	
 
 	private List<ProductBean001> products;
+
+	private List<ProductProductBean001> productProducts;
 
 	private List<ServiceBean001> services;	
 	
@@ -125,6 +129,22 @@ public class DatasetBean001 implements DatasetBean {
 
 	}
 
+	public List<MeasureUnitMeasureUnitBean001> getMeasureUnitMeasureUnits() {
+
+		if (measureUnitMeasureUnits == null)
+
+			measureUnitMeasureUnits = new ArrayList<MeasureUnitMeasureUnitBean001>();
+
+		return measureUnitMeasureUnits;
+
+	}
+
+	public void setMeasureUnitMeasureUnits(List<MeasureUnitMeasureUnitBean001> measureUnitMeasureUnits) {
+
+		this.measureUnitMeasureUnits = measureUnitMeasureUnits;
+
+	}
+	
 	public List<ProductBean001> getProducts() {
 
 		if (products == null)
@@ -141,6 +161,22 @@ public class DatasetBean001 implements DatasetBean {
 
 	}
 
+	public List<ProductProductBean001> getProductProducts() {
+
+		if (productProducts == null)
+
+			productProducts = new ArrayList<ProductProductBean001>();
+
+		return productProducts;
+
+	}
+
+	public void setProductProducts(List<ProductProductBean001> productProducts) {
+
+		this.productProducts = productProducts;
+
+	}
+
 	public List<ServiceBean001> getServices() {
 
 		if (services == null)
@@ -152,9 +188,9 @@ public class DatasetBean001 implements DatasetBean {
 	}
 
 	public void setServices(List<ServiceBean001> services) {
-		
+
 		this.services = services;
-		
+
 	}
 
 	public List<MerchandiseBean001> getMerchandises() {

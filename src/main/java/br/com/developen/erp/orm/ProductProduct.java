@@ -6,16 +6,26 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 
 @Entity
 @Table(name="\"ProductProduct\"")
+@NamedQueries({
+	@NamedQuery(
+			name = ProductProduct.FIND_ALL,
+			query = "FROM ProductProduct"
+	)
+})
 public class ProductProduct implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	public static final String FIND_ALL = "ProductProduct.findAll";
+	
 	@EmbeddedId
 	private ProductProductPK identifier;
 

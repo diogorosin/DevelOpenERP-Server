@@ -4,19 +4,20 @@ import java.util.List;
 
 import br.com.developen.erp.bean.CatalogBean001;
 import br.com.developen.erp.bean.CompanyBean001;
-import br.com.developen.erp.bean.ConversionBean001;
 import br.com.developen.erp.bean.DatasetBean001;
 import br.com.developen.erp.bean.DeviceBean001;
 import br.com.developen.erp.bean.IndividualBean001;
 import br.com.developen.erp.bean.MeasureUnitBean001;
+import br.com.developen.erp.bean.MeasureUnitMeasureUnitBean001;
 import br.com.developen.erp.bean.MerchandiseBean001;
 import br.com.developen.erp.bean.OrganizationBean001;
-import br.com.developen.erp.bean.PartBean001;
 import br.com.developen.erp.bean.PaymentMethodBean001;
 import br.com.developen.erp.bean.ProductBean001;
+import br.com.developen.erp.bean.ProductProductBean001;
 import br.com.developen.erp.bean.ProgenyBean001;
 import br.com.developen.erp.bean.ReceiptMethodBean001;
 import br.com.developen.erp.bean.ServiceBean001;
+import br.com.developen.erp.bean.SubjectBean001;
 import br.com.developen.erp.bean.UserBean001;
 import br.com.developen.erp.orm.Catalog;
 import br.com.developen.erp.orm.Company;
@@ -139,6 +140,8 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 		getDatasetBean().getMeasureUnits().clear();
 
+		getDatasetBean().getMeasureUnitMeasureUnits().clear();
+
 		if (measureUnits != null) {
 
 			for (MeasureUnit measureUnit : measureUnits) {
@@ -148,6 +151,22 @@ public class DatasetBuilder001 implements DatasetBuilder {
 				populateMeasureUnit(measureUnitBean, measureUnit);
 
 				getDatasetBean().getMeasureUnits().add(measureUnitBean);
+
+				List<MeasureUnitMeasureUnit> measureUnitMeasureUnits = measureUnit.getConversions(); 
+
+				if (measureUnitMeasureUnits != null && !measureUnitMeasureUnits.isEmpty()) {
+
+					for(MeasureUnitMeasureUnit measureUnitMeasureUnit : measureUnitMeasureUnits) {
+
+						MeasureUnitMeasureUnitBean001 measureUnitMeasureUnitBean = new MeasureUnitMeasureUnitBean001();
+
+						populateMeasureUnitMeasureUnit(measureUnitMeasureUnitBean, measureUnitMeasureUnit);
+
+						getDatasetBean().getMeasureUnitMeasureUnits().add(measureUnitMeasureUnitBean);
+
+					}
+
+				}
 
 			}
 
@@ -163,6 +182,8 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 		getDatasetBean().getProducts().clear();
 
+		getDatasetBean().getProductProducts().clear();
+
 		getDatasetBean().getMerchandises().clear();
 
 		if (progenies != null) {
@@ -177,6 +198,22 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 					getDatasetBean().getMerchandises().add(merchandiseBean);
 
+					List<ProductProduct> productProducts = ((Merchandise) progeny).getParts();
+
+					if (productProducts != null && !productProducts.isEmpty()) {
+
+						for (ProductProduct productProduct : productProducts) {
+
+							ProductProductBean001 productProductBean = new ProductProductBean001();
+
+							populateProductProduct(productProductBean, productProduct);
+
+							getDatasetBean().getProductProducts().add(productProductBean);
+
+						}
+
+					}
+
 				} else {
 
 					if (progeny instanceof Product) {
@@ -186,6 +223,22 @@ public class DatasetBuilder001 implements DatasetBuilder {
 						populateProduct(productBean, (Product) progeny);
 
 						getDatasetBean().getProducts().add(productBean);
+						
+						List<ProductProduct> productProducts = ((Product) progeny).getParts();
+
+						if (productProducts != null && !productProducts.isEmpty()) {
+
+							for (ProductProduct productProduct : productProducts) {
+
+								ProductProductBean001 productProductBean = new ProductProductBean001();
+
+								populateProductProduct(productProductBean, productProduct);
+
+								getDatasetBean().getProductProducts().add(productProductBean);
+
+							}
+
+						}
 
 					} else {
 
@@ -276,7 +329,45 @@ public class DatasetBuilder001 implements DatasetBuilder {
 		return this;
 
 	}
+
+	private void populateSubject(SubjectBean001 subjectBean, SubjectSubject subject){
+
+		subjectBean.setIdentifier(subject.getIdentifier().getChild().getIdentifier());
+
+		subjectBean.setActive(subject.getIdentifier().getChild().getActive());
+
+		subjectBean.setLevel(subject.getLevel().ordinal());
+
+	}
+
+	private void populateIndividual(IndividualBean001 individualBean, SubjectSubject subjectSubject){
+
+		populateSubject(individualBean, subjectSubject);
+
+		individualBean.setName(((Individual) subjectSubject.getIdentifier().getChild()).getName());
+
+	}
 	
+	private void populateUser(UserBean001 userBean, SubjectSubject subjectSubject){
+
+		populateIndividual(userBean, subjectSubject);
+
+		userBean.setLogin(((User) subjectSubject.getIdentifier().getChild()).getLogin());
+
+		userBean.setPassword(((User) subjectSubject.getIdentifier().getChild()).getPassword());
+
+	}
+
+	private void populateOrganization(OrganizationBean001 organizationBean, SubjectSubject subjectSubject){
+
+		populateSubject(organizationBean, subjectSubject);
+
+		organizationBean.setDenomination(((Organization) subjectSubject.getIdentifier().getChild()).getDenomination());
+
+		organizationBean.setFancyName(((Organization) subjectSubject.getIdentifier().getChild()).getFancyName());
+
+	}
+
 	private void populateCompany(CompanyBean001 companyBean, Company company){
 
 		companyBean.setIdentifier(company.getIdentifier());
@@ -309,48 +400,6 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 	}
 
-	private void populateUser(UserBean001 userBean, SubjectSubject subjectSubject){
-
-		userBean.setIdentifier(subjectSubject.getIdentifier().getChild().getIdentifier());
-
-		userBean.setActive(subjectSubject.getIdentifier().getChild().getActive());
-
-		userBean.setLevel(subjectSubject.getLevel().ordinal());
-
-		userBean.setName(((User) subjectSubject.getIdentifier().getChild()).getName());
-
-		userBean.setLogin(((User) subjectSubject.getIdentifier().getChild()).getLogin());
-
-		userBean.setPassword(((User) subjectSubject.getIdentifier().getChild()).getPassword());
-
-	}
-
-	private void populateIndividual(IndividualBean001 individualBean, SubjectSubject subjectSubject){
-
-		individualBean.setIdentifier(subjectSubject.getIdentifier().getChild().getIdentifier());
-
-		individualBean.setActive(subjectSubject.getIdentifier().getChild().getActive());
-
-		individualBean.setLevel(subjectSubject.getLevel().ordinal());
-
-		individualBean.setName(((Individual) subjectSubject.getIdentifier().getChild()).getName());
-
-	}
-
-	private void populateOrganization(OrganizationBean001 organizationBean, SubjectSubject subjectSubject){
-
-		organizationBean.setIdentifier(subjectSubject.getIdentifier().getChild().getIdentifier());
-
-		organizationBean.setActive(subjectSubject.getIdentifier().getChild().getActive());
-
-		organizationBean.setLevel(subjectSubject.getLevel().ordinal());
-
-		organizationBean.setDenomination(((Organization) subjectSubject.getIdentifier().getChild()).getDenomination());
-
-		organizationBean.setFancyName(((Organization) subjectSubject.getIdentifier().getChild()).getFancyName());
-
-	}
-
 	private void populateMeasureUnit(MeasureUnitBean001 measureUnitBean, MeasureUnit measureUnit){
 
 		measureUnitBean.setIdentifier(measureUnit.getIdentifier());
@@ -361,26 +410,24 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 		measureUnitBean.setGroup(measureUnit.getGroup().ordinal());
 
-		if (measureUnit.getConversions() != null){
-
-			for (MeasureUnitMeasureUnit measureUnitMeasureUnit : measureUnit.getConversions()) {
-
-				ConversionBean001 conversionBean = new ConversionBean001();
-
-				conversionBean.setFactor(measureUnitMeasureUnit.getFactor());
-
-				measureUnitBean.getConversions().put(
-						measureUnitMeasureUnit.
-						getIdentifier().
-						getTo().
-						getIdentifier(), conversionBean);
-
-			}
-
-		}
-
 	}
 
+	private void populateMeasureUnitMeasureUnit(MeasureUnitMeasureUnitBean001 measureUnitMeasureUnitBean, 
+			MeasureUnitMeasureUnit measureUnitMeasureUnit){
+
+		measureUnitMeasureUnitBean.setFrom(measureUnitMeasureUnit.
+				getIdentifier().
+				getFrom().
+				getIdentifier());
+
+		measureUnitMeasureUnitBean.setTo(measureUnitMeasureUnit.
+				getIdentifier().
+				getTo().
+				getIdentifier());
+
+		measureUnitMeasureUnitBean.setFactor(measureUnitMeasureUnit.getFactor());
+
+	}
 
 	private void populateProgeny(ProgenyBean001 progenyBean, Progeny progeny){
 
@@ -391,8 +438,7 @@ public class DatasetBuilder001 implements DatasetBuilder {
 		progenyBean.setDenomination(progeny.getDenomination());
 
 	}
-	
-	
+
 	private void populateService(ServiceBean001 serviceBean, Service service){
 
 		populateProgeny(serviceBean, service);
@@ -410,8 +456,7 @@ public class DatasetBuilder001 implements DatasetBuilder {
 		serviceBean.setPrice(service.getPrice());
 
 	}
-	
-	
+
 	private void populateProduct(ProductBean001 productBean, Product product){
 
 		populateProgeny(productBean, product);
@@ -440,81 +485,53 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 		productBean.setNetWeightUnit(product.getNetWeightUnit() != null ? product.getNetWeightUnit().getIdentifier() : null);
 
-		if (product.getParts() != null){
-
-			for (ProductProduct productProduct : product.getParts()) {
-
-				PartBean001 partBean = new PartBean001();
-
-				partBean.setActive(productProduct.getActive());
-
-				partBean.setQuantity(productProduct.getQuantity());
-
-				productBean.getParts().put(
-						productProduct.
-						getIdentifier().
-						getChild().
-						getIdentifier(), partBean);
-
-			}
-
-		}
-
 	}
 
+	private void populateProductProduct(ProductProductBean001 productProductBean, ProductProduct productProduct){
+
+		productProductBean.setParent(productProduct.
+				getIdentifier().
+				getParent().
+				getIdentifier());
+
+		productProductBean.setChild(productProduct.
+				getIdentifier().
+				getChild().
+				getIdentifier());
+
+		productProductBean.setActive(productProduct.getActive());
+
+		productProductBean.setQuantity(productProduct.getQuantity());
+
+	}
 
 	private void populateMerchandise(MerchandiseBean001 merchandiseBean, Merchandise merchandise){
 
 		populateProduct(merchandiseBean, merchandise);
 
 		merchandiseBean.setCatalog(merchandise.getCatalog().getIdentifier());
-		
+
 		merchandiseBean.setPosition(merchandise.getPosition());
-		
+
 		merchandiseBean.setReference(merchandise.getReference());
-		
+
 		merchandiseBean.setLabel(merchandise.getLabel());
-		
+
 		merchandiseBean.setMeasureUnit(merchandise.getMeasureUnit().getIdentifier());
 
 		merchandiseBean.setPrice(merchandise.getPrice());
 
 	}
-	
 
 	private void populateCatalog(CatalogBean001 catalogBean, Catalog catalog){
 
 		catalogBean.setIdentifier(catalog.getIdentifier());
 
+		catalogBean.setActive(catalog.getActive());
+
 		catalogBean.setPosition(catalog.getPosition());
 
 		catalogBean.setDenomination(catalog.getDenomination());
-
-/*		if (catalog.getItems() != null){
-
-			for (CatalogItem catalogItem : catalog.getItems()) {
-
-				CatalogItemBean001 catalogItemBean = new CatalogItemBean001();
-
-				catalogItemBean.setPosition(catalogItem.getPosition());
-
-				catalogItemBean.setCode(catalogItem.getCode());
-
-				catalogItemBean.setDenomination(catalogItem.getDenomination());
-
-				catalogItemBean.setProgeny(catalogItem.getProgeny().getIdentifier());
-
-				catalogItemBean.setMeasureUnit(catalogItem.getMeasureUnit().getIdentifier());
-
-				catalogItemBean.setPrice(catalogItem.getPrice());
-
-				catalogBean.getItems().put(catalogItem.
-						getIdentifier().
-						getItem(), catalogItemBean);
-
-			}
-
-		} */
 
 	}
 

@@ -268,8 +268,7 @@ public class AccountEndPoint {
 							withCatalogs(company.getCatalogs()).
 							withReceiptMethods(company.getReceiptMethods()).
 							withPaymentMethods(company.getPaymentMethods()).
-							build()).
-					build();
+							build()).build();
 
 		} catch (ConstraintViolationException e) {
 

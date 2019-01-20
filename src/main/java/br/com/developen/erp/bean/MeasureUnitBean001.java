@@ -1,8 +1,5 @@
 package br.com.developen.erp.bean;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class MeasureUnitBean001 {
 
 	private Integer identifier;
@@ -12,8 +9,6 @@ public class MeasureUnitBean001 {
 	private String acronym;
 	
 	private Integer group;
-
-	private Map<Integer, ConversionBean001> conversions;
 
 	public Integer getIdentifier() {
 
@@ -61,22 +56,6 @@ public class MeasureUnitBean001 {
 		
 		this.group = group;
 		
-	}
-
-	public Map<Integer, ConversionBean001> getConversions() {
-
-		if (conversions==null)
-
-			conversions = new HashMap<Integer, ConversionBean001>();
-
-		return conversions;
-
-	}
-
-	public void setConversions(Map<Integer, ConversionBean001> conversions) {
-
-		this.conversions = conversions;
-
 	}
 
 }
