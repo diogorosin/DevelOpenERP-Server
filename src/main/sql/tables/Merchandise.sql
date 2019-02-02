@@ -10,8 +10,6 @@ CREATE TABLE "Merchandise" (
 
     "label" VARCHAR(32) NOT NULL,
 
-    "measureUnit" INTEGER NOT NULL,
-
     "price" NUMERIC(14,4) NOT NULL
 
 );

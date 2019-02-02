@@ -36,10 +36,6 @@ public class Merchandise extends Product {
 	@Size(min=1, max=32)
 	private String label;
 
-	@ManyToOne(optional=false)
-	@JoinColumn(name="\"measureUnit\"")
-	private MeasureUnit measureUnit;
-
 	@NotNull
 	@Column(name="\"price\"", nullable=false)
 	private BigDecimal price;
@@ -91,19 +87,7 @@ public class Merchandise extends Product {
 		this.label = label;
 
 	}
-
-	public MeasureUnit getMeasureUnit() {
-
-		return measureUnit;
-
-	}
-
-	public void setMeasureUnit(MeasureUnit measureUnit) {
-
-		this.measureUnit = measureUnit;
-
-	}
-
+	
 	public BigDecimal getPrice() {
 		
 		return price;

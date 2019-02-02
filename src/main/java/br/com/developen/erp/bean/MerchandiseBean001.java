@@ -12,8 +12,6 @@ public class MerchandiseBean001 extends ProductBean001 {
 
 	private String label;
 
-	private Integer measureUnit;
-
 	private BigDecimal price;
 
 	public Integer getCatalog() {
@@ -61,18 +59,6 @@ public class MerchandiseBean001 extends ProductBean001 {
 	public void setLabel(String label) {
 		
 		this.label = label;
-		
-	}
-
-	public Integer getMeasureUnit() {
-		
-		return measureUnit;
-		
-	}
-
-	public void setMeasureUnit(Integer measureUnit) {
-		
-		this.measureUnit = measureUnit;
 		
 	}
 

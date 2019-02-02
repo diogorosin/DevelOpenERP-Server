@@ -21,6 +21,11 @@ public class Product extends Progeny {
 
 	private static final long serialVersionUID = 1L;
 
+	//ESTOQUE
+	@ManyToOne(optional=false)
+	@JoinColumn(name="\"stockUnit\"")
+	private MeasureUnit stockUnit;
+
 	//DIMENSOES	
 	@ManyToOne(optional=true)
 	@JoinColumn(name="\"widthUnit\"")
@@ -73,10 +78,22 @@ public class Product extends Progeny {
 			orphanRemoval=true)
 	private List<ProductProduct> parts;
 
+	public MeasureUnit getStockUnit() {
+
+		return stockUnit;
+
+	}
+
+	public void setStockUnit(MeasureUnit stockUnit) {
+		
+		this.stockUnit = stockUnit;
+
+	}
+
 	public MeasureUnit getWidthUnit() {
-		
+
 		return widthUnit;
-		
+
 	}
 
 	public void setWidthUnit(MeasureUnit widthUnit) {

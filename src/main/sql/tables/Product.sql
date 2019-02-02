@@ -1,29 +1,31 @@
 CREATE TABLE "Product" (
 
 	"progeny" INTEGER NOT NULL,
+	
+	"stockUnit" INTEGER NOT NULL,
 
 	"widthValue" NUMERIC(14,4),
 
-        "widthUnit" INTEGER,
+    "widthUnit" INTEGER,
 
-        "heightValue" NUMERIC(14,4),
+    "heightValue" NUMERIC(14,4),
 
-        "heightUnit" INTEGER,
+    "heightUnit" INTEGER,
 
-        "lengthValue" NUMERIC(14,4),
+    "lengthValue" NUMERIC(14,4),
 
-        "lengthUnit" INTEGER,
+    "lengthUnit" INTEGER,
 
-        "contentValue" NUMERIC(14,4),
+    "contentValue" NUMERIC(14,4),
 
-        "contentUnit" INTEGER,
+    "contentUnit" INTEGER,
 
-        "grossWeightValue" NUMERIC(14,4),
+    "grossWeightValue" NUMERIC(14,4),
 
-        "grossWeightUnit" INTEGER,
+    "grossWeightUnit" INTEGER,
 
-        "netWeightValue" NUMERIC(14,4),
+    "netWeightValue" NUMERIC(14,4),
 
-        "netWeightUnit" INTEGER
+    "netWeightUnit" INTEGER
 
 );

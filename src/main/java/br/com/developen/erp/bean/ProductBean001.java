@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 
 public class ProductBean001 extends ProgenyBean001{
 
+	//ESTOQUE
+	private Integer stockUnit;	
+	
 	//DIMENSOES	
 	private Integer widthUnit;
 
@@ -30,6 +33,18 @@ public class ProductBean001 extends ProgenyBean001{
 	private Integer netWeightUnit;
 
 	private BigDecimal netWeightValue;
+
+	public Integer getStockUnit() {
+		
+		return stockUnit;
+		
+	}
+
+	public void setStockUnit(Integer stockUnit) {
+		
+		this.stockUnit = stockUnit;
+
+	}
 
 	public Integer getWidthUnit() {
 		

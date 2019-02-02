@@ -461,6 +461,8 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 		populateProgeny(productBean, product);
 
+		productBean.setStockUnit(product.getStockUnit().getIdentifier());
+
 		productBean.setWidthValue(product.getWidthValue());
 
 		productBean.setWidthUnit(product.getWidthUnit() != null ? product.getWidthUnit().getIdentifier() : null);
@@ -516,8 +518,6 @@ public class DatasetBuilder001 implements DatasetBuilder {
 		merchandiseBean.setReference(merchandise.getReference());
 
 		merchandiseBean.setLabel(merchandise.getLabel());
-
-		merchandiseBean.setMeasureUnit(merchandise.getMeasureUnit().getIdentifier());
 
 		merchandiseBean.setPrice(merchandise.getPrice());
 

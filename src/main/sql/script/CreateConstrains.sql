@@ -87,6 +87,7 @@ ALTER TABLE "Service" ADD CONSTRAINT "ServiceCatalogFK" FOREIGN KEY("catalog") R
 ALTER TABLE "Service" ADD CONSTRAINT "ServiceMeasureUnitFK" FOREIGN KEY("measureUnit") REFERENCES "MeasureUnit"("identifier") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 ALTER TABLE "Product" ADD CONSTRAINT "ProductProgenyFK" FOREIGN KEY("progeny") REFERENCES "Progeny"("identifier") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Product" ADD CONSTRAINT "ProductStockUnitFK" FOREIGN KEY("stockUnit") REFERENCES "MeasureUnit"("identifier") ON DELETE RESTRICT ON UPDATE CASCADE;
 ALTER TABLE "Product" ADD CONSTRAINT "ProductWidthUnitFK" FOREIGN KEY("widthUnit") REFERENCES "MeasureUnit"("identifier") ON DELETE RESTRICT ON UPDATE CASCADE;
 ALTER TABLE "Product" ADD CONSTRAINT "ProductHeightUnitFK" FOREIGN KEY("heightUnit") REFERENCES "MeasureUnit"("identifier") ON DELETE RESTRICT ON UPDATE CASCADE;
 ALTER TABLE "Product" ADD CONSTRAINT "ProductLengthUnitFK" FOREIGN KEY("lengthUnit") REFERENCES "MeasureUnit"("identifier") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -99,7 +100,6 @@ ALTER TABLE "ProductProduct" ADD CONSTRAINT "ProductProductPartFK" FOREIGN KEY("
 
 ALTER TABLE "Merchandise" ADD CONSTRAINT "MerchandiseProductFK" FOREIGN KEY("product") REFERENCES "Product"("progeny") ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE "Merchandise" ADD CONSTRAINT "MerchandiseCatalogFK" FOREIGN KEY("catalog") REFERENCES "Catalog"("identifier") ON DELETE RESTRICT ON UPDATE CASCADE;
-ALTER TABLE "Merchandise" ADD CONSTRAINT "MerchandiseMeasureUnitFK" FOREIGN KEY("measureUnit") REFERENCES "MeasureUnit"("identifier") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 ALTER TABLE "CompanyDevice" ADD CONSTRAINT "CompanyDeviceCompanyFK" FOREIGN KEY("company") REFERENCES "Company"("organization") ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE "CompanyDevice" ADD CONSTRAINT "CompanyDeviceDeviceFK" FOREIGN KEY("device") REFERENCES "Device"("identifier") ON DELETE RESTRICT ON UPDATE CASCADE;
