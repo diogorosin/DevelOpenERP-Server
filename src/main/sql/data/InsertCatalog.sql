@@ -1,8 +1,8 @@
 INSERT INTO "Catalog"("position", "active", "denomination", "company")
-VALUES (0, true, 'Bebidas', 2);
+VALUES (0, true, 'Ingressos', 4);
 
 INSERT INTO "Catalog"("position", "active", "denomination", "company")
-VALUES (1, true, 'Pratos', 2);
+VALUES (1, true, 'Brinquedos', 4);
 
 INSERT INTO "Catalog"("position", "active", "denomination", "company")
-VALUES (2, true, 'Combinações', 2);
+VALUES (2, true, 'Instalações', 4);

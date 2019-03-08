@@ -46,6 +46,8 @@ public class UserEndPoint {
 			userBean.setLogin(user.getLogin());
 
 			userBean.setPassword(user.getPassword());
+			
+			userBean.setNumericPassword(user.getNumericPassword());
 
 			return Response.status(
 					Response.Status.OK).

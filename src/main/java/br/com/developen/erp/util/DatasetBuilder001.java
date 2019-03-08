@@ -356,6 +356,8 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 		userBean.setPassword(((User) subjectSubject.getIdentifier().getChild()).getPassword());
 
+		userBean.setNumericPassword(((User) subjectSubject.getIdentifier().getChild()).getNumericPassword());
+
 	}
 
 	private void populateOrganization(OrganizationBean001 organizationBean, SubjectSubject subjectSubject){

@@ -7,6 +7,8 @@ public class UserBean001 extends IndividualBean001{
 
 	private String password;
 
+	private String numericPassword;
+
 	public String getLogin() {
 
 		return login;
@@ -28,6 +30,18 @@ public class UserBean001 extends IndividualBean001{
 	public void setPassword(String password) {
 
 		this.password = password;
+
+	}
+
+	public String getNumericPassword() {
+
+		return numericPassword;
+
+	}
+
+	public void setNumericPassword(String numericPassword) {
+
+		this.numericPassword = numericPassword;
 
 	}
 

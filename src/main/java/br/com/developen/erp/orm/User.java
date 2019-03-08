@@ -37,6 +37,11 @@ public class User extends Individual implements Principal{
 	@NotNull
 	@Size(min=64, max=64)
 	private String password;
+	
+	@NotNull
+	@Size(min=4, max=4)
+	@Column(name="\"numericPassword\"", nullable=false)
+	private String numericPassword;
 
 	public String getLogin() {
 
@@ -59,6 +64,18 @@ public class User extends Individual implements Principal{
 	public void setPassword(String password) {
 
 		this.password = password;
+
+	}
+
+	public String getNumericPassword() {
+
+		return this.numericPassword;
+
+	}
+
+	public void setNumericPassword(String numericPassword) {
+
+		this.numericPassword = numericPassword;
 
 	}
 

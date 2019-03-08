@@ -2,6 +2,7 @@ package br.com.developen.erp.rest;
 
 import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
@@ -180,6 +181,8 @@ public class AccountEndPoint {
 
 				user.setPassword(hexPassword);
 
+				user.setNumericPassword(String.format("%04d", new Random().nextInt(10000)));
+
 				userDAO.create(user);
 
 				isNewUser = true;
@@ -299,6 +302,8 @@ public class AccountEndPoint {
 			if (session.getTransaction().isActive())
 
 				session.getTransaction().rollback();
+			
+			e.printStackTrace();
 
 			log.error(AccountEndPoint.class.getSimpleName() + ": " + 
 					e.getMessage(), 
