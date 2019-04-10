@@ -1,7 +1,7 @@
 package br.com.developen.erp.bean;
 
 
-public class AccountBean001 {
+public class POSConfigurationBean001 {
 
 	private DeviceBean001 device;
 

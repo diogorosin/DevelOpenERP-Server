@@ -29,8 +29,8 @@ import br.com.developen.erp.orm.DeviceDAO;
 import br.com.developen.erp.util.HibernateUtil;
 import br.com.developen.erp.util.I18N;
 
-@Authorization
 @Provider
+@Authorization
 @Priority(Priorities.AUTHORIZATION)
 public class AuthorizationFilter implements ContainerRequestFilter {
 
@@ -60,8 +60,6 @@ public class AuthorizationFilter implements ContainerRequestFilter {
 						entity(new ExceptionBean001(I18N.get(I18N.HTTP_AUTHORIZATION_HEADER_NOT_FOUND))).
 						type(MediaType.APPLICATION_JSON).
 						build());
-
-			log.info(authorizationHeader);
 
 			//PROCESSA O TOKEN ENVIADO
 			StringTokenizer st = new StringTokenizer(authorizationHeader);
@@ -138,6 +136,10 @@ public class AuthorizationFilter implements ContainerRequestFilter {
 			}
 
 		} catch (WebApplicationException e) {
+
+			log.error(AuthorizationFilter.class.getSimpleName() + ": " +
+					e.getMessage(),
+					e.getCause());
 
 			requestContext.abortWith(e.getResponse());
 

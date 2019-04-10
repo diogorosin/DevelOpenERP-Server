@@ -19,12 +19,14 @@ import br.com.developen.erp.bean.ExceptionBean001;
 import br.com.developen.erp.exception.InvalidRangeException;
 import br.com.developen.erp.orm.Company;
 import br.com.developen.erp.orm.CompanyDAO;
+import br.com.developen.erp.orm.Level;
 import br.com.developen.erp.util.HibernateUtil;
 import br.com.developen.erp.util.I18N;
 import br.com.developen.erp.util.Range;
 import br.com.developen.erp.util.RangeUtil;
 
 @Path("/company")
+@Authentication(level=Level.CASHIER)
 public class CompanyEndPoint {
 
 	@GET

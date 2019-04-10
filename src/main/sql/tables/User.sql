@@ -6,6 +6,8 @@ CREATE TABLE "User" (
 
     "password" VARCHAR(64) NOT NULL,
     
-    "numericPassword" VARCHAR(4) NOT NULL 
+    "numericPassword" VARCHAR(4) NOT NULL,
+
+    "lastLoggedInCompany" INTEGER
 
 );

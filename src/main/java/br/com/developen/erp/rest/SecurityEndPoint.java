@@ -24,12 +24,13 @@ import br.com.developen.erp.util.AuthenticationFactory;
 import br.com.developen.erp.util.HibernateUtil;
 import br.com.developen.erp.util.I18N;
 
-@Path("/authentication")
-public class AuthenticationEndPoint {
+@Path("/security")
+public class SecurityEndPoint {
 
 	static Logger log = LogManager.getRootLogger();	
 
 	@POST
+	@Path("/authenticate")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response authenticate(CredentialBean001 credential) {
@@ -40,11 +41,22 @@ public class AuthenticationEndPoint {
 
 		try {
 
-			Token token = AuthenticationFactory.authenticate(
-					session,
-					credential.getLogin(), 
-					credential.getPassword(),
-					credential.getCompany());
+			Token token; 
+
+			if (credential.getCompany() == null)
+
+				token = AuthenticationFactory.authenticate(
+						session,
+						credential.getLogin(), 
+						credential.getPassword());
+
+			else 
+
+				token = AuthenticationFactory.authenticate(
+						session,
+						credential.getLogin(), 
+						credential.getPassword(),
+						credential.getCompany());
 
 			session.getTransaction().commit();
 
@@ -58,7 +70,7 @@ public class AuthenticationEndPoint {
 					getIdentifier().
 					getChild();
 
-			log.info(AuthenticationEndPoint.class.getSimpleName() + 
+			log.info(SecurityEndPoint.class.getSimpleName() + 
 					": Usuário " +
 					user.toString() +
 					" efetuou login na empresa " + 
@@ -76,6 +88,10 @@ public class AuthenticationEndPoint {
 
 				session.getTransaction().rollback();
 
+			log.error(SecurityEndPoint.class.getSimpleName() + ": " + 
+					e.getMessage(), 
+					e.getCause());
+
 			return Response.status(Status.NOT_FOUND).
 					entity(new ExceptionBean001(e.getMessage())).
 					build();			
@@ -86,17 +102,21 @@ public class AuthenticationEndPoint {
 
 				session.getTransaction().rollback();
 
+			log.error(SecurityEndPoint.class.getSimpleName() + ": " + 
+					e.getMessage(), 
+					e.getCause());
+
 			return Response.status(Status.UNAUTHORIZED).
 					entity(new ExceptionBean001(e.getMessage())).
 					build();			
 
-		} catch (Exception e){			
+		} catch (Exception e){
 
 			if (session.getTransaction().isActive())
 
 				session.getTransaction().rollback();
 
-			log.error(AuthenticationEndPoint.class.getSimpleName() + ": " + 
+			log.error(SecurityEndPoint.class.getSimpleName() + ": " + 
 					e.getMessage(), 
 					e.getCause());
 

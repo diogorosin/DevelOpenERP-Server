@@ -15,10 +15,12 @@ import br.com.developen.erp.bean.ExceptionBean001;
 import br.com.developen.erp.exception.DeviceNotFoundException;
 import br.com.developen.erp.orm.Device;
 import br.com.developen.erp.orm.DeviceDAO;
+import br.com.developen.erp.orm.Level;
 import br.com.developen.erp.util.HibernateUtil;
 import br.com.developen.erp.util.I18N;
 
 @Path("/device")
+@Authentication(level=Level.CASHIER)
 public class DeviceEndPoint {
 
 	@GET

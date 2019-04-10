@@ -12,12 +12,14 @@ import org.hibernate.Session;
 import br.com.developen.erp.bean.ExceptionBean001;
 import br.com.developen.erp.bean.UserBean001;
 import br.com.developen.erp.exception.UserNotFoundException;
+import br.com.developen.erp.orm.Level;
 import br.com.developen.erp.orm.User;
 import br.com.developen.erp.orm.UserDAO;
 import br.com.developen.erp.util.HibernateUtil;
 import br.com.developen.erp.util.I18N;
 
 @Path("/user")
+@Authentication(level=Level.CASHIER)
 public class UserEndPoint {
 
 	@GET
@@ -46,7 +48,7 @@ public class UserEndPoint {
 			userBean.setLogin(user.getLogin());
 
 			userBean.setPassword(user.getPassword());
-			
+
 			userBean.setNumericPassword(user.getNumericPassword());
 
 			return Response.status(

@@ -34,8 +34,8 @@ import br.com.developen.erp.orm.TokenDAO;
 import br.com.developen.erp.util.HibernateUtil;
 import br.com.developen.erp.util.I18N;
 
-@Authentication
 @Provider
+@Authentication
 @Priority(Priorities.AUTHENTICATION)
 public class AuthenticationFilter implements ContainerRequestFilter {
 
@@ -153,6 +153,10 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 			if (session.getTransaction().isActive())
 
 				session.getTransaction().rollback();
+
+			log.error(AuthenticationFilter.class.getSimpleName() + ": " + 
+					e.getMessage(), 
+					e.getCause());
 
 			requestContext.abortWith(e.getResponse());
 

@@ -4,6 +4,8 @@ import java.security.Principal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -11,6 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 
 
 @Entity
@@ -37,11 +40,15 @@ public class User extends Individual implements Principal{
 	@NotNull
 	@Size(min=64, max=64)
 	private String password;
-	
+
 	@NotNull
 	@Size(min=4, max=4)
 	@Column(name="\"numericPassword\"", nullable=false)
 	private String numericPassword;
+
+	@ManyToOne
+	@JoinColumn(name="\"lastLoggedInCompany\"", nullable=true)
+	private Company lastLoggedInCompany;
 
 	public String getLogin() {
 
@@ -76,6 +83,18 @@ public class User extends Individual implements Principal{
 	public void setNumericPassword(String numericPassword) {
 
 		this.numericPassword = numericPassword;
+
+	}
+
+	public Company getLastLoggedInCompany() {
+		
+		return lastLoggedInCompany;
+		
+	}
+
+	public void setLastLoggedInCompany(Company lastLoggedInCompany) {
+
+		this.lastLoggedInCompany = lastLoggedInCompany;
 
 	}
 
