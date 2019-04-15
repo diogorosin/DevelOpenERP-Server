@@ -40,6 +40,8 @@
 	 	<mapping class="br.com.developen.erp.orm.Token"/>
 		<mapping class="br.com.developen.erp.orm.Device"/>
 		<mapping class="br.com.developen.erp.orm.CompanyDevice"/>
+		<mapping class="br.com.developen.erp.orm.CompanyDeviceSale"/>
+		<mapping class="br.com.developen.erp.orm.CompanyDeviceSaleItem"/>
 		<mapping class="br.com.developen.erp.orm.ReceiptMethod"/>
 		<mapping class="br.com.developen.erp.orm.PaymentMethod"/>
 		<mapping class="br.com.developen.erp.orm.CompanyReceiptMethod"/>

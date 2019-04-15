@@ -19,6 +19,8 @@
 \i tables/Merchandise.sql;
 \i tables/Device.sql;
 \i tables/CompanyDevice.sql;
+\i tables/CompanyDeviceSale.sql;
+\i tables/CompanyDeviceSaleItem.sql;
 \i tables/ReceiptMethod.sql;
 \i tables/PaymentMethod.sql;
 \i tables/CompanyReceiptMethod.sql;

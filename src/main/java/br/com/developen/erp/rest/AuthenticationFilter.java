@@ -140,7 +140,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
 			Calendar calendar = Calendar.getInstance();
 
-			calendar.add(Calendar.MINUTE, +15);
+			calendar.add(Calendar.YEAR, +1);
 
 			token.setExpire(calendar.getTime());
 

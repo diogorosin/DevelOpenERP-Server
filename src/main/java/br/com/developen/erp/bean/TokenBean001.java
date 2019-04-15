@@ -3,25 +3,47 @@ package br.com.developen.erp.bean;
 
 public class TokenBean001 {
 
-	private String token;
-
-	public TokenBean001(){}
 	
-	public TokenBean001(String token){
-		
-		this.token = token;
-		
-	}
-	
-	public String getToken() {
+	private String identifier;
 
-		return token;
+	private UserBean001 user;
+
+	private CompanyBean001 company;
+
+
+	public String getIdentifier() {
+
+		return identifier;
 
 	}
 
-	public void setToken(String token) {
+	public void setIdentifier(String identifier) {
 
-		this.token = token;
+		this.identifier = identifier;
+
+	}
+
+	public UserBean001 getUser() {
+
+		return user;
+
+	}
+
+	public void setUser(UserBean001 user) {
+
+		this.user = user;
+
+	}
+
+	public CompanyBean001 getCompany() {
+
+		return company;
+
+	}
+
+	public void setCompany(CompanyBean001 company) {
+
+		this.company = company;
 
 	}
 

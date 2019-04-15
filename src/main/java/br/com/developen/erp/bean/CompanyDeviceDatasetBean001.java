@@ -3,11 +3,16 @@ package br.com.developen.erp.bean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatasetBean001 implements DatasetBean {
+public class CompanyDeviceDatasetBean001 implements DatasetBean {
+
 
 	private CompanyBean001 company;
 
-	private List<DeviceBean001> devices;
+	private DeviceBean001 device;
+
+	private Boolean allow;
+
+	private String alias;
 
 	private List<OrganizationBean001> organizations;
 
@@ -16,7 +21,7 @@ public class DatasetBean001 implements DatasetBean {
 	private List<UserBean001> users;
 
 	private List<MeasureUnitBean001> measureUnits;
-	
+
 	private List<MeasureUnitMeasureUnitBean001> measureUnitMeasureUnits;	
 
 	private List<ProductBean001> products;
@@ -32,6 +37,9 @@ public class DatasetBean001 implements DatasetBean {
 	private List<ReceiptMethodBean001> receiptMethods;
 
 	private List<PaymentMethodBean001> paymentMethods;
+
+	private List<SaleBean001> sales;
+
 
 	public CompanyBean001 getCompany() {
 
@@ -49,19 +57,44 @@ public class DatasetBean001 implements DatasetBean {
 
 	}
 
-	public List<DeviceBean001> getDevices() {
+	public DeviceBean001 getDevice() {
 
-		if (devices==null)
+		if (device==null)
 
-			devices = new ArrayList<DeviceBean001>();
+			device = new DeviceBean001();
 
-		return devices;
+		return device;
 
 	}
 
-	public void setDevices(List<DeviceBean001> devices) {
+	public void setDevice(DeviceBean001 device) {
 
-		this.devices = devices;
+		this.device = device;
+
+	}
+	
+
+	public Boolean getAllow() {
+
+		return allow;
+
+	}
+
+	public void setAllow(Boolean allow) {
+
+		this.allow = allow;
+
+	}
+
+	public String getAlias() {
+
+		return alias;
+
+	}
+
+	public void setAlias(String alias) {
+
+		this.alias = alias;
 
 	}
 	
@@ -115,7 +148,7 @@ public class DatasetBean001 implements DatasetBean {
 
 	public List<MeasureUnitBean001> getMeasureUnits() {
 
-		if (this.measureUnits == null)
+		if (measureUnits == null)
 
 			measureUnits = new ArrayList<MeasureUnitBean001>();
 
@@ -254,6 +287,22 @@ public class DatasetBean001 implements DatasetBean {
 	public void setPaymentMethods(List<PaymentMethodBean001> paymentMethods) {
 
 		this.paymentMethods = paymentMethods;
+
+	}
+
+	public List<SaleBean001> getSales() {
+
+		if (sales == null)
+
+			sales = new ArrayList<SaleBean001>();
+
+		return sales;
+
+	}
+
+	public void setSales(List<SaleBean001> sales) {
+
+		this.sales = sales;
 
 	}
 

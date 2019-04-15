@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.com.developen.erp.bean.CatalogBean001;
 import br.com.developen.erp.bean.CompanyBean001;
-import br.com.developen.erp.bean.DatasetBean001;
+import br.com.developen.erp.bean.CompanyDeviceDatasetBean001;
 import br.com.developen.erp.bean.DeviceBean001;
 import br.com.developen.erp.bean.IndividualBean001;
 import br.com.developen.erp.bean.MeasureUnitBean001;
@@ -16,14 +16,18 @@ import br.com.developen.erp.bean.ProductBean001;
 import br.com.developen.erp.bean.ProductProductBean001;
 import br.com.developen.erp.bean.ProgenyBean001;
 import br.com.developen.erp.bean.ReceiptMethodBean001;
+import br.com.developen.erp.bean.SaleBean001;
+import br.com.developen.erp.bean.SaleItemBean001;
 import br.com.developen.erp.bean.ServiceBean001;
 import br.com.developen.erp.bean.SubjectBean001;
 import br.com.developen.erp.bean.UserBean001;
 import br.com.developen.erp.orm.Catalog;
 import br.com.developen.erp.orm.Company;
-import br.com.developen.erp.orm.CompanyDevice;
+import br.com.developen.erp.orm.CompanyDeviceSale;
+import br.com.developen.erp.orm.CompanyDeviceSaleItem;
 import br.com.developen.erp.orm.CompanyPaymentMethod;
 import br.com.developen.erp.orm.CompanyReceiptMethod;
+import br.com.developen.erp.orm.Device;
 import br.com.developen.erp.orm.Individual;
 import br.com.developen.erp.orm.MeasureUnit;
 import br.com.developen.erp.orm.MeasureUnitMeasureUnit;
@@ -36,59 +40,63 @@ import br.com.developen.erp.orm.Service;
 import br.com.developen.erp.orm.SubjectSubject;
 import br.com.developen.erp.orm.User;
 
-public class DatasetBuilder001 implements DatasetBuilder {
+public class CompanyDeviceDatasetBuilder001 implements CompanyDeviceDatasetBuilder {
 
-	private DatasetBean001 datasetBean;
+	private CompanyDeviceDatasetBean001 companyDeviceDatasetBean;
 
-	private DatasetBean001 getDatasetBean() {
+	private CompanyDeviceDatasetBean001 getCompanyDeviceDatasetBean() {
 
-		if (datasetBean==null)
+		if (companyDeviceDatasetBean==null)
 
-			datasetBean = new DatasetBean001();
+			companyDeviceDatasetBean = new CompanyDeviceDatasetBean001();
 
-		return datasetBean;
+		return companyDeviceDatasetBean;
 
 	}
 
-	public DatasetBuilder withCompany(Company company) {
+	public CompanyDeviceDatasetBuilder withCompany(Company company) {
 
 		if (company != null)
 
-			populateCompany(getDatasetBean().getCompany(), company);
+			populateCompany(getCompanyDeviceDatasetBean().getCompany(), company);
 
 		return this;
 
 	}
 
-	public DatasetBuilder withDevices(List<CompanyDevice> devices) {
+	public CompanyDeviceDatasetBuilder withDevice(Device device) {
 
-		getDatasetBean().getDevices().clear();
+		if (device != null)
 
-		if (devices != null) {
-
-			for (CompanyDevice companyDevice : devices) {
-
-				DeviceBean001 deviceBean = new DeviceBean001();
-
-				populateDevice(deviceBean, companyDevice);
-
-				getDatasetBean().getDevices().add(deviceBean);
-
-			}
-
-		}
+			populateDevice(getCompanyDeviceDatasetBean().getDevice(), device);			
 
 		return this;
 
 	}
 
-	public DatasetBuilder withSubjects(List<SubjectSubject> subjects) {
+	public CompanyDeviceDatasetBuilder withAlias(String alias) {
 
-		getDatasetBean().getUsers().clear();
+		getCompanyDeviceDatasetBean().setAlias(alias);
 
-		getDatasetBean().getIndividuals().clear();
+		return this;
 
-		getDatasetBean().getOrganizations().clear();
+	}
+
+	public CompanyDeviceDatasetBuilder withAllow(Boolean allow) {
+
+		getCompanyDeviceDatasetBean().setAllow(allow);
+
+		return this;
+
+	}
+
+	public CompanyDeviceDatasetBuilder withSubjects(List<SubjectSubject> subjects) {
+
+		getCompanyDeviceDatasetBean().getUsers().clear();
+
+		getCompanyDeviceDatasetBean().getIndividuals().clear();
+
+		getCompanyDeviceDatasetBean().getOrganizations().clear();
 
 		if (subjects != null){
 
@@ -100,7 +108,7 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 					populateUser(userBean, subjectSubject);
 
-					getDatasetBean().getUsers().add(userBean);
+					getCompanyDeviceDatasetBean().getUsers().add(userBean);
 
 				} else {
 
@@ -110,7 +118,7 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 						populateOrganization(organizationBean, subjectSubject);
 
-						getDatasetBean().getOrganizations().add(organizationBean);
+						getCompanyDeviceDatasetBean().getOrganizations().add(organizationBean);
 
 					} else {
 
@@ -120,7 +128,7 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 							populateIndividual(individualBean, subjectSubject);
 
-							getDatasetBean().getIndividuals().add(individualBean);
+							getCompanyDeviceDatasetBean().getIndividuals().add(individualBean);
 
 						}					
 
@@ -136,11 +144,11 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 	}
 
-	public DatasetBuilder withMeasureUnits(List<MeasureUnit> measureUnits) {
+	public CompanyDeviceDatasetBuilder withMeasureUnits(List<MeasureUnit> measureUnits) {
 
-		getDatasetBean().getMeasureUnits().clear();
+		getCompanyDeviceDatasetBean().getMeasureUnits().clear();
 
-		getDatasetBean().getMeasureUnitMeasureUnits().clear();
+		getCompanyDeviceDatasetBean().getMeasureUnitMeasureUnits().clear();
 
 		if (measureUnits != null) {
 
@@ -150,7 +158,7 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 				populateMeasureUnit(measureUnitBean, measureUnit);
 
-				getDatasetBean().getMeasureUnits().add(measureUnitBean);
+				getCompanyDeviceDatasetBean().getMeasureUnits().add(measureUnitBean);
 
 				List<MeasureUnitMeasureUnit> measureUnitMeasureUnits = measureUnit.getConversions(); 
 
@@ -162,7 +170,7 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 						populateMeasureUnitMeasureUnit(measureUnitMeasureUnitBean, measureUnitMeasureUnit);
 
-						getDatasetBean().getMeasureUnitMeasureUnits().add(measureUnitMeasureUnitBean);
+						getCompanyDeviceDatasetBean().getMeasureUnitMeasureUnits().add(measureUnitMeasureUnitBean);
 
 					}
 
@@ -176,15 +184,15 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 	}
 
-	public DatasetBuilder withProgenies(List<Progeny> progenies) {
+	public CompanyDeviceDatasetBuilder withProgenies(List<Progeny> progenies) {
 
-		getDatasetBean().getServices().clear();
+		getCompanyDeviceDatasetBean().getServices().clear();
 
-		getDatasetBean().getProducts().clear();
+		getCompanyDeviceDatasetBean().getProducts().clear();
 
-		getDatasetBean().getProductProducts().clear();
+		getCompanyDeviceDatasetBean().getProductProducts().clear();
 
-		getDatasetBean().getMerchandises().clear();
+		getCompanyDeviceDatasetBean().getMerchandises().clear();
 
 		if (progenies != null) {
 
@@ -196,7 +204,7 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 					populateMerchandise(merchandiseBean, (Merchandise) progeny);
 
-					getDatasetBean().getMerchandises().add(merchandiseBean);
+					getCompanyDeviceDatasetBean().getMerchandises().add(merchandiseBean);
 
 					List<ProductProduct> productProducts = ((Merchandise) progeny).getParts();
 
@@ -208,7 +216,7 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 							populateProductProduct(productProductBean, productProduct);
 
-							getDatasetBean().getProductProducts().add(productProductBean);
+							getCompanyDeviceDatasetBean().getProductProducts().add(productProductBean);
 
 						}
 
@@ -222,8 +230,8 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 						populateProduct(productBean, (Product) progeny);
 
-						getDatasetBean().getProducts().add(productBean);
-						
+						getCompanyDeviceDatasetBean().getProducts().add(productBean);
+
 						List<ProductProduct> productProducts = ((Product) progeny).getParts();
 
 						if (productProducts != null && !productProducts.isEmpty()) {
@@ -234,7 +242,7 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 								populateProductProduct(productProductBean, productProduct);
 
-								getDatasetBean().getProductProducts().add(productProductBean);
+								getCompanyDeviceDatasetBean().getProductProducts().add(productProductBean);
 
 							}
 
@@ -248,7 +256,7 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 							populateService(serviceBean, (Service) progeny);
 
-							getDatasetBean().getServices().add(serviceBean);
+							getCompanyDeviceDatasetBean().getServices().add(serviceBean);
 
 						}
 
@@ -264,9 +272,9 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 	}
 
-	public DatasetBuilder withCatalogs(List<Catalog> catalogs) {
+	public CompanyDeviceDatasetBuilder withCatalogs(List<Catalog> catalogs) {
 
-		getDatasetBean().getCatalogs().clear();
+		getCompanyDeviceDatasetBean().getCatalogs().clear();
 
 		if (catalogs != null) {
 
@@ -276,7 +284,7 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 				populateCatalog(catalogBean, catalog);
 
-				getDatasetBean().getCatalogs().add(catalogBean);
+				getCompanyDeviceDatasetBean().getCatalogs().add(catalogBean);
 
 			}
 
@@ -286,9 +294,9 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 	}
 
-	public DatasetBuilder withReceiptMethods(List<CompanyReceiptMethod> receiptMethods) {
+	public CompanyDeviceDatasetBuilder withReceiptMethods(List<CompanyReceiptMethod> receiptMethods) {
 
-		getDatasetBean().getReceiptMethods().clear();
+		getCompanyDeviceDatasetBean().getReceiptMethods().clear();
 
 		if (receiptMethods != null) {
 
@@ -298,7 +306,7 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 				populateReceiptMethod(receiptMethodBean, receiptMethod);
 
-				getDatasetBean().getReceiptMethods().add(receiptMethodBean);
+				getCompanyDeviceDatasetBean().getReceiptMethods().add(receiptMethodBean);
 
 			}
 
@@ -308,9 +316,9 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 	}
 
-	public DatasetBuilder withPaymentMethods(List<CompanyPaymentMethod> paymentMethods) {
+	public CompanyDeviceDatasetBuilder withPaymentMethods(List<CompanyPaymentMethod> paymentMethods) {
 
-		getDatasetBean().getPaymentMethods().clear();
+		getCompanyDeviceDatasetBean().getPaymentMethods().clear();
 
 		if (paymentMethods != null) {
 
@@ -320,7 +328,29 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 				populatePaymentMethod(paymentMethodBean, paymentMethod);
 
-				getDatasetBean().getPaymentMethods().add(paymentMethodBean);
+				getCompanyDeviceDatasetBean().getPaymentMethods().add(paymentMethodBean);
+
+			}
+
+		}
+
+		return this;
+
+	}
+
+	public CompanyDeviceDatasetBuilder withSales(List<CompanyDeviceSale> sales) {
+
+		getCompanyDeviceDatasetBean().getSales().clear();
+
+		if (sales != null) {
+
+			for (CompanyDeviceSale companyDeviceSale : sales) {
+
+				SaleBean001 saleBean = new SaleBean001();
+
+				populateSale(saleBean, companyDeviceSale);
+
+				getCompanyDeviceDatasetBean().getSales().add(saleBean);
 
 			}
 
@@ -347,7 +377,7 @@ public class DatasetBuilder001 implements DatasetBuilder {
 		individualBean.setName(((Individual) subjectSubject.getIdentifier().getChild()).getName());
 
 	}
-	
+
 	private void populateUser(UserBean001 userBean, SubjectSubject subjectSubject){
 
 		populateIndividual(userBean, subjectSubject);
@@ -386,19 +416,15 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 	}
 
-	private void populateDevice(DeviceBean001 deviceBean, CompanyDevice device){
+	private void populateDevice(DeviceBean001 deviceBean, Device device){
 
-		deviceBean.setIdentifier(device.getIdentifier().getDevice().getIdentifier());
+		deviceBean.setIdentifier(device.getIdentifier());
 
-		deviceBean.setActive(device.getIdentifier().getDevice().getActive() && device.getAllow());
+		deviceBean.setActive(device.getActive());
 
-		deviceBean.setSerialNumber(device.getIdentifier().getDevice().getSerialNumber());
+		deviceBean.setSerialNumber(device.getSerialNumber());
 
-		deviceBean.setManufacturer(device.getIdentifier().getDevice().getManufacturer());
-
-		deviceBean.setModel(device.getIdentifier().getDevice().getModel());
-
-		deviceBean.setAlias(device.getAlias());
+		deviceBean.setManufacturer(device.getManufacturer());
 
 	}
 
@@ -552,12 +578,45 @@ public class DatasetBuilder001 implements DatasetBuilder {
 
 		paymentMethodBean.setDenomination(paymentMethod.getIdentifier().getPaymentMethod().getDenomination());
 
+	}
+
+	private void populateSale(SaleBean001 saleBean, CompanyDeviceSale companyDeviceSale){
+
+		saleBean.setIdentifier(companyDeviceSale.getIdentifier().getSale());
+
+		saleBean.setNumber(companyDeviceSale.getNumber());
+
+		saleBean.setDateTime(companyDeviceSale.getDateTime());
+
+		saleBean.setStatus(companyDeviceSale.getStatus().name());
+
+		saleBean.setUser(companyDeviceSale.getUser().getIdentifier());
+
+		saleBean.setNote(companyDeviceSale.getNote());
+
+		for(CompanyDeviceSaleItem companyDeviceSaleItem : companyDeviceSale.getItems()) {
+
+			SaleItemBean001 saleItemBean = new SaleItemBean001();
+
+			saleItemBean.setProgeny(companyDeviceSaleItem.getProgeny().getIdentifier());
+
+			saleItemBean.setMeasureUnit(companyDeviceSaleItem.getMeasureUnit().getIdentifier());
+
+			saleItemBean.setQuantity(companyDeviceSaleItem.getQuantity());
+
+			saleItemBean.setPrice(companyDeviceSaleItem.getPrice());
+
+			saleItemBean.setTotal(companyDeviceSaleItem.getTotal());
+
+			saleBean.getItems().put(companyDeviceSaleItem.getIdentifier().getItem(), saleItemBean);
+
+		}
 
 	}
 
-	public DatasetBean001 build() {
+	public CompanyDeviceDatasetBean001 build() {
 
-		return getDatasetBean();
+		return getCompanyDeviceDatasetBean();
 
 	}
 

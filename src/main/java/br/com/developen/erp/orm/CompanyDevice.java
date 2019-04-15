@@ -1,11 +1,15 @@
 package br.com.developen.erp.orm;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -39,6 +43,13 @@ public class CompanyDevice implements Serializable {
 
 	@NotNull
 	private Boolean allow;
+
+	@OneToMany(
+			fetch=FetchType.LAZY,
+			mappedBy="identifier.companyDevice",
+			cascade={CascadeType.ALL}, 
+			orphanRemoval=true)
+	private List<CompanyDeviceSale> sales;
 
 	public CompanyDevicePK getIdentifier() {
 
@@ -76,7 +87,18 @@ public class CompanyDevice implements Serializable {
 
 	}
 
-	@Override
+	public List<CompanyDeviceSale> getSales() {
+
+		return sales;
+
+	}
+
+	public void setSales(List<CompanyDeviceSale> sales) {
+
+		this.sales = sales;
+
+	}
+
 	public int hashCode() {
 
 		final int prime = 31;
@@ -86,7 +108,6 @@ public class CompanyDevice implements Serializable {
 
 	}
 
-	@Override
 	public boolean equals(Object obj) {
 
 		if (this == obj)

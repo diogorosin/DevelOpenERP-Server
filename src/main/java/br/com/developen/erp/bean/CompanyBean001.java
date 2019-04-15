@@ -11,6 +11,20 @@ public class CompanyBean001 extends OrganizationBean001{
 
 	private String couponSubtitle;
 
+	@Deprecated
+	public Integer getLevel() {
+
+		return level;
+
+	}
+
+	@Deprecated
+	public void setLevel(Integer level) {
+
+		this.level = level;
+
+	}
+
 	public String getCouponTitle() {
 
 		return couponTitle;

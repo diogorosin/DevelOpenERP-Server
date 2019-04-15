@@ -12,8 +12,6 @@ public class DeviceBean001 {
 
 	private String model;
 
-	private String alias;
-
 	public Integer getIdentifier() {
 
 		return identifier;
@@ -73,17 +71,5 @@ public class DeviceBean001 {
 		this.model = model;
 
 	}
-
-	public String getAlias() {
-
-		return alias;
-
-	}
-
-	public void setAlias(String alias) {
-
-		this.alias = alias;
-
-	}
-
+	
 }

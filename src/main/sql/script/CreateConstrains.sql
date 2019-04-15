@@ -41,6 +41,10 @@ ALTER TABLE "Device" ADD CONSTRAINT "DevicePK" PRIMARY KEY("identifier");
 
 ALTER TABLE "CompanyDevice" ADD CONSTRAINT "CompanyDevicePK" PRIMARY KEY("company", "device");
 
+ALTER TABLE "CompanyDeviceSale" ADD CONSTRAINT "CompanyDeviceSalePK" PRIMARY KEY("company", "device", "sale");
+
+ALTER TABLE "CompanyDeviceSaleItem" ADD CONSTRAINT "CompanyDeviceSaleItemPK" PRIMARY KEY("company", "device", "sale", "item");
+
 ALTER TABLE "ReceiptMethod" ADD CONSTRAINT "ReceiptMethodPK" PRIMARY KEY("identifier");
 
 ALTER TABLE "PaymentMethod" ADD CONSTRAINT "PaymentMethodPK" PRIMARY KEY("identifier");
@@ -103,6 +107,13 @@ ALTER TABLE "Merchandise" ADD CONSTRAINT "MerchandiseCatalogFK" FOREIGN KEY("cat
 
 ALTER TABLE "CompanyDevice" ADD CONSTRAINT "CompanyDeviceCompanyFK" FOREIGN KEY("company") REFERENCES "Company"("organization") ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE "CompanyDevice" ADD CONSTRAINT "CompanyDeviceDeviceFK" FOREIGN KEY("device") REFERENCES "Device"("identifier") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE "CompanyDeviceSale" ADD CONSTRAINT "CompanyDeviceSaleCompanyDeviceFK" FOREIGN KEY("company", "device") REFERENCES "CompanyDevice"("company", "device") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "CompanyDeviceSale" ADD CONSTRAINT "CompanyDeviceSaleUserFK" FOREIGN KEY("user") REFERENCES "User"("individual") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE "CompanyDeviceSaleItem" ADD CONSTRAINT "CompanyDeviceSaleItemCompanyDeviceSaleFK" FOREIGN KEY("company", "device", "sale") REFERENCES "CompanyDeviceSale"("company", "device", "sale") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "CompanyDeviceSaleItem" ADD CONSTRAINT "CompanyDeviceSaleItemProgenyFK" FOREIGN KEY("progeny") REFERENCES "Progeny"("identifier") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "CompanyDeviceSaleItem" ADD CONSTRAINT "CompanyDeviceSaleItemMeasureUnitFK" FOREIGN KEY("measureUnit") REFERENCES "MeasureUnit"("identifier") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 ALTER TABLE "CompanyReceiptMethod" ADD CONSTRAINT "CompanyReceiptMethodCompanyFK" FOREIGN KEY("company") REFERENCES "Company"("organization") ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE "CompanyReceiptMethod" ADD CONSTRAINT "CompanyReceiptMethodReceiptMethodFK" FOREIGN KEY("receiptMethod") REFERENCES "ReceiptMethod"("identifier") ON DELETE RESTRICT ON UPDATE CASCADE;

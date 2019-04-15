@@ -17,6 +17,8 @@ public class I18N {
 	public static final String DEVICE_NOT_FOUND = "deviceNotFound";
 	public static final String DEVICE_NOT_ACTIVE = "deviceNotActive";
 	public static final String USER_NOT_LINKED_TO_THE_COMPANY = "userNotLinkedToTheCompany";
+	public static final String DEVICE_NOT_LINKED_TO_THE_COMPANY = "deviceNotLinkedToTheCompany";
+	public static final String DEVICE_NOT_ALLOWED_ON_THIS_COMPANY = "deviceNotAllowedOnThisCompany";
 	public static final String USER_NOT_FOUND = "userNotFound";
 	public static final String USER_NOT_ACTIVE = "userNotActive";
 	public static final String USER_NOT_ALLOWED = "userNotAllowed";
