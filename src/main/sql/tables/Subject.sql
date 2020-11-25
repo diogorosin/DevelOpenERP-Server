@@ -4,6 +4,8 @@ CREATE TABLE "Subject" (
 
     "active" BOOLEAN NOT NULL,
 
-    "address" INTEGER
+    "address" INTEGER NOT NULL,
+    
+    "company" INTEGER NOT NULL
 
 );

@@ -25,7 +25,6 @@
 \i data/InsertCountry.sql;
 \i data/InsertState.sql;
 \i data/InsertCity.sql;
-\i data/InsertUser.sql;
 \i data/InsertCompany.sql;
 \i data/InsertMeasureUnit.sql;
 \i data/InsertProgeny.sql;

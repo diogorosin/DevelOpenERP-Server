@@ -3,11 +3,11 @@
 \i tables/City.sql;
 \i tables/Address.sql;
 \i tables/Subject.sql;
-\i tables/SubjectSubject.sql;
 \i tables/Individual.sql;
 \i tables/Organization.sql;
 \i tables/Company.sql;
 \i tables/User.sql;
+\i tables/CompanyUser.sql;
 \i tables/Token.sql;
 \i tables/Catalog.sql;
 \i tables/MeasureUnit.sql;
