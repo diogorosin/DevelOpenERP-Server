@@ -23,26 +23,26 @@ public class Product extends Progeny {
 
 	//ESTOQUE
 	@ManyToOne(optional=false)
-	@JoinColumn(name="\"stockUnit\"")
+	@JoinColumn(name="\"stockUnit\"", nullable=false)
 	private MeasureUnit stockUnit;
 
 	//DIMENSOES	
 	@ManyToOne(optional=true)
-	@JoinColumn(name="\"widthUnit\"")
+	@JoinColumn(name="\"widthUnit\"", nullable=true)
 	private MeasureUnit widthUnit;
 
 	@Column(name="\"widthValue\"", nullable=true)
 	private BigDecimal widthValue;
 
 	@ManyToOne(optional=true)
-	@JoinColumn(name="\"heightUnit\"")
+	@JoinColumn(name="\"heightUnit\"", nullable=true)
 	private MeasureUnit heightUnit;
 
 	@Column(name="\"heightValue\"", nullable=true)
 	private BigDecimal heightValue;
 
 	@ManyToOne(optional=true)
-	@JoinColumn(name="\"lengthUnit\"")
+	@JoinColumn(name="\"lengthUnit\"", nullable=true)
 	private MeasureUnit lengthUnit;
 
 	@Column(name="\"lengthValue\"", nullable=true)
@@ -50,7 +50,7 @@ public class Product extends Progeny {
 
 	//VOLUME
 	@ManyToOne(optional=true)
-	@JoinColumn(name="\"contentUnit\"")
+	@JoinColumn(name="\"contentUnit\"", nullable=true)
 	private MeasureUnit contentUnit;	
 
 	@Column(name="\"contentValue\"", nullable=true)
@@ -58,14 +58,14 @@ public class Product extends Progeny {
 
 	//PESO
 	@ManyToOne(optional=true)
-	@JoinColumn(name="\"grossWeightUnit\"")
+	@JoinColumn(name="\"grossWeightUnit\"", nullable=true)
 	private MeasureUnit grossWeightUnit;
 
 	@Column(name="\"grossWeightValue\"", nullable=true)
 	private BigDecimal grossWeightValue;
 
 	@ManyToOne(optional=true)
-	@JoinColumn(name="\"netWeightUnit\"")
+	@JoinColumn(name="\"netWeightUnit\"", nullable=true)
 	private MeasureUnit netWeightUnit;
 
 	@Column(name="\"netWeightValue\"", nullable=true)

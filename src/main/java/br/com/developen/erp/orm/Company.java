@@ -1,22 +1,25 @@
 package br.com.developen.erp.orm;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="\"Company\"")
-@PrimaryKeyJoinColumn(name="organization")
 @NamedQueries({
 	@NamedQuery(
 			name = Company.FIND_ALL, 
@@ -27,7 +30,7 @@ import javax.validation.constraints.Size;
 			query = "SELECT COUNT(C) FROM Company C"
 	)
 })
-public class Company extends Organization {
+public class Company implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -35,15 +38,33 @@ public class Company extends Organization {
 
 	public static final String FIND_ALL = "Company.findAll";
 
-	public static final String ROW_COUNT = "Company.rowCount";	
+	public static final String ROW_COUNT = "Company.rowCount";
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)	
+	private Integer identifier;
 
-	@NotNull
+	@Column(name="\"active\"", nullable=false)
+	private Boolean active;
+
+	@ManyToOne(fetch=FetchType.LAZY, optional=false)
+	@JoinColumn(name="address")
+	private Address address;
+
+	@Size(min=1, max=100)
+	@Column(name="\"denomination\"", nullable=false)
+	private String denomination;
+
 	@Size(min=1, max=32)
-	@Column(name="\"couponTitle\"")
+	@Column(name="\"fancyName\"", nullable=true)
+	private String fancyName;
+
+	@Size(min=1, max=32)
+	@Column(name="\"couponTitle\"", nullable=true)
 	private String couponTitle;
 
 	@Size(min=1, max=32)
-	@Column(name="\"couponSubtitle\"")
+	@Column(name="\"couponSubtitle\"", nullable=true)
 	private String couponSubtitle;
 
 	@OneToMany(
@@ -80,6 +101,66 @@ public class Company extends Organization {
 			cascade={CascadeType.ALL}, 
 			orphanRemoval=true)
 	private List<CompanyPaymentMethod> paymentMethods;
+
+	public Integer getIdentifier() {
+
+		return this.identifier;
+
+	}
+
+	public void setIdentifier(Integer identifier) {
+
+		this.identifier = identifier;
+
+	}
+
+	public Boolean getActive() {
+
+		return this.active;
+
+	}
+
+	public void setActive(Boolean active) {
+
+		this.active = active;
+
+	}
+
+	public Address getAddress() {
+		
+		return this.address;
+
+	}
+
+	public void setAddress(Address address) {
+
+		this.address = address;
+
+	}
+
+	public String getDenomination() {
+
+		return this.denomination;
+
+	}
+
+	public void setDenomination(String denomination) {
+
+		this.denomination = denomination;
+
+	}
+
+	public String getFancyName() {
+
+		return fancyName;
+
+	}
+
+	public void setFancyName(String fancyName) {
+
+		this.fancyName = fancyName;
+
+	}
 
 	public String getCouponTitle() {
 
@@ -171,4 +252,31 @@ public class Company extends Organization {
 
 	}
 
+	public int hashCode() {
+		
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((identifier == null) ? 0 : identifier.hashCode());
+		return result;
+		
+	}
+
+	public boolean equals(Object obj) {
+		
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Company other = (Company) obj;
+		if (identifier == null) {
+			if (other.identifier != null)
+				return false;
+		} else if (!identifier.equals(other.identifier))
+			return false;
+		return true;
+
+	}
+	
 }

@@ -16,7 +16,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -37,18 +36,16 @@ public class MeasureUnit implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer identifier;
 
-	@NotNull
 	@Size(min=1, max=20)
-	@Column(name="\"denomination\"")
+	@Column(name="\"denomination\"", nullable=false)
 	private String denomination;
 
-	@NotNull
 	@Size(min=1, max=4)
-	@Column(name="\"acronym\"")	
+	@Column(name="\"acronym\"", nullable=false)	
 	private String acronym;
 
 	@Enumerated(EnumType.ORDINAL)
-	@Column(name="\"group\"")
+	@Column(name="\"group\"", nullable=false)
 	private MeasureUnitGroup group;
 
 	@OneToMany(

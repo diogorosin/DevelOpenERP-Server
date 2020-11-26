@@ -32,11 +32,11 @@
 		<mapping class="br.com.developen.erp.orm.Merchandise"/>	 	
 	 	<mapping class="br.com.developen.erp.orm.Catalog"/>
 	 	<mapping class="br.com.developen.erp.orm.Subject"/>
-	 	<mapping class="br.com.developen.erp.orm.SubjectSubject"/>
 	 	<mapping class="br.com.developen.erp.orm.Individual"/>
 	 	<mapping class="br.com.developen.erp.orm.Organization"/>	 	
 	 	<mapping class="br.com.developen.erp.orm.Company"/>
 	 	<mapping class="br.com.developen.erp.orm.User"/>
+	 	<mapping class="br.com.developen.erp.orm.CompanyUser"/>
 	 	<mapping class="br.com.developen.erp.orm.Token"/>
 		<mapping class="br.com.developen.erp.orm.Device"/>
 		<mapping class="br.com.developen.erp.orm.CompanyDevice"/>

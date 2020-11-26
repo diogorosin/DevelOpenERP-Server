@@ -1,25 +1,13 @@
 package br.com.developen.erp.bean;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class SubjectBean001 {
 
-	private Integer identifier;
-
 	private Boolean active;
 
-	private Integer level;
-
-	public Integer getIdentifier() {
-
-		return identifier;
-
-	}
-
-	public void setIdentifier(Integer identifier) {
-
-		this.identifier = identifier;
-
-	}
+	private Map<Integer, AddressBean001> address;
 
 	public Boolean getActive() {
 
@@ -33,16 +21,20 @@ public class SubjectBean001 {
 
 	}
 
-	public Integer getLevel() {
+	public Map<Integer, AddressBean001> getAddress() {
+		
+		if (address==null)
+			
+			address = new LinkedHashMap<Integer, AddressBean001>();
 
-		return level;
-
+		return address;
+		
 	}
 
-	public void setLevel(Integer level) {
-
-		this.level = level;
-
+	public void setAddress(Map<Integer, AddressBean001> address) {
+		
+		this.address = address;
+		
 	}
 
 }

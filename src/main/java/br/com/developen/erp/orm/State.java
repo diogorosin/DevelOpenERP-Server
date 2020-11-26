@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
@@ -24,18 +23,15 @@ public class State implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer identifier;
 
-	@NotNull
 	@Size(min=1, max=2)
-	@Column(name="\"acronym\"")	
+	@Column(name="\"acronym\"", nullable=false)	
 	private String acronym;
 
-	@NotNull
 	@Size(min=1, max=20)
-	@Column(name="\"denomination\"")
+	@Column(name="\"denomination\"", nullable=false)
 	private String denomination;
 
-	@NotNull
-	@ManyToOne
+	@ManyToOne(optional=false)
 	@JoinColumn(name="country", nullable=false)
 	private Country country;
 

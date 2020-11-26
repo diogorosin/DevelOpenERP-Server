@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
@@ -24,13 +23,11 @@ public class City implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer identifier;
 
-	@NotNull
 	@Size(min=1, max=40)
-	@Column(name="\"denomination\"")	
+	@Column(name="\"denomination\"", nullable=false)	
 	private String denomination;
 
-	@NotNull
-	@ManyToOne
+	@ManyToOne(optional=false)
 	@JoinColumn(name="state")
 	private State state;
 

@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -21,14 +20,12 @@ public class Country implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer identifier;
 
-	@NotNull
 	@Size(min=1, max=3)
-	@Column(name="\"acronym\"")	
+	@Column(name="\"acronym\"", nullable=false)	
 	private String acronym;
 
-	@NotNull
 	@Size(min=1, max=50)
-	@Column(name="\"denomination\"")
+	@Column(name="\"denomination\"", nullable=false)
 	private String denomination;
 
 	public Integer getIdentifier() {

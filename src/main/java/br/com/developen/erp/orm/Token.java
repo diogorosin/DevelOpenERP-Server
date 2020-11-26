@@ -45,11 +45,11 @@ public class Token implements Serializable {
 	private String identifier;
 
 	@Valid
-	@ManyToOne
+	@ManyToOne(optional=false)
 	@JoinColumns({
-		@JoinColumn(name="\"company\"", referencedColumnName="parent"),
-		@JoinColumn(name="\"user\"", referencedColumnName="child")})
-	private SubjectSubject subjectSubject;
+		@JoinColumn(name="\"company\"", referencedColumnName="\"company\"", nullable=false),
+		@JoinColumn(name="\"user\"", referencedColumnName="\"user\"", nullable=false)})
+	private CompanyUser companyUser;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false)
@@ -72,18 +72,18 @@ public class Token implements Serializable {
 
 	}
 
-	public SubjectSubject getSubjectSubject() {
-
-		return subjectSubject;
-
+	public CompanyUser getCompanyUser() {
+		
+		return companyUser;
+		
 	}
 
-	public void setSubjectSubject(SubjectSubject subjectSubject) {
+	public void setCompanyUser(CompanyUser companyUser) {
 
-		this.subjectSubject = subjectSubject;
+		this.companyUser = companyUser;
 
 	}
-
+	
 	public Date getExpire() {
 
 		return expire;

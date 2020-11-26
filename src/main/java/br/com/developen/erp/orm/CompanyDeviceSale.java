@@ -17,7 +17,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -29,7 +28,6 @@ public class CompanyDeviceSale implements Serializable {
 	@EmbeddedId
 	private CompanyDeviceSalePK identifier;
 
-	@NotNull
 	@Column(name="\"number\"", nullable=false)
 	private Integer number;
 

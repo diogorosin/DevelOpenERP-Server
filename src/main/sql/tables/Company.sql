@@ -10,7 +10,7 @@ CREATE TABLE "Company" (
 
     "fancyName" VARCHAR(32),
 
-	"couponTitle" VARCHAR(32) NOT NULL,
+	"couponTitle" VARCHAR(32),
 
 	"couponSubtitle" VARCHAR(32)
 

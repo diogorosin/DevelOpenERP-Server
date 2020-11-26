@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,7 +12,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
@@ -38,10 +38,11 @@ public class CompanyDevice implements Serializable {
 	@EmbeddedId
 	private CompanyDevicePK identifier;
 
-	@Size(min=0, max=20)
+	@Size(min=1, max=20)
+	@Column(name="\"alias\"", nullable=false)
 	private String alias;
 
-	@NotNull
+	@Column(name="\"allow\"", nullable=false)
 	private Boolean allow;
 
 	@OneToMany(

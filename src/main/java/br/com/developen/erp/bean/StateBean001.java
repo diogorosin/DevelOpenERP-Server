@@ -1,26 +1,14 @@
 package br.com.developen.erp.bean;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-public class MeasureUnitBean001 {
-
-	private Integer identifier;
+public class StateBean001 {
 
 	private String denomination;
 
 	private String acronym;
-	
-	private Integer group;
 
-	public Integer getIdentifier() {
-
-		return identifier;
-
-	}
-
-	public void setIdentifier(Integer identifier) {
-
-		this.identifier = identifier;
-
-	}
+	private Map<Integer, CountryBean001> country;
 
 	public String getDenomination() {
 
@@ -46,15 +34,19 @@ public class MeasureUnitBean001 {
 
 	}
 
-	public Integer getGroup() {
+	public Map<Integer, CountryBean001> getCountry() {
+		
+		if (country==null)
+			
+			country = new LinkedHashMap<Integer, CountryBean001>();
 
-		return group;
-
+		return country;
+		
 	}
 
-	public void setGroup(Integer group) {
+	public void setCountry(Map<Integer, CountryBean001> country) {
 		
-		this.group = group;
+		this.country = country;
 		
 	}
 

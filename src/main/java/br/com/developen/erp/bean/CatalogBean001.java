@@ -2,25 +2,11 @@ package br.com.developen.erp.bean;
 
 public class CatalogBean001 {
 
-	private Integer identifier;
-
 	private Boolean active;
 	
 	private Integer position;
 
 	private String denomination;
-
-	public Integer getIdentifier() {
-
-		return identifier;
-
-	}
-
-	public void setIdentifier(Integer identifier) {
-
-		this.identifier = identifier;
-
-	}
 
 	public Boolean getActive() {
 

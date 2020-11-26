@@ -34,8 +34,8 @@ import br.com.developen.erp.orm.TokenDAO;
 import br.com.developen.erp.util.HibernateUtil;
 import br.com.developen.erp.util.I18N;
 
-@Provider
 @Authentication
+@Provider
 @Priority(Priorities.AUTHENTICATION)
 public class AuthenticationFilter implements ContainerRequestFilter {
 
@@ -52,9 +52,9 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
-		session.beginTransaction();
-
 		try {
+
+			session.beginTransaction();
 
 			//BUSCA O TOKEN NO CABECALHO DA REQUISICAO
 			String authorizationHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
@@ -88,26 +88,38 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 						type(MediaType.APPLICATION_JSON).
 						build());
 
+			//VERIFICA SE TOKEN POSSUI MAIS DE 24H
+//			Calendar calendar = Calendar.getInstance();
+
+//			calendar.add(Calendar.HOUR, -24);
+
+//			if (token.getExpire().before(calendar.getTime()))
+
+//				throw new WebApplicationException(Response.status(Status.UNAUTHORIZED).
+//				entity(new ExceptionBean001(I18N.get(I18N.EXPIRED_TOKEN))).
+//				type(MediaType.APPLICATION_JSON).
+//				build());
+
 			//VERIFICA SE A EMPRESA ESTA ATIVA			
 			if (!token.
-					getSubjectSubject().
+					getCompanyUser().
 					getIdentifier().
-					getParent().
+					getCompany().
 					getActive())
 
 				throw new CompanyNotActiveException();
 
 			//VERIFICA SE O USUARIO ESTA ATIVO			
 			if (!token.
-					getSubjectSubject().
+					getCompanyUser().
 					getIdentifier().
-					getChild().
+					getUser().
 					getActive())
 
 				throw new UserNotActiveException();
 
 			//VERIFICA SE O USUARIO ESTA ATIVO PARA A EMPRESA
-			if (token.getSubjectSubject().
+			if (token.getCompanyUser().
 					getLevel().
 					equals(Level.UNDEFINED)) {
 
@@ -123,7 +135,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 					Authentication secured = method.getAnnotation(Authentication.class);
 
 					if (secured.level().ordinal() > token.
-							getSubjectSubject().
+							getCompanyUser().
 							getLevel().
 							ordinal()){
 
@@ -140,7 +152,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
 			Calendar calendar = Calendar.getInstance();
 
-			calendar.add(Calendar.YEAR, +1);
+			calendar.add(Calendar.HOUR, +24);
 
 			token.setExpire(calendar.getTime());
 

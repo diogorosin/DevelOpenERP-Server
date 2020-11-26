@@ -12,7 +12,6 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
@@ -27,16 +26,15 @@ public class Progeny implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)	
 	private Integer identifier;
 
-	@NotNull
+	@Column(name="\"active\"", nullable=false)
 	private Boolean active;
 
-	@NotNull
 	@Size(min=1, max=50)
 	@Column(name="\"denomination\"", nullable=false)
 	private String denomination;
 
 	@ManyToOne(optional=false)
-	@JoinColumn(name = "company")
+	@JoinColumn(name = "company", nullable=false)
 	private Company company;
 
 	public Integer getIdentifier() {

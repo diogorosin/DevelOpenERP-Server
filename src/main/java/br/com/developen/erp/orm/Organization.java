@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
@@ -15,13 +14,12 @@ public class Organization extends Subject {
 
 	private static final long serialVersionUID = 1L;
 
-	@NotNull
 	@Size(min=1, max=100)
-	@Column(name="\"denomination\"")
+	@Column(name="\"denomination\"", nullable=false)
 	private String denomination;
 
-	@Size(min=0, max=32)
-	@Column(name="\"fancyName\"")
+	@Size(min=1, max=32)
+	@Column(name="\"fancyName\"", nullable=true)
 	private String fancyName;
 
 	public String getDenomination() {

@@ -4,7 +4,10 @@ public class BooleanBean{
 
 	private Boolean value;
 
-	public BooleanBean(){}
+	public BooleanBean(){
+		
+		
+	}
 
 	public BooleanBean(Boolean value){
 

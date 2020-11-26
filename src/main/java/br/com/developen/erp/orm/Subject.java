@@ -1,9 +1,8 @@
 package br.com.developen.erp.orm;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,11 +12,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-import br.com.developen.erp.orm.SubjectSubject;
 
 
 @Entity
@@ -31,26 +26,16 @@ public class Subject implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)	
 	private Integer identifier;
 
-	@NotNull
+	@Column(name="\"active\"", nullable=false)
 	private Boolean active;
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="address")
+	@ManyToOne(fetch=FetchType.LAZY, optional=false)
+	@JoinColumn(name="address", nullable=false)
 	private Address address;
 
-	@OneToMany(
-			fetch=FetchType.LAZY,
-			mappedBy="identifier.child", 
-			cascade={CascadeType.ALL}, 
-			orphanRemoval=true)
-	private List<SubjectSubject> parents;
-
-	@OneToMany(
-			fetch=FetchType.LAZY,
-			mappedBy="identifier.parent", 
-			cascade={CascadeType.ALL}, 
-			orphanRemoval=true)
-	private List<SubjectSubject> childs;
+	@ManyToOne(optional=false)
+	@JoinColumn(name = "company", nullable=false)
+	private Company company;
 
 	public Integer getIdentifier() {
 
@@ -88,30 +73,18 @@ public class Subject implements Serializable {
 
 	}
 
-	public List<SubjectSubject> getParents() {
+	public Company getCompany() {
 
-		return parents;
-
-	}
-
-	public void setParents(List<SubjectSubject> parents) {
-
-		this.parents = parents;
+		return company;
 
 	}
 
-	public List<SubjectSubject> getChilds() {
+	public void setCompany(Company company) {
 
-		return childs;
-
-	}
-
-	public void setChilds(List<SubjectSubject> childs) {
-
-		this.childs = childs;
+		this.company = company;
 
 	}
-
+	
 	public int hashCode() {
 
 		final int prime = 31;
