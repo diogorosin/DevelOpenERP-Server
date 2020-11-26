@@ -2,8 +2,6 @@ package br.com.developen.erp.bean;
 
 public class DeviceBean001 {
 
-	private Integer identifier;	
-
 	private Boolean active;
 
 	private String serialNumber;
@@ -11,18 +9,6 @@ public class DeviceBean001 {
 	private String manufacturer;
 
 	private String model;
-
-	public Integer getIdentifier() {
-
-		return identifier;
-
-	}
-
-	public void setIdentifier(Integer identifier) {
-
-		this.identifier = identifier;
-
-	}
 
 	public Boolean getActive() {
 

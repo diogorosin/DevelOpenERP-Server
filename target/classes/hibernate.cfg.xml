@@ -23,6 +23,7 @@
 	 	<mapping class="br.com.developen.erp.orm.State"/>
 	 	<mapping class="br.com.developen.erp.orm.City"/>
 	 	<mapping class="br.com.developen.erp.orm.Address"/>
+	 	<mapping class="br.com.developen.erp.orm.Contact"/>
 		<mapping class="br.com.developen.erp.orm.MeasureUnit"/>
 		<mapping class="br.com.developen.erp.orm.MeasureUnitMeasureUnit"/>
 		<mapping class="br.com.developen.erp.orm.Progeny"/>
@@ -31,8 +32,8 @@
 	 	<mapping class="br.com.developen.erp.orm.ProductProduct"/>
 		<mapping class="br.com.developen.erp.orm.Merchandise"/>	 	
 	 	<mapping class="br.com.developen.erp.orm.Catalog"/>
+	 	<mapping class="br.com.developen.erp.orm.Level"/>
 	 	<mapping class="br.com.developen.erp.orm.Subject"/>
-	 	<mapping class="br.com.developen.erp.orm.SubjectSubject"/>
 	 	<mapping class="br.com.developen.erp.orm.Individual"/>
 	 	<mapping class="br.com.developen.erp.orm.Organization"/>	 	
 	 	<mapping class="br.com.developen.erp.orm.Company"/>

@@ -17,7 +17,7 @@ public class CompanyDeviceDAO extends DAO<CompanyDevice, CompanyDevicePK>{
 
 		return getSession().
 				createNamedQuery(CompanyDevice.FIND_BY_COMPANY, CompanyDevice.class).
-				setParameter("company", company).				
+				setParameter("company", company).
 				getResultList();
 
 	}

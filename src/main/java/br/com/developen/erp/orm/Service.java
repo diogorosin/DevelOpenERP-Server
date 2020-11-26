@@ -8,7 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
@@ -23,24 +22,20 @@ public class Service extends Progeny {
 	@JoinColumn(name="\"catalog\"", referencedColumnName="identifier", nullable=false)
 	private Catalog catalog;
 
-	@NotNull
 	@Column(name="\"position\"", nullable=false)
 	private Integer position;
 
-	@NotNull
 	@Column(name="\"reference\"", nullable=false)
 	private Integer reference;
 
-	@NotNull
-	@Column(name="\"label\"", nullable=false)
 	@Size(min=1, max=32)
+	@Column(name="\"label\"", nullable=false)
 	private String label;
 
 	@ManyToOne(optional=false)
-	@JoinColumn(name="\"measureUnit\"")
+	@JoinColumn(name="\"measureUnit\"", nullable=false)
 	private MeasureUnit measureUnit;
 
-	@NotNull
 	@Column(name="\"price\"", nullable=false)
 	private BigDecimal price;
 

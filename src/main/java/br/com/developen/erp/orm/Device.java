@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
@@ -32,20 +31,19 @@ public class Device implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer identifier;
 
-	@NotNull
+	@Column(name="\"active\"", nullable=false)
 	private Boolean active;
 
-	@NotNull
-	@Column(unique=true, name="\"serialNumber\"")
 	@Size(min=16, max=16)
+	@Column(name="\"serialNumber\"", unique=true, nullable=false)
 	private String serialNumber;
 
-	@NotNull
-	@Size(min=0, max=30)
+	@Size(min=1, max=30)
+	@Column(name="\"manufacturer\"", nullable=false)
 	private String manufacturer;
 
-	@NotNull
-	@Size(min=0, max=20)
+	@Size(min=1, max=20)
+	@Column(name="\"model\"", nullable=false)
 	private String model;
 
 	public Integer getIdentifier() {

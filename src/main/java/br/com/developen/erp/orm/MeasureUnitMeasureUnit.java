@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -29,7 +28,6 @@ public class MeasureUnitMeasureUnit implements Serializable {
 	@EmbeddedId
 	private MeasureUnitMeasureUnitPK identifier;
 
-	@NotNull
 	@Column(name="\"factor\"", nullable=false)
 	private BigDecimal factor;
 

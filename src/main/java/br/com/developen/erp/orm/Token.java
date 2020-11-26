@@ -5,16 +5,15 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -44,15 +43,12 @@ public class Token implements Serializable {
 	@Pattern(regexp = "[A-Z0-9]{10,10}")
 	private String identifier;
 
-	@Valid
-	@ManyToOne
-	@JoinColumns({
-		@JoinColumn(name="\"company\"", referencedColumnName="parent"),
-		@JoinColumn(name="\"user\"", referencedColumnName="child")})
-	private SubjectSubject subjectSubject;
+	@ManyToOne(fetch=FetchType.LAZY, optional=false)
+	@JoinColumn(name="\"user\"", nullable=false)
+	private User user;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(nullable = false)
+	@Column(name="\"expire\"", nullable = false)
 	private Date expire;
 
 	public Token() {
@@ -72,15 +68,15 @@ public class Token implements Serializable {
 
 	}
 
-	public SubjectSubject getSubjectSubject() {
+	public User getUser() {
 
-		return subjectSubject;
+		return user;
 
 	}
 
-	public void setSubjectSubject(SubjectSubject subjectSubject) {
+	public void setUser(User user) {
 
-		this.subjectSubject = subjectSubject;
+		this.user = user;
 
 	}
 
@@ -96,7 +92,6 @@ public class Token implements Serializable {
 
 	}
 
-	@Override
 	public int hashCode() {
 
 		final int prime = 31;
@@ -106,7 +101,6 @@ public class Token implements Serializable {
 
 	}
 
-	@Override
 	public boolean equals(Object obj) {
 
 		if (this == obj)
@@ -122,12 +116,6 @@ public class Token implements Serializable {
 		} else if (!identifier.equals(other.identifier))
 			return false;
 		return true;
-
-	}
-
-	public String toString(){
-
-		return "(" + getIdentifier() + ")";
 
 	}
 

@@ -12,12 +12,6 @@ CREATE TABLE "Address" (
 
 	"postalCode" INTEGER,
 
-	"city" INTEGER,
-
-	"phone" BIGINT,
-
-	"email" VARCHAR(254),
-
-	"webSite" VARCHAR(254)
+	"city" INTEGER
 
 );

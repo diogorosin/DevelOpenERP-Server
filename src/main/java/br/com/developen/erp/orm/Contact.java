@@ -8,11 +8,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.URL;
+
+
 @Entity
-@Table(name="\"Country\"")
-public class Country implements Serializable {
+@Table(name="\"Contact\"")
+public class Contact implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -20,17 +24,25 @@ public class Country implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer identifier;
 
-	@Size(min=1, max=3)
-	@Column(name="\"acronym\"", nullable=false)	
-	private String acronym;
+	@Column(name="\"phone\"", nullable=true)	
+	private Long phone;
+	
+	@Column(name="\"cellPhone\"", nullable=true)	
+	private Long cellPhone;
 
-	@Size(min=1, max=50)
-	@Column(name="\"denomination\"", nullable=false)
-	private String denomination;
+	@Email
+	@Size(min=1, max=254)
+	@Column(name="\"email\"", nullable=true)	
+	private String email;
+
+	@URL
+	@Size(min=1, max=254)
+	@Column(name="\"webSite\"", nullable=true)
+	private String webSite;	
 
 	public Integer getIdentifier() {
 
-		return this.identifier;
+		return identifier;
 
 	}
 
@@ -40,57 +52,79 @@ public class Country implements Serializable {
 
 	}
 
-	public String getAcronym() {
-
-		return this.acronym;
-
+	public Long getPhone() {
+		
+		return phone;
+		
 	}
 
-	public void setAcronym(String acronym) {
-
-		this.acronym = acronym;
-
+	public void setPhone(Long phone) {
+		
+		this.phone = phone;
+		
 	}
 
-	public String getDenomination() {
-
-		return this.denomination;
-
+	public Long getCellPhone() {
+		
+		return cellPhone;
+		
 	}
 
-	public void setDenomination(String denomination) {
-
-		this.denomination = denomination;
-
+	public void setCellPhone(Long cellPhone) {
+		
+		this.cellPhone = cellPhone;
+		
 	}
 
-	@Override
+	public String getEmail() {
+		
+		return email;
+		
+	}
+
+	public void setEmail(String email) {
+		
+		this.email = email;
+		
+	}
+
+	public String getWebSite() {
+		
+		return webSite;
+		
+	}
+
+	public void setWebSite(String webSite) {
+		
+		this.webSite = webSite;
+		
+	}
+
 	public int hashCode() {
-
+		
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((identifier == null) ? 0 : identifier.hashCode());
 		return result;
-
+		
 	}
 
-	@Override
 	public boolean equals(Object obj) {
-
+		
 		if (this == obj)
 			return true;
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Country other = (Country) obj;
+		Contact other = (Contact) obj;
 		if (identifier == null) {
 			if (other.identifier != null)
 				return false;
 		} else if (!identifier.equals(other.identifier))
 			return false;
 		return true;
-
+		
 	}
 
 }

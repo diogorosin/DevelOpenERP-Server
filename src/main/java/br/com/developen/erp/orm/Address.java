@@ -10,10 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.URL;
 
 
 @Entity
@@ -48,19 +45,6 @@ public class Address implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="city", nullable=true)
 	private City city;
-
-	@Column(name="\"phone\"", nullable=true)	
-	private Long phone;
-
-	@Email
-	@Size(min=1, max=254)
-	@Column(name="\"email\"", nullable=true)	
-	private String email;
-
-	@URL
-	@Size(min=1, max=254)
-	@Column(name="\"webSite\"", nullable=true)
-	private String webSite;
 
 	public Integer getIdentifier() {
 
@@ -143,42 +127,6 @@ public class Address implements Serializable{
 	public void setCity(City city) {
 
 		this.city = city;
-
-	}
-
-	public Long getPhone() {
-
-		return phone;
-
-	}
-
-	public void setPhone(Long phone) {
-
-		this.phone = phone;
-
-	}
-
-	public String getEmail() {
-
-		return email;
-
-	}
-
-	public void setEmail(String email) {
-
-		this.email = email;
-
-	}
-
-	public String getWebSite() {
-
-		return webSite;
-
-	}
-
-	public void setWebSite(String webSite) {
-
-		this.webSite = webSite;
 
 	}
 

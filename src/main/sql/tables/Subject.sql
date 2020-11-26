@@ -6,6 +6,8 @@ CREATE TABLE "Subject" (
 
     "address" INTEGER NOT NULL,
     
+    "contact" INTEGER NOT NULL,
+    
     "company" INTEGER NOT NULL
 
 );

@@ -2,21 +2,7 @@ package br.com.developen.erp.bean;
 
 public class PaymentMethodBean001 {
 
-	private String identifier;
-
 	private String denomination;
-
-	public String getIdentifier() {
-
-		return identifier;
-
-	}
-
-	public void setIdentifier(String identifier) {
-
-		this.identifier = identifier;
-
-	}
 
 	public String getDenomination() {
 

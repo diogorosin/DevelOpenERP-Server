@@ -1,8 +1,11 @@
 package br.com.developen.erp.bean;
 
-public class ReceiptMethodBean001 {
+
+public class CountryBean001 {
 
 	private String denomination;
+	
+	private String acronym;
 
 	public String getDenomination() {
 
@@ -13,6 +16,18 @@ public class ReceiptMethodBean001 {
 	public void setDenomination(String denomination) {
 
 		this.denomination = denomination;
+
+	}
+
+	public String getAcronym() {
+
+		return acronym;
+
+	}
+
+	public void setAcronym(String acronym) {
+
+		this.acronym = acronym;
 
 	}
 

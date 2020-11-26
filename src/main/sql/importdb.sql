@@ -20,6 +20,7 @@
 \i script/CreateTables.sql;
 
 /* POPULA */
+\i data/InsertLevel.sql;
 \i data/InsertReceiptMethod.sql;
 \i data/InsertPaymentMethod.sql;
 \i data/InsertCountry.sql;

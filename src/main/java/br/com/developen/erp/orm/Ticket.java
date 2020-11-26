@@ -1,108 +1,110 @@
 package br.com.developen.erp.orm;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 
 @Entity
-@Table(name="\"Subject\"")
-@Inheritance(strategy=InheritanceType.JOINED)  
-public class Subject implements Serializable {
+@Table(name="\"Ticket\"")
+public class Ticket implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	public static final String FIND_ALL = "Ticket.findAll";
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)	
-	private Integer identifier;
+	@Size(min=64, max=64)
+	@Pattern(regexp = "[a-zA-Z0-9]{64,64}")
+	private String identifier;
 
 	@Column(name="\"active\"", nullable=false)
 	private Boolean active;
 
-	@ManyToOne(fetch=FetchType.LAZY, optional=false)
-	@JoinColumn(name="address", nullable=false)
-	private Address address;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="\"date\"", nullable=false)
+	private Date date;
 
 	@ManyToOne(optional=false)
-	@JoinColumn(name = "company", nullable=false)
-	private Company company;
+	@JoinColumn(name="\"to\"", nullable=false)
+	private User to;
 
-	public Integer getIdentifier() {
-
-		return this.identifier;
-
+	public String getIdentifier() {
+		
+		return identifier;
+		
 	}
 
-	public void setIdentifier(Integer identifier) {
-
+	public void setIdentifier(String identifier) {
+		
 		this.identifier = identifier;
-
+		
 	}
 
 	public Boolean getActive() {
-
-		return this.active;
-
+		
+		return active;
+		
 	}
 
 	public void setActive(Boolean active) {
-
-		this.active = active;
-
-	}
-
-	public Address getAddress() {
 		
-		return this.address;
-
+		this.active = active;
+		
 	}
 
-	public void setAddress(Address address) {
-
-		this.address = address;
-
+	public Date getDate() {
+		
+		return date;
+		
 	}
 
-	public Company getCompany() {
-
-		return company;
-
+	public void setDate(Date date) {
+		
+		this.date = date;
+		
 	}
 
-	public void setCompany(Company company) {
-
-		this.company = company;
-
+	public User getTo() {
+		
+		return to;
+		
 	}
-	
+
+	public void setTo(User to) {
+		
+		this.to = to;
+		
+	}
+
 	public int hashCode() {
-
+		
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((identifier == null) ? 0 : identifier.hashCode());
 		return result;
-
+		
 	}
 
 	public boolean equals(Object obj) {
-
+		
 		if (this == obj)
 			return true;
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Subject other = (Subject) obj;
+		Ticket other = (Ticket) obj;
 		if (identifier == null) {
 			if (other.identifier != null)
 				return false;

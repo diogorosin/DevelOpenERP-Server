@@ -1,3 +1,4 @@
+/*
 INSERT INTO "Catalog"("position", "active", "denomination", "company")
 VALUES (0, true, 'Ingressos', 1);
 
@@ -16,5 +17,4 @@ VALUES (4, true, 'Comidas', 1);
 INSERT INTO "Catalog"("position", "active", "denomination", "company")
 VALUES (5, true, 'Sorvetes', 1);
 
-
-
+*/

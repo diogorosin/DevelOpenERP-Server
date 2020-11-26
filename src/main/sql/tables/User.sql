@@ -4,7 +4,11 @@ CREATE TABLE "User" (
 
     "active" BOOLEAN NOT NULL,
 
+    "image" VARCHAR(200),
+
     "address" INTEGER NOT NULL,
+
+    "contact" INTEGER NOT NULL,    
 
 	"name" VARCHAR(100) NOT NULL,
 
@@ -14,6 +18,8 @@ CREATE TABLE "User" (
 
     "numericPassword" VARCHAR(4) NOT NULL,
 
-    "lastLoggedInCompany" INTEGER
+    "company" INTEGER NOT NULL,
+
+    "level" INTEGER NOT NULL
 
 );
